@@ -3,8 +3,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import {createElement} from 'react';
+import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
 import {createStore, applyMiddleware} from 'redux';
@@ -25,7 +25,7 @@ const createStoreWithMiddleware = applyMiddleware(
 
 const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-ReactDOM.render(
+render(
     <Provider store={store}>
         <ConnectedRouter history={createHistory()}>
             <App />

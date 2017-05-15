@@ -4,6 +4,7 @@
   ],
   "plugins": [
     "transform-object-rest-spread",
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    ["transform-react-jsx", {"pragma": "createElement"}]
   ]
 }

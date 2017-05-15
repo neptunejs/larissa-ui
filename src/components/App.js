@@ -1,4 +1,4 @@
-import React from 'react';
+import {createElement} from 'react';
 
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
