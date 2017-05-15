@@ -1,6 +1,8 @@
 import {createElement} from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import NodeListDrawer from './NodeListDrawer';
 
 import AppBar from 'material-ui/AppBar';
 
@@ -26,6 +28,7 @@ export default function () {
         <MuiThemeProvider>
             <div>
                 <AppBar title="larissa" />
+                <NodeListDrawer />
                 <div>
                     <div style={{position: 'relative'}}>
                         <div style={{position: 'absolute', top: 150, left: 450}}>
