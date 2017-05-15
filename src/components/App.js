@@ -1,18 +1,22 @@
 import {createElement} from 'react';
 
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import AppBar from 'material-ui/AppBar';
 
+import Block from './Block';
+
 export default function () {
     return (
-        <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+        <MuiThemeProvider>
             <div>
                 <AppBar title="larissa" />
                 <div>
-                    <div>content</div>
+                    <div style={{position: 'relative'}}>
+                        <div style={{position: 'absolute', top: 150, left: 450}}>
+                            <Block progress="error" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </MuiThemeProvider>
