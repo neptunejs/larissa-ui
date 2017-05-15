@@ -13,7 +13,7 @@ const testDefinition = {
     label: 'My test node',
     inputs: [
         {name: 'input1'},
-        {name: 'input2'},
+        {name: 'input2', multiple: true},
         {name: 'input3'}
     ],
     outputs: [
@@ -21,6 +21,13 @@ const testDefinition = {
         {name: 'output2'}
     ],
     options: null
+};
+
+const testDefinition2 = {
+    name: 'test2',
+    outputs: [
+        {name: 'output'}
+    ]
 };
 
 export default function () {
@@ -33,7 +40,7 @@ export default function () {
                     <div style={{position: 'relative'}}>
                         <div style={{position: 'absolute', top: 150, left: 450}}>
                             <Block status="error" definition={testDefinition} /><br />
-                            <Block status="running" definition={testDefinition} />
+                            <Block status="running" definition={testDefinition2} />
                         </div>
                     </div>
                 </div>

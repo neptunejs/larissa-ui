@@ -1,6 +1,8 @@
 import {createElement} from 'react';
 
-export default function Triangle({direction = 'right', size = 15, color = 'black'}) {
+import {portSize} from '../../constants';
+
+export default function Triangle({direction = 'right', size = portSize, color = 'black'}) {
     const demiSize = size / 2;
     const transparentStyle = `${demiSize}px solid transparent`;
     const colorStyle = `${size}px solid ${color}`;

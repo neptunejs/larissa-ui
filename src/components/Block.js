@@ -2,40 +2,24 @@ import {createElement} from 'react';
 
 import Paper from 'material-ui/Paper';
 
+import Ports from './Ports';
 import StatusBar from './StatusBar';
-import Triangle from './shapes/Triangle';
-import Rectangle from './shapes/Rectangle';
 
 const blockWidth = 250;
+const blockHeight = 150;
 
 const blockStyle = {
     width: blockWidth,
-    height: 150,
+    height: blockHeight,
     position: 'relative'
-};
-
-const inputs = {
-    position: 'absolute',
-    left: -15
-};
-
-const outputs = {
-    position: 'absolute',
-    left: blockWidth
 };
 
 export default function Block({definition, status}) {
     return (
         <Paper style={blockStyle}>
             <StatusBar status={status} />
-            <div style={inputs}>
-                <Triangle direction="right" size={15} /><br />
-                <Rectangle size={15} />
-            </div>
-            <div style={outputs}>
-                <Triangle direction="right" size={15} /><br />
-                <Rectangle size={15} />
-            </div>
+            <Ports type="input" value={definition.inputs} width={blockWidth} height={blockHeight} />
+            <Ports type="output" value={definition.outputs} width={blockWidth} height={blockHeight} />
         </Paper>
     );
 }
