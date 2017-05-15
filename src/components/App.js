@@ -29,7 +29,8 @@ export default function () {
                 <div>
                     <div style={{position: 'relative'}}>
                         <div style={{position: 'absolute', top: 150, left: 450}}>
-                            <Block status="error" definition={testDefinition} />
+                            <Block status="error" definition={testDefinition} /><br />
+                            <Block status="running" definition={testDefinition} />
                         </div>
                     </div>
                 </div>
