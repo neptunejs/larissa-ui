@@ -1,0 +1,4 @@
+extends: neptun-react
+settings:
+  react:
+    pragma: createElement

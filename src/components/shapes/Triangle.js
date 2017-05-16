@@ -31,6 +31,8 @@ export default function Triangle({direction = 'right', size = portSize, color = 
             style.borderRight = transparentStyle;
             style.borderBottom = colorStyle;
             break;
+        default:
+            throw new Error(`invalid direction: ${direction}`);
     }
     return <div style={style} />;
 }

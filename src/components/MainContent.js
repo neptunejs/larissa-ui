@@ -44,7 +44,7 @@ class MainContent extends Component {
 const mapStateToProps = state => {
     return {
         drawerOpen: state.drawer.open
-    }
+    };
 };
 
 export default connect(mapStateToProps)(MainContent);

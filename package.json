@@ -5,8 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "eslint": "eslint src --cache",
+    "eslint-fix": "npm run eslint -- --fix",
     "start": "webpack-dev-server --inline",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run eslint"
   },
   "repository": {
     "type": "git",

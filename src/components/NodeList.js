@@ -4,10 +4,10 @@ import {List, ListItem, Subheader} from 'material-ui';
 const NodeList = props => {
     const tree = props.tree;
     function renderTree(tree) {
-        if(!tree) return null;
+        if (!tree) return null;
         return (
-            <ListItem key={tree.label} primaryText={tree.label} nestedItems={tree.children ? tree.children.map(renderTree) : []}/>
-        )
+            <ListItem key={tree.label} primaryText={tree.label} nestedItems={tree.children ? tree.children.map(renderTree) : []} />
+        );
     }
 
     return (

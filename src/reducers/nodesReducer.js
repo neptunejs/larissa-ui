@@ -2,7 +2,6 @@ import env from '../environment';
 
 const blocks = env.getBlockList();
 blocks.forEach(b => b.label = b.label || b.name);
-console.log(blocks);
 const defaultState = blocks;
 
 export default function (state = defaultState, action) {
