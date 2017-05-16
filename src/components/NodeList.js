@@ -6,7 +6,12 @@ const NodeList = props => {
     function renderTree(tree) {
         if (!tree) return null;
         return (
-            <ListItem key={tree.label} primaryText={tree.label} nestedItems={tree.children ? tree.children.map(renderTree) : []} />
+            <ListItem
+                key={tree.label}
+                primaryText={tree.label}
+                nestedItems={tree.children ? tree.children.map(renderTree) : []}
+                primaryTogglesNestedList={!!tree.children}
+            />
         );
     }
 
