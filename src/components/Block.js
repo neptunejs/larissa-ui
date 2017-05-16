@@ -11,12 +11,12 @@ const blockHeight = 150;
 const blockStyle = {
     width: blockWidth,
     height: blockHeight,
-    position: 'relative'
+    position: 'absolute'
 };
 
-export default function Block({definition, status}) {
+export default function Block({definition, status, style}) {
     return (
-        <Paper style={blockStyle}>
+        <Paper style={{...blockStyle, ...style}}>
             <StatusBar status={status} />
             <Ports type="input" value={definition.inputs} width={blockWidth} height={blockHeight} />
             <Ports type="output" value={definition.outputs} width={blockWidth} height={blockHeight} />

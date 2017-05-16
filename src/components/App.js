@@ -1,12 +1,12 @@
 import {createElement} from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import NodeListDrawer from './NodeListDrawer';
 
 import AppBar from 'material-ui/AppBar';
 
 import Block from './Block';
+import SvgLines from './SvgLines';
 
 const testDefinition = {
     name: 'testnode',
@@ -25,23 +25,22 @@ const testDefinition = {
 
 const testDefinition2 = {
     name: 'test2',
-    outputs: [
-        {name: 'output'}
+    inputs: [
+        {name: 'input'}
     ]
 };
 
 export default function () {
     return (
         <MuiThemeProvider>
-            <div>
+            <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
                 <AppBar title="larissa" />
                 <NodeListDrawer />
-                <div>
-                    <div style={{position: 'relative'}}>
-                        <div style={{position: 'absolute', top: 150, left: 450}}>
-                            <Block status="error" definition={testDefinition} /><br />
-                            <Block status="running" definition={testDefinition2} />
-                        </div>
+                <div style={{flex: 0.99}}>
+                    <div style={{position: 'relative', height: '100%'}}>
+                        <SvgLines lines={[[[612, 202], [735, 227]]]} />
+                        <Block status="error" definition={testDefinition} style={{top: 150, left: 350}} />
+                        <Block status="running" definition={testDefinition2} style={{position: 'absolute', top: 150, left: 750}} />
                     </div>
                 </div>
             </div>
