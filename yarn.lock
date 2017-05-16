@@ -2266,6 +2266,10 @@ graceful-fs@^4.1.2:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
+graph.js@^1.21.1:
+  version "1.21.1"
+  resolved "https://registry.yarnpkg.com/graph.js/-/graph.js-1.21.1.tgz#7e0354b41f7494dfd1869b9dec1b77ef30653853"
+
 handle-thing@^1.2.4:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"

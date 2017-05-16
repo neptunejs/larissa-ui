@@ -1,41 +1,24 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
 import Block from './Block';
-import SvgLines from './SvgLines';
 
 import placeNodes from '../util/placeNodes';
 
-const testDefinition = {
-    name: 'testnode',
-    label: 'My test node',
-    inputs: [
-        {name: 'input1'},
-        {name: 'input2', multiple: true},
-        {name: 'input3'}
-    ],
-    outputs: [
-        {name: 'output1'},
-        {name: 'output2'}
-    ],
-    options: null
-};
-
-const testDefinition2 = {
-    name: 'test2',
-    inputs: [
-        {name: 'input'}
-    ]
-};
-
 class Pipeline extends Component {
     render() {
-        const nodes = this.props.nodes;
-
+        const graph = this.props.graph;
+        const blocks = [];
+        const widths = {};
+        for (const level of graph.levels) {
+            widths[level[0]] = level[1];
+        }
+        for (const node of graph.nodes) {
+            const width = widths[node[1]]--;
+            blocks.push(<Block key={node[0]} node={node[0]} depth={graph.totalLevels - node[1]} width={width} />);
+        }
         return (
             <div style={{position: 'relative', height: '100%'}}>
-                <SvgLines lines={[[[612, 202], [735, 227]]]} />
-                <Block status="error" definition={testDefinition} style={{top: 150, left: 350}} />
-                <Block status="running" definition={testDefinition2} style={{position: 'absolute', top: 150, left: 750}} />
+                {blocks}
             </div>
         );
     }
@@ -44,6 +27,6 @@ class Pipeline extends Component {
 
 export default connect((state) => {
     return {
-        nodes: placeNodes(state.pipeline)
+        graph: placeNodes(state.pipeline)
     };
 })(Pipeline)
