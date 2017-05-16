@@ -4,6 +4,7 @@ import Triangle from './shapes/Triangle';
 import Square from './shapes/Square';
 
 import {portSize} from '../constants';
+import evenSeparation from '../util/evenSeparation';
 
 export default function Ports({type, value = [], width, height}) {
     if (value.length === 0) return null;
@@ -13,25 +14,20 @@ export default function Ports({type, value = [], width, height}) {
     if (type === 'input') style.left = -portSize;
     else if (type === 'output') style.left = width;
 
-    const nElements = value.length;
-    const totalHeight = portSize * nElements;
-    const step = (height - totalHeight) / (nElements + 1);
-
+    const separation = evenSeparation(value.length, portSize, height);
     const ports = [];
-    let currentStep = step;
-    for (let i = 0; i < nElements; i++) {
+    for (let i = 0; i < value.length; i++) {
         const port = value[i];
         let Component = port.multiple ? Square : Triangle;
         const pos = {
             position: 'absolute',
-            top: currentStep
+            top: separation[i]
         };
         ports.push(
             <div key={i} style={pos}>
                 <Component />
             </div>
         );
-        currentStep += step + portSize;
     }
 
     return (
