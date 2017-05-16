@@ -1,15 +1,9 @@
+import env from '../environment';
 
-
-const defaultState = {
-    tree: [
-        {
-            label: 'node1'
-        },
-        {
-            label: 'node2'
-        }
-    ]
-};
+const blocks = env.getBlockList();
+blocks.forEach(b => b.label = b.label || b.name);
+console.log(blocks);
+const defaultState = blocks;
 
 export default function (state = defaultState, action) {
     switch (action.type) {

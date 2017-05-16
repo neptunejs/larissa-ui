@@ -2,6 +2,7 @@ import {createElement} from 'react';
 import NodeList from './NodeList';
 import {Drawer} from 'material-ui';
 import {connect} from 'react-redux';
+import {nodesToTree} from '../selectors';
 
 const NodeListDrawer = props => {
     return (
@@ -14,7 +15,7 @@ const NodeListDrawer = props => {
 const mapStateToProps = state => {
     return {
         open: state.drawer.open,
-        tree: state.nodes.tree
+        tree: nodesToTree(state)
     }
 };
 
