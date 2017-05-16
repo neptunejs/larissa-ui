@@ -3,8 +3,9 @@
     "react"
   ],
   "plugins": [
-    "transform-object-rest-spread",
     "syntax-dynamic-import",
+    "transform-decorators",
+    "transform-object-rest-spread",
     ["transform-react-jsx", {"pragma": "createElement"}]
   ]
 }
