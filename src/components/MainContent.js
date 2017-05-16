@@ -1,7 +1,7 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
 
-import Pipeline from './Pipeline';
+import Pipeline from './PipelineDroppable';
 
 class MainContent extends Component {
     render() {
