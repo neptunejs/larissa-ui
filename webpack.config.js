@@ -4,16 +4,17 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// const VENDOR_LIBS = [
-//     'react', 'react-dom', 'react-redux', 'react-router-dom', 'react-table',
-//     'redux', 'redux-actions', 'redux-promise-middleware', 'redux-thunk',
-//     'superagent'
-// ];
+const VENDOR_LIBS = [
+    'lodash-es', 'material-ui',
+    'react', 'react-dom', 'react-redux', 'react-router-dom',
+    'redux', 'redux-actions', 'redux-promise-middleware', 'redux-thunk',
+    'reselect'
+];
 
 const plugins = [
-    // new webpack.optimize.CommonsChunkPlugin({
-    //     names: ['vendor', 'manifest']
-    // }),
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ['vendor', 'manifest']
+    }),
     new HtmlWebpackPlugin({
         template: 'src/index.html'
     }),
@@ -25,12 +26,15 @@ const plugins = [
 if (process.env.NODE_ENV === 'production') {
     const BabiliPlugin = require('babili-webpack-plugin');
     plugins.push(new BabiliPlugin());
+} else {
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+    plugins.push(new BundleAnalyzerPlugin())
 }
 
 module.exports = {
     entry: {
         bundle: ['regenerator-runtime/runtime', './src/index.js'],
-        // vendor: VENDOR_LIBS
+        vendor: VENDOR_LIBS
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
