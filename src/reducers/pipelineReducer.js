@@ -1,103 +1,46 @@
 const pipeline = {
-    graph: [
-        [
-            'b450d733-12a2-444d-a8aa-40e0a187c029',
-            {
-                kind: 'block',
-                type: 'number',
-                options: {
-                    value: 1
-                }
-            }
-        ],
-        [
-            'b450d733-12a2-444d-a8aa-40e0a187c029_output_number',
-            null
-        ],
-        [
-            '2408658d-c4c3-49dd-bdce-3d489dd7723a',
-            {
-                kind: 'block',
-                type: 'number',
-                options: {
-                    value: 2
-                }
-            }
-        ],
-        [
-            '2408658d-c4c3-49dd-bdce-3d489dd7723a_output_number',
-            null
-        ],
-        [
-            '4021a0ce-cc30-4fac-926e-c0f768195b9d',
-            {
-                kind: 'block',
-                type: 'sum'
-            }
-        ],
-        [
-            '4021a0ce-cc30-4fac-926e-c0f768195b9d_input_value',
-            null
-        ],
-        [
-            '4021a0ce-cc30-4fac-926e-c0f768195b9d_output_sum',
-            null
-        ],
-        [
-            [
-                'b450d733-12a2-444d-a8aa-40e0a187c029',
-                'b450d733-12a2-444d-a8aa-40e0a187c029_output_number'
-            ]
-        ],
-        [
-            [
-                'b450d733-12a2-444d-a8aa-40e0a187c029_output_number',
-                '4021a0ce-cc30-4fac-926e-c0f768195b9d_input_value'
-            ]
-        ],
-        [
-            [
-                '2408658d-c4c3-49dd-bdce-3d489dd7723a',
-                '2408658d-c4c3-49dd-bdce-3d489dd7723a_output_number'
-            ]
-        ],
-        [
-            [
-                '2408658d-c4c3-49dd-bdce-3d489dd7723a_output_number',
-                '4021a0ce-cc30-4fac-926e-c0f768195b9d_input_value'
-            ]
-        ],
-        [
-            [
-                '4021a0ce-cc30-4fac-926e-c0f768195b9d',
-                '4021a0ce-cc30-4fac-926e-c0f768195b9d_output_sum'
-            ]
-        ],
-        [
-            [
-                '4021a0ce-cc30-4fac-926e-c0f768195b9d_input_value',
-                '4021a0ce-cc30-4fac-926e-c0f768195b9d'
-            ]
-        ]
+    graph: [["87fe7a48-9802-4d45-92e7-6895308216ba", {
+        "kind": "block",
+        "type": "number",
+        "options": {"value": 5}
+    }], ["7b031c36-76e3-437b-8921-f4fc26adf0b3", {
+        "kind": "block",
+        "type": "number",
+        "options": {"value": 10}
+    }], ["d5e23c8d-bdc3-415d-889f-56c17e364868", {
+        "kind": "block",
+        "type": "rng"
+    }], ["93412b07-2a69-4ba7-8a4f-08012c4524a3", {
+        "kind": "block",
+        "type": "sum"
+    }],
+        [["87fe7a48-9802-4d45-92e7-6895308216ba", "93412b07-2a69-4ba7-8a4f-08012c4524a3"], ["87fe7a48-9802-4d45-92e7-6895308216ba_output_number:93412b07-2a69-4ba7-8a4f-08012c4524a3_input_value"]],
+        [["7b031c36-76e3-437b-8921-f4fc26adf0b3", "93412b07-2a69-4ba7-8a4f-08012c4524a3"], ["7b031c36-76e3-437b-8921-f4fc26adf0b3_output_number:93412b07-2a69-4ba7-8a4f-08012c4524a3_input_value"]],
+        [["d5e23c8d-bdc3-415d-889f-56c17e364868", "93412b07-2a69-4ba7-8a4f-08012c4524a3"], ["d5e23c8d-bdc3-415d-889f-56c17e364868_output_number:93412b07-2a69-4ba7-8a4f-08012c4524a3_input_value"]]
     ],
     nodes: {
-        'b450d733-12a2-444d-a8aa-40e0a187c029': {
+        '87fe7a48-9802-4d45-92e7-6895308216ba': {
             kind: 'block',
             type: 'number',
             options: {
-                value: 1
+                value: 5
             },
             status: 'finished'
         },
-        '2408658d-c4c3-49dd-bdce-3d489dd7723a': {
+        '7b031c36-76e3-437b-8921-f4fc26adf0b3': {
             kind: 'block',
             type: 'number',
             options: {
-                value: 2
+                value: 10
             },
             status: 'running'
         },
-        '4021a0ce-cc30-4fac-926e-c0f768195b9d': {
+        'd5e23c8d-bdc3-415d-889f-56c17e364868': {
+            kind: 'block',
+            type: 'rng',
+            status: 'init'
+        },
+        '93412b07-2a69-4ba7-8a4f-08012c4524a3': {
             kind: 'block',
             type: 'sum',
             status: 'error'

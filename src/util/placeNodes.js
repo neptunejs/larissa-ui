@@ -8,7 +8,7 @@ export default function placeNodes(pipeline) {
     // step 1
     const reduced = graph.transitiveReduction();
     // step 2
-    const topological = Array.from(reduced.vertices_topologically()).filter(([x]) => x.length === 36);
+    const topological = Array.from(reduced.vertices_topologically());
     // step 3
     topological.reverse();
     const nodes = new Map();
@@ -16,18 +16,11 @@ export default function placeNodes(pipeline) {
     let totalLevels = 1;
     for (const [nodeId] of topological) {
         let maxLevel = 1;
-        const outputs = [];
-        for (const [vertexId] of graph.vertices()) {
-            if (vertexId.length > 36 && vertexId.startsWith(nodeId + '_output')) {
-                outputs.push(vertexId);
-            }
-        }
-        for (const output of outputs) {
-            const connectedInputs = Array.from(reduced.verticesFrom(output));
-            for (const [inputId] of connectedInputs) {
-                if (nodes.has(inputId.substring(0, 36))) {
-                    maxLevel = Math.max(maxLevel, nodes.get(inputId.substring(0, 36)) + 1);
-                }
+        const connected = [];
+        for (const [connectedId] of graph.verticesFrom(nodeId)) {
+            connected.push(connectedId);
+            if (nodes.has(connectedId)) {
+                maxLevel = Math.max(maxLevel, nodes.get(connectedId).level + 1);
             }
         }
         while (true) {
@@ -37,14 +30,19 @@ export default function placeNodes(pipeline) {
             }
             maxLevel++;
         }
-        nodes.set(nodeId, maxLevel);
+        nodes.set(nodeId, {level: maxLevel, connected});
         const level = levels.get(maxLevel);
         levels.set(maxLevel, level ? level + 1 : 1);
         if (maxLevel > totalLevels) totalLevels = maxLevel;
     }
+    let maxWidth = 0;
+    for (const width of levels.values()) {
+        if (width > maxWidth) maxWidth = width;
+    }
     return {
         nodes,
         levels,
-        totalLevels
+        totalLevels,
+        maxWidth
     };
 }

@@ -9,6 +9,8 @@ import StatusBar from './StatusBar';
 
 const blockWidth = 250;
 const blockHeight = 150;
+const blockVerticalSeparation = 50;
+const blockHorizontalSeparation = 100;
 
 const blockStyle = {
     width: blockWidth,
@@ -17,12 +19,20 @@ const blockStyle = {
     margin: 20
 };
 
+function getHeight(nNodes) {
+    return nNodes * blockHeight + (nNodes - 1) * blockVerticalSeparation
+}
+
 class Block extends Component {
     render() {
+        let padding = 0;
+        if (this.props.maxWidth > this.props.totalWidth) {
+            padding = Math.round((getHeight(this.props.maxWidth) - getHeight(this.props.totalWidth)) / 2)
+        }
         const info = this.props.info;
         const blockType = env.getBlock(info.type);
-        const left = this.props.depth * (blockWidth + 50);
-        const top = (this.props.width - 1) * (blockHeight + 50);
+        const left = this.props.depth * (blockWidth + blockHorizontalSeparation);
+        const top = (this.props.width - 1) * (blockHeight + blockVerticalSeparation) + padding;
         return (
             <Paper style={{...blockStyle, left, top}}>
                 <StatusBar status={this.props.info.status} />
