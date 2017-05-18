@@ -1,5 +1,5 @@
-import {createElement, Component} from 'react';
-import {List, ListItem, Subheader} from 'material-ui';
+import {createElement} from 'react';
+import {List, Subheader} from 'material-ui';
 import {NodeTree} from './ListNode';
 
 const NodeList = props => {

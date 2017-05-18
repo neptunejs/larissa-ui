@@ -2,6 +2,7 @@ import {createElement, Component} from 'react';
 import {DropTarget} from 'react-dnd';
 import Pipeline from './Pipeline';
 import {ItemTypes} from '../constants';
+import {createBlock} from '../actions/index';
 
 const types = [ItemTypes.BLOCK_NODE];
 
@@ -27,9 +28,9 @@ class DropPipeline extends Component {
 
 const spec = {
     drop(props, monitor) {
-        const item = monitor.getItem();
         // TODO: dispatch create block action
-        // createBlock(item.block);
+        const item = monitor.getItem();
+        createBlock(item.block);
     }
 };
 

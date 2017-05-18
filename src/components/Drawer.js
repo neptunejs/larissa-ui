@@ -1,6 +1,6 @@
 import {createElement} from 'react';
 import NodeList from './NodeList';
-import {Drawer, AppBar, IconButton, SvgIcon} from 'material-ui';
+import {Drawer, AppBar, IconButton} from 'material-ui';
 import {connect} from 'react-redux';
 import {nodesToTree} from '../selectors';
 import {closeDrawer} from '../actions/index';

@@ -29,4 +29,4 @@ export default connect((state) => {
     return {
         graph: placeNodes(state.pipeline)
     };
-})(Pipeline)
+})(Pipeline);

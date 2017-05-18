@@ -6,6 +6,7 @@ const defaultState = blocks;
 
 export default function (state = defaultState, action) {
     switch (action.type) {
+        // TODO: handle CREATE_BLOCK
         default:
             return state;
     }
