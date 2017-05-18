@@ -3,6 +3,7 @@ import {DropTarget} from 'react-dnd';
 import Pipeline from './Pipeline';
 import {ItemTypes} from '../constants';
 import {createBlock} from '../actions/index';
+import {connect} from 'react-redux';
 
 const types = [ItemTypes.BLOCK_NODE];
 
@@ -28,10 +29,12 @@ class DropPipeline extends Component {
 
 const spec = {
     drop(props, monitor) {
-        // TODO: dispatch create block action
-        const item = monitor.getItem();
-        createBlock(item.block);
+        if (!monitor.didDrop()) {
+            const item = monitor.getItem();
+            props.createBlock(item.block);
+        }
     }
 };
 
-export default DropTarget(types, spec, collect)(DropPipeline);
+
+export default connect(null, {createBlock})(DropTarget(types, spec, collect)(DropPipeline));
