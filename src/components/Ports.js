@@ -1,9 +1,10 @@
 import {createElement} from 'react';
+import {DropTarget} from 'react-dnd';
 
 import Triangle from './shapes/Triangle';
 import Square from './shapes/Square';
 
-import {portSize} from '../constants';
+import {portSize, ItemTypes} from '../constants';
 import evenSeparation from '../util/evenSeparation';
 
 export default function Ports({type, value = [], width, height}) {
@@ -25,7 +26,9 @@ export default function Ports({type, value = [], width, height}) {
         };
         ports.push(
             <div key={i} style={pos}>
-                <Component />
+                <PortConnection>
+                    <Component />
+                </PortConnection>
             </div>
         );
     }
@@ -36,3 +39,28 @@ export default function Ports({type, value = [], width, height}) {
         </div>
     );
 }
+
+function PortElement({children, dropTarget, isOver}) {
+    const style = {};
+    if (isOver) {
+        style.backgroundColor = 'red';
+    }
+    return dropTarget(<div style={style}>
+        {children}
+    </div>);
+}
+
+function collect(connect, monitor) {
+    return {
+        dropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
+    };
+}
+
+const spec = {
+    drop() {
+        console.log('drop');
+    }
+};
+
+const PortConnection = DropTarget([ItemTypes.BLOCK_NODE], spec, collect)(PortElement);
