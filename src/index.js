@@ -16,18 +16,18 @@ import './index.css';
 
 import App from './components/App';
 import reducers from './reducers/index';
-
+const history = createHistory();
 const createStoreWithMiddleware = applyMiddleware(
     thunkMiddleware,
     promiseMiddleware(),
-    routerMiddleware
+    routerMiddleware(history)
 )(createStore);
 
 const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 render(
     <Provider store={store}>
-        <ConnectedRouter history={createHistory()}>
+        <ConnectedRouter history={history}>
             <App />
         </ConnectedRouter>
     </Provider>,

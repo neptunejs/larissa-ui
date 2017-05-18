@@ -1,13 +1,11 @@
 import {createElement} from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import NodeListDrawer from './NodeListDrawer';
+import NodeListDrawer from './Drawer';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import {DragDropContext} from 'react-dnd';
 import CustomDragLayer from './CustomDragLayer';
-
-import AppBar from 'material-ui/AppBar';
-
+import MainAppBar from './MainAppBar';
 import MainContent from './MainContent';
 
 function App() {
@@ -15,7 +13,7 @@ function App() {
         <MuiThemeProvider>
             <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
                 <CustomDragLayer />
-                <AppBar title="larissa" />
+                <MainAppBar />
                 <NodeListDrawer />
                 <MainContent />
             </div>
