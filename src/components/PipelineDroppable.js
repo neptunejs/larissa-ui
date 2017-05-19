@@ -31,7 +31,7 @@ const spec = {
     drop(props, monitor) {
         if (!monitor.didDrop()) {
             const item = monitor.getItem();
-            props.createBlock(item.block);
+            props.createBlock(item);
         }
     }
 };

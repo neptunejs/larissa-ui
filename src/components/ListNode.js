@@ -3,12 +3,11 @@ import {DragSource} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
 import {ItemTypes} from '../constants';
 import {ListItem} from 'material-ui';
-import env from '../larissa/environment';
 
 const nodeSource = {
     beginDrag(props) {
         return {
-            block: env.getBlock(props.block.identifier),
+            type: props.block.identifier,
             label: props.block.label
         };
     }

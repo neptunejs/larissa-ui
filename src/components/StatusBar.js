@@ -13,7 +13,6 @@ export default function StatusBar({status}) {
     let value = 100;
     let color;
 
-    console.log(status);
     switch (status) {
         case INSTANTIATED:
             color = yellow500;
