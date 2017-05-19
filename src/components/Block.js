@@ -35,9 +35,9 @@ class Block extends Component {
         const top = (this.props.width - 1) * (blockHeight + blockVerticalSeparation) + padding;
         return (
             <Paper style={{...blockStyle, left, top}}>
-                <StatusBar status={this.props.info.status} />
-                <Ports type="input" value={blockType.inputs} width={blockWidth} height={blockHeight} />
-                <Ports type="output" value={blockType.outputs} width={blockWidth} height={blockHeight} />
+                <StatusBar status={info.status} />
+                <Ports node={info.id} type="input" value={blockType.inputs} width={blockWidth} height={blockHeight} />
+                <Ports node={info.id} type="output" value={blockType.outputs} width={blockWidth} height={blockHeight} />
                 <div style={{padding: 5}}>
                     <h4 style={{marginTop: 0}}>{blockType.label || blockType.name}</h4>
                 </div>

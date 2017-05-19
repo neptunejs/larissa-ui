@@ -11,3 +11,6 @@ export const toggleDrawer = createAction(TOGGLE_DRAWER);
 
 export const CREATE_BLOCK = 'CREATE_BLOCK';
 export const createBlock = createAction(CREATE_BLOCK);
+
+export const CREATE_BLOCK_WITH_CONNECTION = 'CREATE_BLOCK_WITH_CONNECTION';
+export const createBlockWithConnection = createAction(CREATE_BLOCK_WITH_CONNECTION);

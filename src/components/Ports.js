@@ -6,8 +6,10 @@ import Square from './shapes/Square';
 
 import {portSize, ItemTypes} from '../constants';
 import evenSeparation from '../util/evenSeparation';
+import {connect} from 'react-redux';
+import {createBlockWithConnection} from '../actions/index';
 
-export default function Ports({type, value = [], width, height}) {
+export default function Ports({type, value = [], width, height, node}) {
     if (value.length === 0) return null;
     const style = {
         position: 'absolute'
@@ -26,7 +28,7 @@ export default function Ports({type, value = [], width, height}) {
         };
         ports.push(
             <div key={i} style={pos}>
-                <PortConnection>
+                <PortConnection node={node} name={port.name} type={type}>
                     <Component />
                 </PortConnection>
             </div>
@@ -58,9 +60,15 @@ function collect(connect, monitor) {
 }
 
 const spec = {
-    drop() {
-        console.log('drop');
+    drop(props, monitor) {
+        const item = monitor.getItem();
+        props.createBlockWithConnection({
+            node: props.node,
+            type: item.type,
+            portName: props.name,
+            portType: props.type
+        });
     }
 };
 
-const PortConnection = DropTarget([ItemTypes.BLOCK_NODE], spec, collect)(PortElement);
+const PortConnection = connect(null, {createBlockWithConnection})(DropTarget([ItemTypes.BLOCK_NODE], spec, collect)(PortElement));
