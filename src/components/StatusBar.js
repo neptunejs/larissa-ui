@@ -4,29 +4,27 @@ import LinearProgress from 'material-ui/LinearProgress';
 import {
     yellow500,
     red500,
-    lightGreenA100,
     lightGreenA400 as doneGreen
 } from 'material-ui/styles/colors';
+import {INSTANTIATED, ERRORED, FINISHED, RUNNING} from '../constants';
 
 export default function StatusBar({status}) {
     let mode = 'determinate';
     let value = 100;
     let color;
 
+    console.log(status);
     switch (status) {
-        case 'init':
+        case INSTANTIATED:
             color = yellow500;
             break;
-        case 'error':
+        case ERRORED:
             color = red500;
             break;
-        case 'ready':
-            color = lightGreenA100;
-            break;
-        case 'done':
+        case FINISHED:
             color = doneGreen;
             break;
-        case 'running':
+        case RUNNING:
             color = doneGreen;
             mode = 'indeterminate';
             break;

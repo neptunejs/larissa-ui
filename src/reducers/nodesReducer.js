@@ -1,4 +1,4 @@
-import env from '../environment';
+import env from '../larissa/environment';
 
 const blocks = env.getBlockList();
 blocks.forEach(b => b.label = b.label || b.name);

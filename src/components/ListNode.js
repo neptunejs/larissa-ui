@@ -3,7 +3,7 @@ import {DragSource} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
 import {ItemTypes} from '../constants';
 import {ListItem} from 'material-ui';
-import env from '../environment';
+import env from '../larissa/environment';
 
 const nodeSource = {
     beginDrag(props) {

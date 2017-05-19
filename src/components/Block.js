@@ -1,6 +1,6 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
-import env from '../environment';
+import env from '../larissa/environment';
 
 import Paper from 'material-ui/Paper';
 
