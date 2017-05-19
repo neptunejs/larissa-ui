@@ -9,5 +9,4 @@ pipeline.on('child-status', function () {
 
 pipeline.newNode('number', {value: 5});
 
-
 export default pipeline;
