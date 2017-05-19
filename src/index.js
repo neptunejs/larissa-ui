@@ -6,24 +6,12 @@ injectTapEventPlugin();
 import {createElement} from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
-import {createStore, applyMiddleware} from 'redux';
-import promiseMiddleware from 'redux-promise-middleware';
-import thunkMiddleware from 'redux-thunk';
-import createHistory from 'history/createBrowserHistory';
+import {ConnectedRouter} from 'react-router-redux';
 
 import './index.css';
-
+import store from './store';
 import App from './components/App';
-import reducers from './reducers/index';
-const history = createHistory();
-const createStoreWithMiddleware = applyMiddleware(
-    thunkMiddleware,
-    promiseMiddleware(),
-    routerMiddleware(history)
-)(createStore);
-
-const store = createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+import history from './history';
 
 render(
     <Provider store={store}>

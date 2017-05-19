@@ -1,5 +1,5 @@
 import pipeline from '../larissa/pipeline';
-import {CREATE_BLOCK, CREATE_BLOCK_WITH_CONNECTION} from '../actions/index';
+import {CREATE_BLOCK, CREATE_BLOCK_WITH_CONNECTION, UPDATE_PIPELINE} from '../actions/index';
 
 const defaultPipeline = stateFromPipeline(pipeline);
 
@@ -24,8 +24,11 @@ export default function (state = defaultPipeline, action) {
                 }
             } catch (e) {
                 // TODO: dispatch action to notify user of failure
-                console.error(e.message, e.stack);
             }
+            return stateFromPipeline(pipeline);
+        }
+        case UPDATE_PIPELINE: {
+            console.log('update pipeline reducer')
             return stateFromPipeline(pipeline);
         }
         default: {

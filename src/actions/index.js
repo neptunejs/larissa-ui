@@ -14,3 +14,6 @@ export const createBlock = createAction(CREATE_BLOCK);
 
 export const CREATE_BLOCK_WITH_CONNECTION = 'CREATE_BLOCK_WITH_CONNECTION';
 export const createBlockWithConnection = createAction(CREATE_BLOCK_WITH_CONNECTION);
+
+export const UPDATE_PIPELINE = 'UPDATE_PIPELINE';
+export const updatePipeline = createAction(UPDATE_PIPELINE);

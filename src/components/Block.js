@@ -20,14 +20,14 @@ const blockStyle = {
 };
 
 function getHeight(nNodes) {
-    return nNodes * blockHeight + (nNodes - 1) * blockVerticalSeparation
+    return nNodes * blockHeight + (nNodes - 1) * blockVerticalSeparation;
 }
 
 class Block extends Component {
     render() {
         let padding = 0;
         if (this.props.maxWidth > this.props.totalWidth) {
-            padding = Math.round((getHeight(this.props.maxWidth) - getHeight(this.props.totalWidth)) / 2)
+            padding = Math.round((getHeight(this.props.maxWidth) - getHeight(this.props.totalWidth)) / 2);
         }
         const info = this.props.info;
         const blockType = env.getBlock(info.type);
