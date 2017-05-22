@@ -17,3 +17,9 @@ export const createBlockWithConnection = createAction(CREATE_BLOCK_WITH_CONNECTI
 
 export const UPDATE_PIPELINE = 'UPDATE_PIPELINE';
 export const updatePipeline = createAction(UPDATE_PIPELINE);
+
+export const SELECT_BLOCK = 'SELECT_BLOCK';
+export const selectBlock = createAction(SELECT_BLOCK);
+
+export const UNSELECT_NODE = 'UNSELECT_NODE';
+export const unselectNode = createAction(UNSELECT_NODE);

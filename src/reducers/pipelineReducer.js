@@ -1,13 +1,19 @@
 import pipeline from '../larissa/pipeline';
-import {CREATE_BLOCK, CREATE_BLOCK_WITH_CONNECTION, UPDATE_PIPELINE} from '../actions/index';
+import {
+    CREATE_BLOCK,
+    CREATE_BLOCK_WITH_CONNECTION,
+    UPDATE_PIPELINE,
+    SELECT_BLOCK,
+    UNSELECT_NODE
+} from '../actions/index';
 
-const defaultPipeline = stateFromPipeline(pipeline);
+const defaultPipeline = stateFromPipeline(pipeline, {selectedNode: {}});
 
 export default function (state = defaultPipeline, action) {
     switch (action.type) {
         case CREATE_BLOCK: {
             pipeline.newNode(action.payload.type);
-            return stateFromPipeline(pipeline);
+            return stateFromPipeline(pipeline, state);
         }
         case CREATE_BLOCK_WITH_CONNECTION: {
             const nodeId = action.payload.node;
@@ -25,11 +31,16 @@ export default function (state = defaultPipeline, action) {
             } catch (e) {
                 // TODO: dispatch action to notify user of failure
             }
-            return stateFromPipeline(pipeline);
+            return stateFromPipeline(pipeline, state);
         }
         case UPDATE_PIPELINE: {
-            console.log('update pipeline reducer')
-            return stateFromPipeline(pipeline);
+            return stateFromPipeline(pipeline, state);
+        }
+        case SELECT_BLOCK: {
+            return {...state, selectedNode: action.payload};
+        }
+        case UNSELECT_NODE: {
+            return {...state, selectedNode: null};
         }
         default: {
             return state;
@@ -37,8 +48,9 @@ export default function (state = defaultPipeline, action) {
     }
 }
 
-function stateFromPipeline(pipeline) {
-    const state = {
+function stateFromPipeline(pipeline, state) {
+    state = {
+        ...state,
         nodes: {},
         graph: JSON.parse(pipeline.toJSON().graph)
     };
