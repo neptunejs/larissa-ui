@@ -20,7 +20,7 @@ class DropPipeline extends Component {
     render() {
         const {canDrop, isOver} = this.props;
         return this.props.connectDropTarget(
-            <div style={{position: 'relative', height: '100%', backgroundColor: canDrop && isOver ? '#ddd' : '#fff'}}>
+            <div style={{flex: 1, position: 'relative', backgroundColor: canDrop && isOver ? '#ddd' : '#fff'}}>
                 <Pipeline />
             </div>
         );
