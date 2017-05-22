@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import {groupBy, map} from 'lodash-es';
-const nodes = state => state.nodes;
+const nodes = state => state.blockTypes;
 
 export const nodesToTree = createSelector([nodes], nodes => {
     const groups = groupBy(nodes, node => node.plugin || 'builtin');

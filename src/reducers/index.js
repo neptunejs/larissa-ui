@@ -7,7 +7,7 @@ import pipelineReducer from './pipelineReducer';
 const rootReducer = combineReducers({
     router: routerReducer,
     drawer: drawerReducer,
-    nodes: nodesReducer,
+    blockTypes: nodesReducer,
     pipeline: pipelineReducer
 });
 
