@@ -1,5 +1,5 @@
 import {createElement} from 'react';
-import {Toolbar, ToolbarGroup, ToolbarTitle, RaisedButton} from 'material-ui';
+import {Toolbar, ToolbarGroup, RaisedButton} from 'material-ui';
 import pipeline from '../larissa/pipeline';
 
 export default function () {

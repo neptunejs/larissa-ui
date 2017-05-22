@@ -28,7 +28,6 @@ export default function (state = defaultPipeline, action) {
             return stateFromPipeline(pipeline);
         }
         case UPDATE_PIPELINE: {
-            console.log('update pipeline reducer')
             return stateFromPipeline(pipeline);
         }
         default: {
