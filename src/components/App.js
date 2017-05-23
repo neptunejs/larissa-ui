@@ -2,6 +2,7 @@ import {createElement} from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NodeListDrawer from './Drawer';
+import SecondaryDrawer from './SecondaryDrawer';
 import HTML5Backend from 'react-dnd-html5-backend';
 import {DragDropContext} from 'react-dnd';
 import CustomDragLayer from './CustomDragLayer';
@@ -15,6 +16,7 @@ function App() {
                 <CustomDragLayer />
                 <MainAppBar />
                 <NodeListDrawer />
+                <SecondaryDrawer />
                 <MainContent />
             </div>
         </MuiThemeProvider>
