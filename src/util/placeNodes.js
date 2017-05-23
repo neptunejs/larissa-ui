@@ -4,6 +4,7 @@ Implement the Coffman–Graham algorithm (https://en.wikipedia.org/wiki/Coffman%
  */
 const limit = 5;
 export default function placeNodes(pipeline) {
+    if(!pipeline.graph) return null;
     const graph = Graph.fromJSON(JSON.stringify(pipeline.graph));
     // step 1
     const reduced = graph.transitiveReduction();

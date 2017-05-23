@@ -36,7 +36,9 @@ class Block extends Component {
         const left = this.props.depth * (blockWidth + blockHorizontalSeparation);
         const top = (this.props.width - 1) * (blockHeight + blockVerticalSeparation) + padding;
         return (
-            <Paper zDepth={this.props.selected ? 1 : 1} style={{...blockStyle, left, top, border: this.props.selected ? 'solid 1px blue' : null}} onClick={() => this.props.selectBlock(this.props.info)}>
+            <Paper zDepth={this.props.selected ? 1 : 1}
+                   style={{...blockStyle, left, top, border: this.props.selected ? 'solid 1px blue' : null}}
+                   onClick={this.handleClick.bind(this)}>
                 <StatusBar status={info.status} />
                 <Ports node={info.id} type="input" value={blockType.inputs} width={blockWidth} height={blockHeight} />
                 <Ports node={info.id} type="output" value={blockType.outputs} width={blockWidth} height={blockHeight} />
@@ -46,13 +48,18 @@ class Block extends Component {
             </Paper>
         );
     }
+
+    handleClick(event) {
+        event.stopPropagation();
+        this.props.selectBlock(this.props.info);
+    }
 }
 
 const mapStateToProps = (state, ownProps) => {
     const info = state.pipeline.nodes[ownProps.node];
     return {
-        info: info,
-        selected: info.id === state.pipeline.selectedNode.id
+        info: info
+        // selected: info.id === state.pipeline.selectedNode.id
     };
 };
 

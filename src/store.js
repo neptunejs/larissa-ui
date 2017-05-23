@@ -6,7 +6,11 @@ import history from './history';
 import './index.css';
 
 import reducers from './reducers/index';
+
+import {memoryMiddleware, newPipeline} from './larissa/redux';
+
 const createStoreWithMiddleware = applyMiddleware(
+    memoryMiddleware(newPipeline()),
     thunkMiddleware,
     promiseMiddleware(),
     routerMiddleware(history)

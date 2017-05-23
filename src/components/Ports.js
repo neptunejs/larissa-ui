@@ -7,7 +7,7 @@ import Square from './shapes/Square';
 import {portSize, ItemTypes} from '../constants';
 import evenSeparation from '../util/evenSeparation';
 import {connect} from 'react-redux';
-import {createBlockWithConnection} from '../actions/index';
+import {createBlockWithConnection} from '../larissa/redux';
 
 export default function Ports({type, value = [], width, height, node}) {
     if (value.length === 0) return null;

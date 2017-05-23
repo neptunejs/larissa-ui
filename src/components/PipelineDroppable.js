@@ -2,7 +2,8 @@ import {createElement, Component} from 'react';
 import {DropTarget} from 'react-dnd';
 import Pipeline from './Pipeline';
 import {ItemTypes} from '../constants';
-import {createBlock} from '../actions/index';
+import {unselectNode} from '../actions/index';
+import {createBlock} from '../larissa/redux';
 import {connect} from 'react-redux';
 
 const types = [ItemTypes.BLOCK_NODE];
@@ -20,7 +21,9 @@ class DropPipeline extends Component {
     render() {
         const {canDrop, isOver} = this.props;
         return this.props.connectDropTarget(
-            <div style={{flex: 1, position: 'relative', backgroundColor: canDrop && isOver ? '#ddd' : '#fff'}}>
+            <div
+                style={{flex: 1, position: 'relative', backgroundColor: canDrop && isOver ? '#ddd' : '#fff'}}
+                onClick={this.props.unselectNode} >
                 <Pipeline />
             </div>
         );
@@ -37,4 +40,4 @@ const spec = {
 };
 
 
-export default connect(null, {createBlock})(DropTarget(types, spec, collect)(DropPipeline));
+export default connect(null, {createBlock, unselectNode})(DropTarget(types, spec, collect)(DropPipeline));

@@ -7,6 +7,7 @@ import placeNodes from '../util/placeNodes';
 class Pipeline extends Component {
     render() {
         const graph = this.props.graph;
+        if (!graph) return null;
         const blocks = [];
         const widths = {};
         for (const level of graph.levels) {
