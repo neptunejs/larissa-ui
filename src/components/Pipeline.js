@@ -24,6 +24,7 @@ class Pipeline extends Component {
                 maxWidth={graph.maxWidth}
                 totalWidth={widthObj.total}
                 connected={node[1].connected}
+                selected={this.props.selectedNode.id === node[0]}
             />);
         }
         return (
@@ -37,6 +38,7 @@ class Pipeline extends Component {
 
 export default connect((state) => {
     return {
-        graph: placeNodes(state.pipeline)
+        graph: placeNodes(state.pipeline),
+        selectedNode: state.pipelineUI.selectedNode
     };
 })(Pipeline);
