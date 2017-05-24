@@ -32,7 +32,7 @@ class Block extends Component {
             padding = Math.round((getHeight(this.props.maxWidth) - getHeight(this.props.totalWidth)) / 2);
         }
         const info = this.props.info;
-        const blockType = env.getBlock(info.type);
+        const blockType = env.getBlock(info.blockType.identifier);
         const left = this.props.depth * (blockWidth + blockHorizontalSeparation);
         const top = (this.props.width - 1) * (blockHeight + blockVerticalSeparation) + padding;
         return (

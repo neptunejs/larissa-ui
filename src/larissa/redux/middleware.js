@@ -86,7 +86,7 @@ function stateFromPipeline(pipeline) {
     };
 
     for (let [id, vertex] of pipeline.graph.vertices()) {
-        state.nodes[id] = vertex.inspect();
+        state.nodes[id] = vertex.toJSON();
     }
     return state;
 }
