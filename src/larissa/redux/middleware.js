@@ -4,33 +4,24 @@ import {
     UPDATE_GRAPH,
     CREATE_BLOCK_WITH_CONNECTION,
     RUN_PIPELINE,
-    RESET_PIPELINE
+    RESET_PIPELINE,
+    SET_BLOCK_OPTIONS
 } from './actions';
 export const memoryMiddleware = pipeline => store => {
     // Listen to status changes in the pipeline to dispatch actions
     pipeline.on('child-status', function () {
-        store.dispatch({
-            type: UPDATE_GRAPH,
-            payload: stateFromPipeline(pipeline)
-        });
+        store.dispatch(createUpdateGraphAction(pipeline));
     });
 
     // Update on initialization
-    store.dispatch({
-        type: UPDATE_GRAPH,
-        payload: stateFromPipeline(pipeline)
-    });
+    store.dispatch(createUpdateGraphAction(pipeline));
 
     return next => action => {
         if (action.type.startsWith('@@larissa/')) {
             switch (action.type) {
                 case CREATE_BLOCK: {
                     pipeline.newNode(action.payload.type);
-                    const nextAction = {
-                        type: UPDATE_GRAPH,
-                        payload: stateFromPipeline(pipeline)
-                    };
-                    return next(nextAction);
+                    return next(createUpdateGraphAction(pipeline));
                 }
                 case CREATE_BLOCK_WITH_CONNECTION: {
                     const nodeId = action.payload.node;
@@ -48,10 +39,14 @@ export const memoryMiddleware = pipeline => store => {
                     } catch (e) {
                         // TODO: dispatch action to notify user of failure
                     }
-                    return next({
-                        type: UPDATE_GRAPH,
-                        payload: stateFromPipeline(pipeline)
-                    });
+                    return next(createUpdateGraphAction(pipeline));
+                }
+                case SET_BLOCK_OPTIONS: {
+                    const node = pipeline.getNode(action.payload.id);
+                    if (node.kind !== 'block') throw new Error('Setting options on not-a-block');
+                    node.setOptions(action.payload.options);
+                    // No need for dispatching. Listener will detect the reset of the Block
+                    return null;
                 }
                 case RUN_PIPELINE: {
                     pipeline.run();
@@ -75,6 +70,13 @@ export function newPipeline() {
     const pipeline = env.newPipeline();
     pipeline.newNode('number', {value: 5});
     return pipeline;
+}
+
+function createUpdateGraphAction(pipeline) {
+    return {
+        type: UPDATE_GRAPH,
+        payload: stateFromPipeline(pipeline)
+    };
 }
 
 function stateFromPipeline(pipeline) {

@@ -2,11 +2,12 @@ import {createElement} from 'react';
 import {Drawer, AppBar, IconButton} from 'material-ui';
 import {connect} from 'react-redux';
 import BlockOptions from './BlockOptions';
+import {setBlockOptions} from '../larissa/redux';
 
-function renderOptions(node) {
-    switch (node.kind) {
+function renderOptions(props) {
+    switch (props.node.kind) {
         case 'block':
-            return <BlockOptions node={node} />;
+            return <BlockOptions node={props.node} onChange={(options) => props.setBlockOptions({id: props.node.id, options})} />;
         default:
             return <div>Unable to render this kind of node</div>;
     }
@@ -25,7 +26,7 @@ const SecondaryDrawer = props => {
                 iconElementLeft={<div></div>}
             >
             </AppBar>
-            {renderOptions(props.node)}
+            {renderOptions(props)}
         </Drawer>
     );
 };
@@ -36,4 +37,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(SecondaryDrawer);
+export default connect(mapStateToProps, {setBlockOptions})(SecondaryDrawer);

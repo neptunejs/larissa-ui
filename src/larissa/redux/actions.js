@@ -13,3 +13,6 @@ export const runPipeline = createAction(RUN_PIPELINE);
 
 export const RESET_PIPELINE = '@@larissa/RESET_PIPELINE';
 export const resetPipeline = createAction(RESET_PIPELINE);
+
+export const SET_BLOCK_OPTIONS = '@@larissa/SET_BLOCK_OPTIONS';
+export const setBlockOptions = createAction(SET_BLOCK_OPTIONS);

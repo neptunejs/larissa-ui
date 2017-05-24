@@ -13,13 +13,14 @@ const BlockOptions = props => {
         return (
             <SchemaForm schema={blockType.schema} model={props.node.options} onModelChange={(keys, value) => {
                 let toChange = props.node.options;
-                console.log(toChange);
                 for (let i = 0; i < keys.length - 1; i++) {
                     toChange = toChange[keys[i]];
                 }
                 const key = keys[keys.length - 1];
                 toChange[key] = value;
-                console.log(props.node.options);
+                if (props.onChange) {
+                    props.onChange(props.node.options);
+                }
             }} />
         );
     }
