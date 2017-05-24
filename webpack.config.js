@@ -7,8 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VENDOR_LIBS = [
     'lodash-es', 'material-ui',
     'react', 'react-dom', 'react-redux', 'react-router-dom',
-    'redux', 'redux-actions', 'redux-promise-redux', 'redux-thunk',
-    'reselect'
+    'redux', 'redux-actions', 'redux-promise-middleware', 'redux-thunk',
+    'reselect', 'react-schema-form'
 ];
 
 const plugins = [
@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
     plugins.push(new BabiliPlugin());
 } else {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-    plugins.push(new BundleAnalyzerPlugin())
+    plugins.push(new BundleAnalyzerPlugin());
 }
 
 module.exports = {
