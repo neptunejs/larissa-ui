@@ -6,7 +6,7 @@ import {setBlockOptions} from '../actions/index';
 
 
 const BlockOptions = props => {
-    const blockType = env.getBlock(props.node.type);
+    const blockType = env.getBlock(props.node.blockType.identifier);
     if (!blockType.schema) {
         return <div>No schema for this block</div>;
     } else {
