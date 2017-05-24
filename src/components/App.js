@@ -8,6 +8,7 @@ import {DragDropContext} from 'react-dnd';
 import CustomDragLayer from './CustomDragLayer';
 import MainAppBar from './MainAppBar';
 import MainContent from './MainContent';
+import Notifications from './Notifications';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <NodeListDrawer />
                 <SecondaryDrawer />
                 <MainContent />
+                <Notifications />
             </div>
         </MuiThemeProvider>
     );

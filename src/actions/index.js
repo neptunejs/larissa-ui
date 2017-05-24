@@ -17,3 +17,6 @@ export const unselectNode = createAction(UNSELECT_NODE);
 
 export const BLOCK_OPTIONS = 'BLOCK_OPTIONS';
 export const setBlockOptions = createAction(BLOCK_OPTIONS);
+
+export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
+export const clearNotification = createAction(CLEAR_NOTIFICATION);
