@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const VENDOR_LIBS = [
     'immutable', 'lodash-es', 'material-ui',
-    'react', 'react-dom', 'react-redux', 'react-router-dom',
+    'react', 'react-dom', 'react-keydown', 'react-redux', 'react-router-dom',
     'redux', 'redux-actions', 'redux-promise-middleware', 'redux-thunk',
     'reselect', 'react-schema-form'
 ];

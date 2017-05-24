@@ -1,10 +1,18 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
+import keydown from 'react-keydown'
+
 import Block from './Block';
 
 import placeNodes from '../util/placeNodes';
 
-class Pipeline extends Component {
+@connect((state) => {
+    return {
+        graph: placeNodes(state.pipeline),
+        selectedNode: state.pipelineUI.selectedNode
+    };
+})
+export default class Pipeline extends Component {
     render() {
         const graph = this.props.graph;
         if (!graph) return null;
@@ -13,18 +21,18 @@ class Pipeline extends Component {
         for (const level of graph.levels) {
             widths[level[0]] = {total: level[1], current: level[1]};
         }
-        for (const node of graph.nodes) {
-            const widthObj = widths[node[1].level];
+        for (const [id, info] of graph.nodes) {
+            const widthObj = widths[info.level];
             const width = widthObj.current--;
             blocks.push(<Block
-                key={node[0]}
-                node={node[0]}
-                depth={graph.totalLevels - node[1].level}
+                key={id}
+                node={id}
+                depth={graph.totalLevels - info.level}
                 width={width}
                 maxWidth={graph.maxWidth}
                 totalWidth={widthObj.total}
-                connected={node[1].connected}
-                selected={this.props.selectedNode.id === node[0]}
+                connected={info.connected}
+                selected={this.props.selectedNode.id === id}
             />);
         }
         return (
@@ -34,11 +42,8 @@ class Pipeline extends Component {
         );
     }
 
+    @keydown('delete')
+    deleteKeyPressed() {
+        console.log('TODO: delete currently selected node!');
+    }
 }
-
-export default connect((state) => {
-    return {
-        graph: placeNodes(state.pipeline),
-        selectedNode: state.pipelineUI.selectedNode
-    };
-})(Pipeline);
