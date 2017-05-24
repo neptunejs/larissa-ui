@@ -1,12 +1,14 @@
 import env from '../environment';
 import {
     CREATE_BLOCK,
-    UPDATE_GRAPH,
     CREATE_BLOCK_WITH_CONNECTION,
-    RUN_PIPELINE,
     RESET_PIPELINE,
-    SET_BLOCK_OPTIONS
+    RUN_ERROR,
+    RUN_PIPELINE,
+    SET_BLOCK_OPTIONS,
+    UPDATE_GRAPH,
 } from './actions';
+
 export const memoryMiddleware = pipeline => store => {
     // Listen to status changes in the pipeline to dispatch actions
     pipeline.on('child-status', function () {
@@ -49,15 +51,26 @@ export const memoryMiddleware = pipeline => store => {
                     return null;
                 }
                 case RUN_PIPELINE: {
-                    pipeline.run();
+                    pipeline.run().catch((err) => {
+                        console.error(err);
+                        next({
+                            type: RUN_ERROR,
+                            payload: {
+                                message: err.message
+                            }
+                        });
+                    });
                     return null;
                 }
                 case RESET_PIPELINE: {
                     pipeline.reset();
                     return null;
                 }
+                case UPDATE_GRAPH: // Just pass the action to the end user
+                    next(action);
+                    return null;
                 default: {
-                    return next(action);
+                    throw new Error(`Unexpected action: ${action.type}`);
                 }
             }
         }

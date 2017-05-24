@@ -16,3 +16,5 @@ export const resetPipeline = createAction(RESET_PIPELINE);
 
 export const SET_BLOCK_OPTIONS = '@@larissa/SET_BLOCK_OPTIONS';
 export const setBlockOptions = createAction(SET_BLOCK_OPTIONS);
+
+export const RUN_ERROR = '@@larissa/RUN_ERROR';
