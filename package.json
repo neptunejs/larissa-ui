@@ -29,7 +29,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
-    "babili-webpack-plugin": "^0.0.11",
+    "babili-webpack-plugin": "^0.1.1",
     "css-loader": "^0.28.1",
     "eslint": "^3.19.0",
     "eslint-config-cheminfo": "^1.8.0",
@@ -37,7 +37,7 @@
     "eslint-plugin-no-only-tests": "^1.1.0",
     "eslint-plugin-react": "^7.0.1",
     "html-webpack-plugin": "^2.28.0",
-    "style-loader": "^0.17.0",
+    "style-loader": "^0.18.1",
     "webpack": "^2.5.1",
     "webpack-bundle-analyzer": "^2.8.1",
     "webpack-dev-server": "^2.4.5"
