@@ -3027,15 +3027,15 @@ kind-of@^3.0.2:
   dependencies:
     is-buffer "^1.1.5"
 
-larissa-plugin-nodes-image-js@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-image-js/-/larissa-plugin-nodes-image-js-0.0.2.tgz#4dc8392d89a3c6a08ae5f0812b9ee04c786a3561"
+larissa-plugin-nodes-image-js@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-image-js/-/larissa-plugin-nodes-image-js-0.0.3.tgz#d0e66bd74841b80390f78e317ac36f174897dc32"
   dependencies:
     image-js "^0.9.13"
 
-larissa@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.0.2.tgz#9e2f0b71179505f69a218725b5b617a1c52b8f5b"
+larissa@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.0.3.tgz#be61fcc4aef054668ab9d43bedce58a0a54f0b6f"
   dependencies:
     graph.js "^1.21.1"
     is-my-json-valid "^2.16.0"
