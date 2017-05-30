@@ -9,7 +9,7 @@ const MainDrawer = props => {
     return (
         <Drawer open={props.open}>
             <AppBar
-                title="Test"
+                title="larissa"
                 iconElementLeft={<IconButton onClick={props.closeDrawer} iconClassName="material-icons">arrow_back</IconButton>}
             >
             </AppBar>
