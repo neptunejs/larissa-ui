@@ -31,6 +31,16 @@ export const memoryMiddleware = env => store => {
         store.dispatch(createUpdateGraphAction(rootPipeline));
     });
 
+    rootPipeline.on('runError', function (err) {
+        console.log(err);
+        store.dispatch({
+            type: RUN_ERROR,
+            payload: {
+                message: err.message
+            }
+        })
+    });
+
     // Update on initialization
     store.dispatch(createUpdateGraphAction(rootPipeline));
 
@@ -68,7 +78,6 @@ export const memoryMiddleware = env => store => {
                 }
                 case RUN_PIPELINE: {
                     rootPipeline.run().catch((err) => {
-                        console.error(err);
                         next({
                             type: RUN_ERROR,
                             payload: {
@@ -88,6 +97,7 @@ export const memoryMiddleware = env => store => {
                     return next(createUpdateGraphAction(rootPipeline));
                 }
                 case UPDATE_GRAPH: // Just pass the action to the end user
+                case RUN_ERROR:
                     next(action);
                     return null;
                 case DELETE_NODE:
