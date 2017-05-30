@@ -5,12 +5,15 @@ import keydown from 'react-keydown'
 import Node from './nodes/Node';
 
 import placeNodes from '../util/placeNodes';
+import {deleteNode} from '../larissa/redux';
 
 @connect((state) => {
     return {
         graph: placeNodes(state.pipeline),
         selectedNode: state.pipelineUI.selectedNode
     };
+}, {
+    deleteNode
 })
 export default class Pipeline extends Component {
     render() {
@@ -44,6 +47,8 @@ export default class Pipeline extends Component {
 
     @keydown('delete')
     deleteKeyPressed() {
-        console.log('TODO: delete currently selected node!');
+        if (this.props.selectedNode) {
+            this.props.deleteNode(this.props.selectedNode.id);
+        }
     }
 }

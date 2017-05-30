@@ -1,7 +1,7 @@
 import {
     CREATE_BLOCK,
     CREATE_BLOCK_WITH_CONNECTION,
-    CREATE_PIPELINE,
+    CREATE_PIPELINE, DELETE_NODE,
     RESET_PIPELINE,
     RUN_ERROR,
     RUN_PIPELINE,
@@ -80,6 +80,10 @@ export const memoryMiddleware = env => store => {
                 case UPDATE_GRAPH: // Just pass the action to the end user
                     next(action);
                     return null;
+                case DELETE_NODE:
+                    rootPipeline.deleteNode(rootPipeline.getNode(action.payload));
+                    next(action);
+                    return next(createUpdateGraphAction(rootPipeline));
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);
                 }

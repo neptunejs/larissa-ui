@@ -21,3 +21,6 @@ export const SET_BLOCK_OPTIONS = '@@larissa/SET_BLOCK_OPTIONS';
 export const setBlockOptions = createAction(SET_BLOCK_OPTIONS);
 
 export const RUN_ERROR = '@@larissa/RUN_ERROR';
+
+export const DELETE_NODE = '@@larissa/DELETE_NODE';
+export const deleteNode = createAction(DELETE_NODE);
