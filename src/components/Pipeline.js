@@ -2,7 +2,7 @@ import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
 import keydown from 'react-keydown'
 
-import Block from './Block';
+import Node from './nodes/Node';
 
 import placeNodes from '../util/placeNodes';
 
@@ -16,7 +16,7 @@ export default class Pipeline extends Component {
     render() {
         const graph = this.props.graph;
         if (!graph) return null;
-        const blocks = [];
+        const nodes = [];
         const widths = {};
         for (const level of graph.levels) {
             widths[level[0]] = {total: level[1], current: level[1]};
@@ -24,7 +24,7 @@ export default class Pipeline extends Component {
         for (const [id, info] of graph.nodes) {
             const widthObj = widths[info.level];
             const width = widthObj.current--;
-            blocks.push(<Block
+            nodes.push(<Node
                 key={id}
                 node={id}
                 depth={graph.totalLevels - info.level}
@@ -37,7 +37,7 @@ export default class Pipeline extends Component {
         }
         return (
             <div style={{position: 'relative', height: '100%'}}>
-                {blocks}
+                {nodes}
             </div>
         );
     }

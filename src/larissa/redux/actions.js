@@ -3,6 +3,9 @@ import {createAction} from 'redux-actions';
 export const CREATE_BLOCK = '@@larissa/CREATE_BLOCK';
 export const createBlock = createAction(CREATE_BLOCK);
 
+export const CREATE_PIPELINE = '@@larissa/CREATE_PIPELINE';
+export const createPipeline = createAction(CREATE_PIPELINE);
+
 export const CREATE_BLOCK_WITH_CONNECTION = '@@larissa/CREATE_BLOCK_WITH_CONNECTION';
 export const createBlockWithConnection = createAction(CREATE_BLOCK_WITH_CONNECTION);
 
