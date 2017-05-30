@@ -1,4 +1,3 @@
-import env from '../environment';
 import {
     CREATE_BLOCK,
     CREATE_BLOCK_WITH_CONNECTION,
@@ -9,7 +8,13 @@ import {
     UPDATE_GRAPH,
 } from './actions';
 
-export const memoryMiddleware = pipeline => store => {
+export const memoryMiddleware = env => store => {
+    // Create root pipeline
+    const pipeline = env.newPipeline();
+
+    // Create dummy node on the pipeline
+    pipeline.newNode('number', {value: 5});
+
     // Listen to status changes in the pipeline to dispatch actions
     pipeline.on('child-status', function () {
         store.dispatch(createUpdateGraphAction(pipeline));
@@ -79,11 +84,6 @@ export const memoryMiddleware = pipeline => store => {
     };
 };
 
-export function newPipeline() {
-    const pipeline = env.newPipeline();
-    pipeline.newNode('number', {value: 5});
-    return pipeline;
-}
 
 function createUpdateGraphAction(pipeline) {
     return {

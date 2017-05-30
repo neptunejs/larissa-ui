@@ -3,14 +3,15 @@ import {createStore, applyMiddleware} from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunkMiddleware from 'redux-thunk';
 import history from './history';
+import env from './larissa/environment';
 import './index.css';
 
 import reducers from './reducers/index';
 
-import {memoryMiddleware, newPipeline} from './larissa/redux';
+import {memoryMiddleware} from './larissa/redux';
 
 const createStoreWithMiddleware = applyMiddleware(
-    memoryMiddleware(newPipeline()),
+    memoryMiddleware(env),
     thunkMiddleware,
     promiseMiddleware(),
     routerMiddleware(history)
