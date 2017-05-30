@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npm run clean && webpack",
     "clean": "rimraf dist",
-    "deploy": "npm run build && bash deploy.sh",
+    "deploy": "NODE_ENV=production npm run build && bash deploy.sh",
     "eslint": "eslint src --cache",
     "eslint-fix": "npm run eslint -- --fix",
     "start": "webpack-dev-server --inline",

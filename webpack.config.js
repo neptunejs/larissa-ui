@@ -24,8 +24,8 @@ const plugins = [
 ];
 
 if (process.env.NODE_ENV === 'production') {
-    const BabiliPlugin = require('babili-webpack-plugin');
-    plugins.push(new BabiliPlugin());
+    // const BabiliPlugin = require('babili-webpack-plugin');
+    // plugins.push(new BabiliPlugin());
 } else {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     plugins.push(new BundleAnalyzerPlugin());
