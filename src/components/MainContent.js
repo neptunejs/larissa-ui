@@ -9,7 +9,11 @@ const baseStyle = {display: 'flex', flexDirection: 'column', flex: 0.99};
 class MainContent extends Component {
     render() {
         return (
-            <div style={{...baseStyle, marginLeft: this.props.drawerOpen ? 256 : 0}}>
+            <div style={{
+                ...baseStyle,
+                marginLeft: this.props.drawerOpen ? 256 : 0,
+                marginRight: this.props.inspectorOpen ? 400 : 0
+            }}>
                 <PipelineToolbar />
                 <Pipeline />
             </div>
@@ -20,7 +24,8 @@ class MainContent extends Component {
 
 const mapStateToProps = state => {
     return {
-        drawerOpen: state.drawer.open
+        drawerOpen: state.drawer.open,
+        inspectorOpen: state.drawer.inspectorOpen
     };
 };
 

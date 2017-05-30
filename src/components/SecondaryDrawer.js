@@ -14,15 +14,12 @@ function renderOptions(props) {
 }
 
 const SecondaryDrawer = props => {
-    if (!props.node.id) {
-        return null;
-    }
     return (
-        <Drawer width={400} open={!!props.node.id} openSecondary={true}>
+        <Drawer width={400} open={props.inspectorOpen} openSecondary={true}>
             <AppBar
                 title="Options"
-                iconElementRight={<IconButton onClick={props.closeDrawer}
-                                              iconClassName="material-icons">arrow_forward</IconButton>}
+                // iconElementRight={<IconButton onClick={props.closeDrawer}
+                //                               iconClassName="material-icons">arrow_forward</IconButton>}
                 iconElementLeft={<div></div>}
             >
             </AppBar>
@@ -33,7 +30,8 @@ const SecondaryDrawer = props => {
 
 const mapStateToProps = state => {
     return {
-        node: state.pipelineUI.selectedNode
+        node: state.pipelineUI.selectedNode,
+        inspectorOpen: state.drawer.inspectorOpen
     };
 };
 
