@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import env from '../../larissa/environment';
 
 import Block from './Block';
+import Pipeline from './Pipeline';
 
 const blockWidth = 250;
 const blockHeight = 150;
@@ -40,6 +41,15 @@ class Node extends Component {
                     blockType={blockType}
                     node={info}
                     style={{...blockStyle, left, top}}
+                />;
+            }
+            case 'pipeline': {
+                return <Pipeline
+                    node={info}
+                    style={{...blockStyle, left, top}}
+                    width={blockWidth}
+                    height={blockHeight}
+                    selected={this.props.selected}
                 />;
             }
             default: {

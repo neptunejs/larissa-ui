@@ -14,7 +14,17 @@ export const memoryMiddleware = env => store => {
     const rootPipeline = env.newPipeline();
 
     // Create dummy node on the pipeline
-    rootPipeline.newNode('number', {value: 5});
+    const ten = rootPipeline.newNode('number', {value: 10});
+
+    const pIn = env.newPipeline();
+    const five = pIn.newNode('number', {value: 5});
+    const prod = pIn.newNode('product');
+    pIn.connect(five, prod);
+    pIn.linkInput(prod.input(), 'number');
+    pIn.linkOutput(prod.output(), 'result');
+
+    rootPipeline.addNode(pIn);
+    rootPipeline.connect(ten, pIn.input('number'));
 
     // Listen to status changes in the pipeline to dispatch actions
     rootPipeline.on('child-status', function () {

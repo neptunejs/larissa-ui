@@ -1,6 +1,6 @@
 import {
     UNSELECT_NODE,
-    SELECT_BLOCK
+    SELECT_NODE,
 } from '../actions';
 import {DELETE_NODE} from '../larissa/redux/actions';
 
@@ -10,7 +10,7 @@ const defaultState = {
 
 export default function (state = defaultState, action) {
     switch (action.type) {
-        case SELECT_BLOCK:
+        case SELECT_NODE:
             return {...state, selectedNode: action.payload};
         case UNSELECT_NODE:
             return {...state, selectedNode: {}};
