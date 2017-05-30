@@ -19,11 +19,11 @@ class Block extends Component {
         return (
             <Paper style={{...blockStyle, border: selected ? 'solid 1px blue' : null}}
                    onClick={this.handleClick.bind(this)}>
-                <StatusBar status={info.status}/>
+                <StatusBar status={info.status} />
                 <Ports node={info.id} type="input" value={blockType.inputs} width={blockWidth}
-                       height={blockHeight}/>
+                       height={blockHeight} />
                 <Ports node={info.id} type="output" value={blockType.outputs} width={blockWidth}
-                       height={blockHeight}/>
+                       height={blockHeight} />
                 <div style={{padding: 5}}>
                     <h4 style={{marginTop: 0}}>{blockType.label || blockType.name}</h4>
                 </div>
@@ -33,7 +33,7 @@ class Block extends Component {
 
     handleClick(event) {
         event.stopPropagation();
-        this.props.selectBlock(this.props.info);
+        this.props.selectBlock(this.props.node);
     }
 }
 

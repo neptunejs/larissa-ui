@@ -34,11 +34,12 @@ class Node extends Component {
             case 'block': {
                 const blockType = env.getBlock(info.blockType.identifier);
                 return <Block
+                    selected={this.props.selected}
                     width={blockWidth}
                     height={blockHeight}
                     blockType={blockType}
                     node={info}
-                    style={{...blockStyle, left, top }}
+                    style={{...blockStyle, left, top}}
                 />;
             }
             default: {
