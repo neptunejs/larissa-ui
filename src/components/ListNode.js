@@ -49,6 +49,7 @@ export const ParentListNode = props => {
         <ListItem
             key={tree.label}
             primaryText={tree.label}
+            initiallyOpen={tree.label === 'builtin'}
             nestedItems={tree.children.map(renderTree)}
             primaryTogglesNestedList={true}
         />
