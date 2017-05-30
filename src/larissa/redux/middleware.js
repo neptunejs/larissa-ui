@@ -7,11 +7,13 @@ import {
     RUN_PIPELINE,
     SET_BLOCK_OPTIONS,
     UPDATE_GRAPH,
+    SET_CURRENT_PIPELINE
 } from './actions';
 
 export const memoryMiddleware = env => store => {
     // Create root pipeline
     const rootPipeline = env.newPipeline();
+    let currentPipeline = rootPipeline;
 
     // Create dummy node on the pipeline
     const ten = rootPipeline.newNode('number', {value: 10});
@@ -38,7 +40,7 @@ export const memoryMiddleware = env => store => {
             payload: {
                 message: err.message
             }
-        })
+        });
     });
 
     // Update on initialization
@@ -48,62 +50,78 @@ export const memoryMiddleware = env => store => {
         if (action.type.startsWith('@@larissa/')) {
             switch (action.type) {
                 case CREATE_BLOCK: {
-                    rootPipeline.newNode(action.payload.type);
-                    return next(createUpdateGraphAction(rootPipeline));
+                    currentPipeline.newNode(action.payload.type);
+                    return next(createUpdateGraphAction(currentPipeline));
                 }
                 case CREATE_BLOCK_WITH_CONNECTION: {
                     const nodeId = action.payload.node;
-                    const newNode = rootPipeline.newNode(action.payload.type);
+                    const newNode = currentPipeline.newNode(action.payload.type);
                     try {
-                        const node = rootPipeline.getNode(nodeId);
+                        const node = currentPipeline.getNode(nodeId);
                         if (node) {
                             if (action.payload.portType === 'input') {
-                                rootPipeline.connect(newNode, node.input(action.payload.name));
+                                currentPipeline.connect(newNode, node.input(action.payload.name));
                             }
                             if (action.payload.portType === 'output') {
-                                rootPipeline.connect(node.output(action.payload.name), newNode);
+                                currentPipeline.connect(node.output(action.payload.name), newNode);
                             }
                         }
                     } catch (e) {
                         // TODO: dispatch action to notify user of failure
                     }
-                    return next(createUpdateGraphAction(rootPipeline));
+                    return next(createUpdateGraphAction(currentPipeline));
                 }
                 case SET_BLOCK_OPTIONS: {
-                    const node = rootPipeline.getNode(action.payload.id);
+                    const node = currentPipeline.getNode(action.payload.id);
                     if (node.kind !== 'block') throw new Error('Setting options on not-a-block');
                     node.setOptions(action.payload.options);
                     // No need for dispatching. Listener will detect the reset of the Block
                     return null;
                 }
                 case RUN_PIPELINE: {
-                    rootPipeline.run().catch((err) => {
-                        next({
-                            type: RUN_ERROR,
-                            payload: {
-                                message: err.message
-                            }
+                    currentPipeline.run().catch((err) => {
+                        console.error(err);
+                        rootPipeline.run().catch((err) => {
+                            next({
+                                type: RUN_ERROR,
+                                payload: {
+                                    message: err.message
+                                }
+                            });
                         });
+                        return null;
                     });
-                    return null;
+                    break;
                 }
                 case RESET_PIPELINE: {
-                    rootPipeline.reset();
+                    currentPipeline.reset();
                     return null;
                 }
                 case CREATE_PIPELINE: {
                     const newPipeline = env.newPipeline();
-                    rootPipeline.addNode(newPipeline);
-                    return next(createUpdateGraphAction(rootPipeline));
+                    currentPipeline.addNode(newPipeline);
+                    return next(createUpdateGraphAction(currentPipeline));
                 }
                 case UPDATE_GRAPH: // Just pass the action to the end user
                 case RUN_ERROR:
                     next(action);
                     return null;
                 case DELETE_NODE:
-                    rootPipeline.deleteNode(rootPipeline.getNode(action.payload));
+                    currentPipeline.deleteNode(currentPipeline.getNode(action.payload));
                     next(action);
-                    return next(createUpdateGraphAction(rootPipeline));
+                    return next(createUpdateGraphAction(currentPipeline));
+                case SET_CURRENT_PIPELINE: {
+                    const newCurrentPipeline = rootPipeline.findNode(action.payload.id);
+                    if (!newCurrentPipeline) {
+                        throw new Error(`Pipeline with id ${action.payload.id} was not found`);
+                    }
+                    if (newCurrentPipeline.kind !== 'pipeline') {
+                        throw new Error('Setting pipeline to be not-a-pipeline');
+                    }
+                    currentPipeline = newCurrentPipeline;
+                    next(action);
+                    return next(createUpdateGraphAction(currentPipeline));
+                }
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);
                 }
