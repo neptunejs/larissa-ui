@@ -4185,9 +4185,9 @@ react-router@^4.1.1:
     prop-types "^15.5.4"
     warning "^3.0.0"
 
-"react-schema-form@https://github.com/networknt/react-schema-form#0660262324822b1233cea2b4fce271ffcb6b9fa0":
-  version "0.3.2"
-  resolved "https://github.com/networknt/react-schema-form#0660262324822b1233cea2b4fce271ffcb6b9fa0"
+react-schema-form@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/react-schema-form/-/react-schema-form-0.3.3.tgz#5cff33c040c7a2b3acd8554f6a50c422205ddebc"
   dependencies:
     classnames "^2.2.5"
     lodash "^4.16.6"

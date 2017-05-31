@@ -64,7 +64,7 @@
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
-    "react-schema-form": "https://github.com/networknt/react-schema-form#0660262324822b1233cea2b4fce271ffcb6b9fa0",
+    "react-schema-form": "^0.3.3",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-actions": "^2.0.3",
