@@ -23,7 +23,7 @@ class DropPipeline extends Component {
         return this.props.connectDropTarget(
             <div
                 style={{flex: 1, position: 'relative', backgroundColor: canDrop && isOver ? '#ddd' : '#fff'}}
-                onClick={this.props.unselectNode} >
+                onClick={() => this.props.unselectNode()} >
                 <Pipeline />
             </div>
         );
