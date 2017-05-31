@@ -1,11 +1,19 @@
-import Graph from 'graph.js/dist/graph.es6';
 /*
 Implement the Coffman–Graham algorithm (https://en.wikipedia.org/wiki/Coffman%E2%80%93Graham_algorithm)
  */
+import Graph from 'graph.js/dist/graph.es6';
+
+import getSubgraphs from './getSubgraphs';
+
 const limit = 5;
 export default function placeNodes(pipeline) {
     if(!pipeline.graph) return null;
     const graph = Graph.fromJSON(JSON.stringify(pipeline.graph));
+    const subgraphs = getSubgraphs(graph);
+    return subgraphs.map(getNodesPlacement);
+}
+
+function getNodesPlacement(graph) {
     // step 1
     const reduced = graph.transitiveReduction();
     // step 2

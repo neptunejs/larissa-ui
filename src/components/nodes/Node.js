@@ -5,10 +5,12 @@ import env from '../../larissa/environment';
 import Block from './Block';
 import Pipeline from './Pipeline';
 
-const blockWidth = 250;
-const blockHeight = 150;
-const blockVerticalSeparation = 50;
-const blockHorizontalSeparation = 100;
+import {
+    blockWidth,
+    blockHeight,
+    blockVerticalSeparation,
+    blockHorizontalSeparation
+} from '../../constants';
 
 const blockStyle = {
     width: blockWidth,
@@ -28,7 +30,7 @@ class Node extends Component {
             padding = Math.round((getHeight(this.props.maxWidth) - getHeight(this.props.totalWidth)) / 2);
         }
         const left = this.props.depth * (blockWidth + blockHorizontalSeparation);
-        const top = (this.props.width - 1) * (blockHeight + blockVerticalSeparation) + padding;
+        const top = (this.props.width - 1) * (blockHeight + blockVerticalSeparation) + padding + this.props.verticalOffset;
 
         const info = this.props.info;
         switch (info.kind) {

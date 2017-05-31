@@ -1,6 +1,8 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
 
+import {drawerWidth, inspectorWidth} from '../constants';
+
 import Pipeline from './PipelineDroppable';
 import PipelineToolbar from './PipelineToolbar';
 
@@ -11,8 +13,8 @@ class MainContent extends Component {
         return (
             <div style={{
                 ...baseStyle,
-                marginLeft: this.props.drawerOpen ? 256 : 0,
-                marginRight: this.props.inspectorOpen ? 400 : 0
+                marginLeft: this.props.drawerOpen ? drawerWidth : 0,
+                marginRight: this.props.inspectorOpen ? inspectorWidth : 0
             }}>
                 <PipelineToolbar />
                 <Pipeline />
