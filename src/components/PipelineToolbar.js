@@ -2,7 +2,7 @@ import {createElement} from 'react';
 import {Toolbar, ToolbarGroup, RaisedButton} from 'material-ui';
 import {connect} from 'react-redux';
 import {runPipeline, resetPipeline, createPipeline} from '../larissa/redux';
-import {toggleInspector} from '../actions'
+import {toggleInspector} from '../actions';
 
 const PipelineToolbar = props => {
     return (

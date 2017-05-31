@@ -1,8 +1,6 @@
-'use strict';
+import Graph from 'graph.js/dist/graph.full';
 
-const Graph = require('graph.js/dist/graph.full');
-
-const getSubgraphs = require('../getSubgraphs');
+import getSubgraphs from '../getSubgraphs';
 
 const graph = new Graph();
 
@@ -28,4 +26,4 @@ graph.addNewEdge('11', '10');
 graph.addNewEdge('7', '8');
 graph.addNewEdge('8', '9');
 
-console.log(getSubgraphs(graph));
+console.log(getSubgraphs(graph)); // eslint-disable-line no-console

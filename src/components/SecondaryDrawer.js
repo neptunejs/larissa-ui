@@ -1,5 +1,5 @@
 import {createElement} from 'react';
-import {Drawer, AppBar, IconButton} from 'material-ui';
+import {Drawer, AppBar} from 'material-ui';
 import {connect} from 'react-redux';
 import BlockOptions from './BlockOptions';
 import {setBlockOptions} from '../larissa/redux';
@@ -18,8 +18,6 @@ const SecondaryDrawer = props => {
         <Drawer width={400} open={props.inspectorOpen} openSecondary={true}>
             <AppBar
                 title="Options"
-                // iconElementRight={<IconButton onClick={props.closeDrawer}
-                //                               iconClassName="material-icons">arrow_forward</IconButton>}
                 iconElementLeft={<div></div>}
             >
             </AppBar>

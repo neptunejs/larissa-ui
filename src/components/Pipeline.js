@@ -1,6 +1,6 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
-import keydown from 'react-keydown'
+import keydown from 'react-keydown';
 
 import Node from './nodes/Node';
 
@@ -23,7 +23,6 @@ export default class Pipeline extends Component {
         let verticalOffset = 0;
         const nodes = [];
         for (const graph of subgraphs) {
-            console.log(subgraphs);
             const widths = {};
             for (const level of graph.levels) {
                 widths[level[0]] = {total: level[1], current: level[1]};

@@ -34,7 +34,7 @@ export const memoryMiddleware = env => store => {
     });
 
     rootPipeline.on('runError', function (err) {
-        console.log(err);
+        console.log(err); // eslint-disable-line no-console
         store.dispatch({
             type: RUN_ERROR,
             payload: {
@@ -80,7 +80,7 @@ export const memoryMiddleware = env => store => {
                 }
                 case RUN_PIPELINE: {
                     currentPipeline.run().catch((err) => {
-                        console.error(err);
+                        console.error(err); // eslint-disable-line no-console
                         rootPipeline.run().catch((err) => {
                             next({
                                 type: RUN_ERROR,
