@@ -1,5 +1,5 @@
 import {routerMiddleware} from 'react-router-redux';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import thunkMiddleware from 'redux-thunk';
 import history from './history';
@@ -10,11 +10,23 @@ import reducers from './reducers/index';
 
 import {memoryMiddleware} from './larissa/redux';
 
-const createStoreWithMiddleware = applyMiddleware(
+const middlewares = [
     memoryMiddleware(env),
     thunkMiddleware,
     promiseMiddleware(),
     routerMiddleware(history)
-)(createStore);
+];
 
-export default createStoreWithMiddleware(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(
+    applyMiddleware(...middlewares)
+);
+
+const store = createStore(reducers, enhancer);
+export default store;
+
+if (module.hot) {
+    module.hot.accept('./reducers/index', () => {
+        store.replaceReducer(reducers);
+    });
+}

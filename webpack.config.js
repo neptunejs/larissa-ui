@@ -23,12 +23,20 @@ const plugins = [
     })
 ];
 
+let outputFilename;
+
 if (process.env.NODE_ENV === 'production') {
     // const BabiliPlugin = require('babili-webpack-plugin');
     // plugins.push(new BabiliPlugin());
+    outputFilename = '[name].[chunkhash].js'
 } else {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-    plugins.push(new BundleAnalyzerPlugin());
+    plugins.push(
+        new BundleAnalyzerPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin()
+    );
+    outputFilename = '[name].[hash].js';
 }
 
 module.exports = {
@@ -38,7 +46,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].[chunkhash].js',
+        filename: outputFilename,
         publicPath: '/larissa-ui/'
     },
     module: {
@@ -61,6 +69,7 @@ module.exports = {
     plugins,
     devtool: 'source-map',
     devServer: {
+        hot: true,
         compress: true,
         historyApiFallback: true,
         contentBase: './'
