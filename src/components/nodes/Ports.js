@@ -2,13 +2,12 @@ import {createElement} from 'react';
 import {DropTarget} from 'react-dnd';
 import {connect} from 'react-redux';
 
-import Triangle from './shapes/Triangle';
-import Square from './shapes/Square';
+import {blockWidth, blockHeight, portSize, ItemTypes} from '../../constants';
+import portSeparation from '../../util/portSeparation';
+import {createBlockWithConnection} from '../../larissa/redux/index';
 
-import {portSize, ItemTypes} from '../constants';
-import portSeparation from '../util/portSeparation';
-import {createBlockWithConnection} from '../larissa/redux';
-import {blockWidth, blockHeight} from '../constants';
+import Triangle from '../shapes/Triangle';
+import Square from '../shapes/Square';
 
 export default function Ports({type, value = [], node}) {
     if (value.length === 0) return null;

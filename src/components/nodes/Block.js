@@ -2,9 +2,10 @@ import {createElement, Component} from 'react';
 import Paper from 'material-ui/Paper';
 import {connect} from 'react-redux';
 
-import Ports from '../Ports';
-import StatusBar from '../StatusBar';
 import {selectNode, selectBlock} from '../../actions/index';
+
+import Ports from './Ports';
+import StatusBar from './StatusBar';
 
 class Block extends Component {
     render() {

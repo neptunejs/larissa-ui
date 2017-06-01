@@ -1,15 +1,15 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
+
 import env from '../../larissa/environment';
-
-import Block from './Block';
-import Pipeline from './Pipeline';
-
 import {
     blockWidth,
     blockHeight,
     blockMargin
 } from '../../constants';
+
+import Block from './Block';
+import Pipeline from './Pipeline';
 
 const blockStyle = {
     width: blockWidth,

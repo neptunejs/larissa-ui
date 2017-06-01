@@ -1,12 +1,13 @@
 import {createElement} from 'react';
 
+import {INSTANTIATED, ERRORED, FINISHED, RUNNING} from '../../constants';
+
 import LinearProgress from 'material-ui/LinearProgress';
 import {
     yellow500,
     red500,
     lightGreenA400 as doneGreen
 } from 'material-ui/styles/colors';
-import {INSTANTIATED, ERRORED, FINISHED, RUNNING} from '../constants';
 
 export default function StatusBar({status}) {
     let mode = 'determinate';

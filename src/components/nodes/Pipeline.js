@@ -1,11 +1,12 @@
 import {createElement, Component} from 'react';
 import Paper from 'material-ui/Paper';
+import {connect} from 'react-redux';
 
-import StatusBar from '../StatusBar';
-import Ports from '../Ports';
 import {selectNode, selectPipeline} from '../../actions/index';
 import {setCurrentPipeline} from '../../larissa/redux';
-import {connect} from 'react-redux';
+
+import StatusBar from './StatusBar';
+import Ports from './Ports';
 
 class Pipeline extends Component {
     render() {
