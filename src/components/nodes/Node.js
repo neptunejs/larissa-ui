@@ -21,20 +21,25 @@ const blockStyle = {
 class Node extends Component {
     render() {
         const info = this.props.info;
+        const style = {
+            ...blockStyle,
+            left: this.props.left,
+            top: this.props.top
+        };
         switch (info.kind) {
             case 'block': {
                 const blockType = env.getBlock(info.blockType.identifier);
                 return <Block
-                    selected={this.props.selected}
-                    blockType={blockType}
                     node={info}
-                    style={{...blockStyle, left: this.props.left, top: this.props.top}}
+                    selected={this.props.selected}
+                    style={style}
+                    blockType={blockType}
                 />;
             }
             case 'pipeline': {
                 return <Pipeline
                     node={info}
-                    style={{...blockStyle, left: this.props.left, top: this.props.top}}
+                    style={style}
                     selected={this.props.selected}
                 />;
             }
