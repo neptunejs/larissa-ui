@@ -3,6 +3,7 @@
     "react"
   ],
   "plugins": [
+    "react-hot-loader/babel",
     "lodash",
     "syntax-dynamic-import",
     "transform-decorators-legacy",

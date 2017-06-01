@@ -41,7 +41,11 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
     entry: {
-        bundle: ['regenerator-runtime/runtime', './src/index.js'],
+        bundle: [
+            'react-hot-loader/patch',
+            'regenerator-runtime/runtime',
+            './src/index.js'
+        ],
         vendor: VENDOR_LIBS
     },
     output: {
