@@ -3,6 +3,7 @@ import {Drawer, AppBar} from 'material-ui';
 import {connect} from 'react-redux';
 import BlockOptions from './BlockOptions';
 import {setBlockOptions} from '../larissa/redux';
+import {inspectorWidth} from '../constants';
 
 function renderOptions(props) {
     switch (props.node.kind) {
@@ -15,7 +16,7 @@ function renderOptions(props) {
 
 const SecondaryDrawer = props => {
     return (
-        <Drawer width={400} open={props.inspectorOpen} openSecondary={true}>
+        <Drawer width={inspectorWidth} open={props.inspectorOpen} openSecondary={true}>
             <AppBar
                 title="Options"
                 iconElementLeft={<div></div>}

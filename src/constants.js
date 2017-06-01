@@ -1,6 +1,6 @@
 
 export const drawerWidth = 256;
-export const inspectorWidth = 400;
+export const inspectorWidth = 450;
 export const portSize = 15;
 
 export const blockWidth = 250;
