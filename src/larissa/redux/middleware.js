@@ -60,10 +60,10 @@ export const memoryMiddleware = env => store => {
                         const node = currentPipeline.getNode(nodeId);
                         if (node) {
                             if (action.payload.portType === 'input') {
-                                currentPipeline.connect(newNode, node.input(action.payload.name));
+                                currentPipeline.connect(newNode, node.input(action.payload.portName));
                             }
                             if (action.payload.portType === 'output') {
-                                currentPipeline.connect(node.output(action.payload.name), newNode);
+                                currentPipeline.connect(node.output(action.payload.portName), newNode);
                             }
                         }
                     } catch (e) {
