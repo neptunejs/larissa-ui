@@ -18,9 +18,9 @@ class Pipeline extends Component {
             <Paper style={{...blockStyle, border: selected ? 'solid 1px blue' : null}}
                    onClick={this.handleClick.bind(this)}
                    onDoubleClick={this.handleDblClick.bind(this)}>
-                <StatusBar status={info.status} />
                 <Ports node={info.id} type="input" value={info.inputs} />
                 <Ports node={info.id} type="output" value={info.outputs} />
+                <StatusBar status={info.status} />
                 <div style={{padding: 5}}>
                     <h4 style={{marginTop: 0}}>{info.title}</h4>
                 </div>

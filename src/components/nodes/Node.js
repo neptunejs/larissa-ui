@@ -7,14 +7,15 @@ import Pipeline from './Pipeline';
 
 import {
     blockWidth,
-    blockHeight
+    blockHeight,
+    blockMargin
 } from '../../constants';
 
 const blockStyle = {
     width: blockWidth,
     height: blockHeight,
     position: 'absolute',
-    margin: 20
+    margin: blockMargin
 };
 
 class Node extends Component {

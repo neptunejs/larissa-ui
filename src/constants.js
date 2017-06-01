@@ -3,8 +3,9 @@ export const drawerWidth = 256;
 export const inspectorWidth = 450;
 export const portSize = 15;
 
-export const blockWidth = 250;
-export const blockHeight = 150;
+export const blockWidth = 200;
+export const blockHeight = 100;
+export const blockMargin = 20;
 export const blockVerticalSeparation = 50;
 export const blockHorizontalSeparation = 100;
 

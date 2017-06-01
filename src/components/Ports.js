@@ -6,7 +6,7 @@ import Triangle from './shapes/Triangle';
 import Square from './shapes/Square';
 
 import {portSize, ItemTypes} from '../constants';
-import evenSeparation from '../util/evenSeparation';
+import portSeparation from '../util/portSeparation';
 import {createBlockWithConnection} from '../larissa/redux';
 import {blockWidth, blockHeight} from '../constants';
 
@@ -18,7 +18,7 @@ export default function Ports({type, value = [], node}) {
     if (type === 'input') style.left = -portSize;
     else if (type === 'output') style.left = blockWidth;
 
-    const separation = evenSeparation(value.length, portSize, blockHeight);
+    const separation = portSeparation(value.length, portSize, blockHeight);
     const ports = [];
     for (let i = 0; i < value.length; i++) {
         const port = value[i];
