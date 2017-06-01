@@ -30,7 +30,7 @@ export const memoryMiddleware = env => store => {
 
     // Listen to status changes in the pipeline to dispatch actions
     rootPipeline.on('child-status', function () {
-        store.dispatch(createUpdateGraphAction(rootPipeline));
+        store.dispatch(createUpdateGraphAction(currentPipeline));
     });
 
     rootPipeline.on('runError', function (err) {
