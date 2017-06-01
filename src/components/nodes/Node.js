@@ -7,9 +7,7 @@ import Pipeline from './Pipeline';
 
 import {
     blockWidth,
-    blockHeight,
-    blockVerticalSeparation,
-    blockHorizontalSeparation
+    blockHeight
 } from '../../constants';
 
 const blockStyle = {
@@ -19,38 +17,23 @@ const blockStyle = {
     margin: 20
 };
 
-function getHeight(nNodes) {
-    return nNodes * blockHeight + (nNodes - 1) * blockVerticalSeparation;
-}
-
 class Node extends Component {
     render() {
-        let padding = 0;
-        if (this.props.maxWidth > this.props.totalWidth) {
-            padding = Math.round((getHeight(this.props.maxWidth) - getHeight(this.props.totalWidth)) / 2);
-        }
-        const left = this.props.depth * (blockWidth + blockHorizontalSeparation);
-        const top = (this.props.width - 1) * (blockHeight + blockVerticalSeparation) + padding + this.props.verticalOffset;
-
         const info = this.props.info;
         switch (info.kind) {
             case 'block': {
                 const blockType = env.getBlock(info.blockType.identifier);
                 return <Block
                     selected={this.props.selected}
-                    width={blockWidth}
-                    height={blockHeight}
                     blockType={blockType}
                     node={info}
-                    style={{...blockStyle, left, top}}
+                    style={{...blockStyle, left: this.props.left, top: this.props.top}}
                 />;
             }
             case 'pipeline': {
                 return <Pipeline
                     node={info}
-                    style={{...blockStyle, left, top}}
-                    width={blockWidth}
-                    height={blockHeight}
+                    style={{...blockStyle, left: this.props.left, top: this.props.top}}
                     selected={this.props.selected}
                 />;
             }
@@ -63,10 +46,7 @@ class Node extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     const info = state.pipeline.nodes[ownProps.node];
-    return {
-        info: info
-        // selected: info.id === state.pipeline.selectedNode.id
-    };
+    return {info};
 };
 
 export default connect(mapStateToProps)(Node);

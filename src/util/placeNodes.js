@@ -26,8 +26,11 @@ function getNodesPlacement(graph) {
     for (const [nodeId] of topological) {
         let maxLevel = 1;
         const connected = [];
-        for (const [connectedId] of graph.verticesFrom(nodeId)) {
-            connected.push(connectedId);
+        for (const [connectedId,, connections] of graph.verticesFrom(nodeId)) {
+            connected.push({
+                node: connectedId,
+                connections: connections.map(c => c.split(':').map(c => c.split('_')[2]))
+            });
             if (nodes.has(connectedId)) {
                 maxLevel = Math.max(maxLevel, nodes.get(connectedId).level + 1);
             }

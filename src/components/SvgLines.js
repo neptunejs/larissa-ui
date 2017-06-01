@@ -1,6 +1,6 @@
 import {createElement} from 'react';
 
-export default function SvgLines({lines}) {
+export default function SvgLines({lines = []}) {
     const inlines = [];
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
