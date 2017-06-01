@@ -5,7 +5,7 @@ import {
 import {DELETE_NODE} from '../larissa/redux/actions';
 
 const defaultState = {
-    selectedNode: {}
+    selectedNode: {},
 };
 
 export default function (state = defaultState, action) {

@@ -15,7 +15,13 @@ export const RUN_PIPELINE = '@@larissa/RUN_PIPELINE';
 export const runPipeline = createAction(RUN_PIPELINE);
 
 export const SET_CURRENT_PIPELINE = '@@larissa/SET_CURRENT_PIPELINE';
-export const setCurrentPipeline = createAction(SET_CURRENT_PIPELINE);
+export const setCurrentPipeline = function(pipeline, meta) {
+    return {
+        type: SET_CURRENT_PIPELINE,
+        payload: pipeline,
+        meta
+    };
+};
 
 export const RESET_PIPELINE = '@@larissa/RESET_PIPELINE';
 export const resetPipeline = createAction(RESET_PIPELINE);

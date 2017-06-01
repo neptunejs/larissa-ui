@@ -19,7 +19,7 @@ import portSeparation from '../util/portSeparation';
 
 @connect((state) => {
     return {
-        subgraphs: placeNodes(state.pipeline),
+        subgraphs: placeNodes(state.pipeline.graph),
         selectedNode: state.pipelineUI.selectedNode
     };
 }, {

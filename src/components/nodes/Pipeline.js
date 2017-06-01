@@ -30,7 +30,7 @@ class Pipeline extends Component {
     }
 
     handleDblClick() {
-        this.props.setCurrentPipeline(this.props.node);
+        this.props.setCurrentPipeline(this.props.node, {appendToHistory: true});
     }
 
     handleClick(event) {
