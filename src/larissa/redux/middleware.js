@@ -7,12 +7,14 @@ import {
     RUN_PIPELINE,
     SET_BLOCK_OPTIONS,
     UPDATE_GRAPH,
-    SET_CURRENT_PIPELINE
+    SET_CURRENT_PIPELINE,
+    setCurrentPipeline
 } from './actions';
 
 export const memoryMiddleware = env => store => {
     // Create root pipeline
     const rootPipeline = env.newPipeline();
+    rootPipeline.setTitle('ROOT');
     let currentPipeline = rootPipeline;
 
     // Create dummy node on the pipeline
@@ -45,6 +47,7 @@ export const memoryMiddleware = env => store => {
 
     // Update on initialization
     store.dispatch(createUpdateGraphAction(rootPipeline));
+    store.dispatch(setCurrentPipeline(rootPipeline.toJSON()));
 
     return next => action => {
         if (action.type.startsWith('@@larissa/')) {
@@ -124,7 +127,6 @@ export const memoryMiddleware = env => store => {
                 }
             }
         }
-
         return next(action);
     };
 };

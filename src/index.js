@@ -19,7 +19,7 @@ const renderApp = (Component) => {
         <AppContainer>
             <Provider store={store}>
                 <ConnectedRouter history={history}>
-                    <Component/>
+                    <Component />
                 </ConnectedRouter>
             </Provider>
         </AppContainer>,

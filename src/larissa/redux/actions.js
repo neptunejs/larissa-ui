@@ -19,7 +19,7 @@ export const setCurrentPipeline = function(pipeline, meta) {
     return {
         type: SET_CURRENT_PIPELINE,
         payload: pipeline,
-        meta
+        meta: meta || {}
     };
 };
 
