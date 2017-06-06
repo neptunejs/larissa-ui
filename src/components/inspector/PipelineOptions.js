@@ -12,18 +12,18 @@ class PipelineOptions extends Component {
                 <CandidateEditor
                     candidates={this.props.node.inputCandidates}
                     label="Inputs"
+                    buttonText="Link Input"
                     onSubmit={(input, name) => {
-                        console.log(input, name);
-                        this.props.linkInput(input, name);
-                    }}/>
+                        this.props.linkInput(this.props.node.node.id, input, name);
+                    }} />
                 <CandidateEditor
                     candidates={this.props.node.outputCandidates}
                     label="Outputs"
+                    buttonText="Link Output"
                     onSubmit={(output, name) => {
-                        console.log(output, name);
-                        this.props.linkOutput(output, name);
+                        this.props.linkOutput(this.props.node.node.id, output, name);
                     }
-                    }/>
+                    } />
             </div>
         );
     }
@@ -32,7 +32,9 @@ class PipelineOptions extends Component {
 class CandidateEditor extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            linkName: ''
+        };
     }
 
     handleChange(event, index, value) {
@@ -47,10 +49,10 @@ class CandidateEditor extends Component {
                              onChange={this.handleChange.bind(this)}>
                     {this.props.candidates.map(renderCandidate)}
                 </SelectField>
-                <TextField name="link_name" hintText="Link name"/>
+                <TextField name="link_name" hintText="Link name" value={this.state.linkName} onChange={(event) => this.setState({linkName: event.target.value })}/>
                 <RaisedButton onClick={(event) => {
-                    this.props.onSubmit(this.props.candidates.find(candidate => candidate.info.id === this.state.value), event.target.value);
-                }} label="Link input"/>
+                    this.props.onSubmit(this.props.candidates.find(candidate => candidate.info.id === this.state.value), this.state.linkName);
+                }} label={this.props.buttonText}/>
             </div>
         );
     }

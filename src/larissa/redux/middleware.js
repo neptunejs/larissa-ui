@@ -9,6 +9,8 @@ import {
     UPDATE_GRAPH,
     SET_CURRENT_PIPELINE,
     INSPECT_NODE,
+    LINK_INPUT,
+    LINK_OUTPUT,
     setCurrentPipeline
 } from './actions';
 
@@ -121,6 +123,24 @@ export const memoryMiddleware = env => store => {
                     }
                     currentPipeline = newCurrentPipeline;
                     next(action);
+                    return next(createUpdateGraphAction(currentPipeline));
+                }
+                case LINK_INPUT: {
+                    const pipeline = currentPipeline.getNode(action.payload.id);
+                    const nodeId = action.payload.input.node.id;
+                    const inputName = action.payload.input.info.name;
+                    const linkName = action.payload.name;
+                    const node = pipeline.getNode(nodeId);
+                    pipeline.linkInput(node.input(inputName), linkName);
+                    return next(createUpdateGraphAction(currentPipeline));
+                }
+                case LINK_OUTPUT: {
+                    const pipeline = currentPipeline.getNode(action.payload.id);
+                    const nodeId = action.payload.output.node.id;
+                    const outputName = action.payload.output.info.name;
+                    const linkName = action.payload.name;
+                    const node = pipeline.getNode(nodeId);
+                    pipeline.linkOutput(node.output(outputName), linkName);
                     return next(createUpdateGraphAction(currentPipeline));
                 }
                 case INSPECT_NODE: {

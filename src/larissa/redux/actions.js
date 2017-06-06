@@ -38,7 +38,23 @@ export const INSPECT_NODE = '@@larissa/INSPECT_NODE';
 export const inspectNode = createAction(INSPECT_NODE);
 
 export const LINK_INPUT = '@@larissa/LINK_INPUT';
-export const linkInput = createAction(LINK_INPUT);
+export const linkInput = function (pipelineId, input, name) {
+    return {
+        type: LINK_INPUT,
+        payload: {
+            id: pipelineId,
+            input, name
+        }
+    };
+};
 
 export const LINK_OUTPUT = '@@larissa/LINK_OUTPUT';
-export const linkOutput = createAction(LINK_OUTPUT);
+export const linkOutput = function(pipelineId, output, name) {
+    return {
+        type: LINK_OUTPUT,
+        payload: {
+            id: pipelineId,
+            output, name
+        }
+    }
+};

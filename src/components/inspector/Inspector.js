@@ -26,7 +26,9 @@ const SecondaryDrawer = props => {
                 iconElementLeft={<div></div>}
             >
             </AppBar>
-            {renderOptions(props)}
+            <div style={{margin: 10}}>
+                {renderOptions(props)}
+            </div>
         </Drawer>
     );
 };
