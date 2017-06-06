@@ -49,12 +49,12 @@ export const linkInput = function (pipelineId, input, name) {
 };
 
 export const LINK_OUTPUT = '@@larissa/LINK_OUTPUT';
-export const linkOutput = function(pipelineId, output, name) {
+export const linkOutput = function (pipelineId, output, name) {
     return {
         type: LINK_OUTPUT,
         payload: {
             id: pipelineId,
             output, name
         }
-    }
+    };
 };

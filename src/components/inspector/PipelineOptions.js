@@ -47,10 +47,10 @@ class CandidateEditor extends Component {
                              onChange={this.handleChange.bind(this)}>
                     {this.props.candidates.map(renderCandidate)}
                 </SelectField>
-                <TextField name="link_name" hintText="Link name" value={this.state.linkName} onChange={(event) => this.setState({linkName: event.target.value })}/>
-                <RaisedButton onClick={(event) => {
+                <TextField name="link_name" hintText="Link name" value={this.state.linkName} onChange={(event) => this.setState({linkName: event.target.value})} />
+                <RaisedButton onClick={() => {
                     this.props.onSubmit(this.props.candidates.find(candidate => candidate.info.id === this.state.value), this.state.linkName);
-                }} label={this.props.buttonText}/>
+                }} label={this.props.buttonText} />
             </div>
         );
     }
