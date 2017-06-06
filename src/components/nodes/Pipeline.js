@@ -2,8 +2,7 @@ import {createElement, Component} from 'react';
 import Paper from 'material-ui/Paper';
 import {connect} from 'react-redux';
 
-import {selectNode, selectPipeline} from '../../actions/index';
-import {setCurrentPipeline} from '../../larissa/redux';
+import {setCurrentPipeline, inspectNode} from '../../larissa/redux';
 
 import StatusBar from './StatusBar';
 import Ports from './Ports';
@@ -35,14 +34,12 @@ class Pipeline extends Component {
 
     handleClick(event) {
         event.stopPropagation();
-        this.props.selectNode(this.props.node);
-        this.props.selectPipeline(this.props.node);
+        this.props.inspectNode(this.props.node.id);
     }
 }
 
 const mapDispatchToProps = {
-    selectPipeline,
-    selectNode,
+    inspectNode,
     setCurrentPipeline
 };
 

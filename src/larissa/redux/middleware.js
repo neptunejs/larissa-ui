@@ -8,6 +8,7 @@ import {
     SET_BLOCK_OPTIONS,
     UPDATE_GRAPH,
     SET_CURRENT_PIPELINE,
+    INSPECT_NODE,
     setCurrentPipeline
 } from './actions';
 
@@ -121,6 +122,15 @@ export const memoryMiddleware = env => store => {
                     currentPipeline = newCurrentPipeline;
                     next(action);
                     return next(createUpdateGraphAction(currentPipeline));
+                }
+                case INSPECT_NODE: {
+                    const node = currentPipeline.findNode(action.payload);
+                    if (!node) {
+                        throw new Error(`Node with id ${action.payload} was not found for inspection`);
+                    }
+                    action.payload = node.inspect();
+                    next(action);
+                    return null;
                 }
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);

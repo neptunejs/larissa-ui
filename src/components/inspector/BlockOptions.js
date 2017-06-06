@@ -1,8 +1,8 @@
 import {createElement} from 'react';
 import {connect} from 'react-redux';
 import {SchemaForm} from 'react-schema-form';
-import env from '../larissa/environment';
-import {setBlockOptions} from '../actions/index';
+import env from '../../larissa/environment';
+import {setBlockOptions} from '../../actions/index';
 
 
 const BlockOptions = props => {

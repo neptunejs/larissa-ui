@@ -15,7 +15,7 @@ export const RUN_PIPELINE = '@@larissa/RUN_PIPELINE';
 export const runPipeline = createAction(RUN_PIPELINE);
 
 export const SET_CURRENT_PIPELINE = '@@larissa/SET_CURRENT_PIPELINE';
-export const setCurrentPipeline = function(pipeline, meta) {
+export const setCurrentPipeline = function (pipeline, meta) {
     return {
         type: SET_CURRENT_PIPELINE,
         payload: pipeline,
@@ -33,3 +33,6 @@ export const RUN_ERROR = '@@larissa/RUN_ERROR';
 
 export const DELETE_NODE = '@@larissa/DELETE_NODE';
 export const deleteNode = createAction(DELETE_NODE);
+
+export const INSPECT_NODE = '@@larissa/INSPECT_NODE';
+export const inspectNode = createAction(INSPECT_NODE);

@@ -2,13 +2,17 @@ import {createElement} from 'react';
 import {Drawer, AppBar} from 'material-ui';
 import {connect} from 'react-redux';
 import BlockOptions from './BlockOptions';
-import {setBlockOptions} from '../larissa/redux';
-import {inspectorWidth} from '../constants';
+import PipelineOptions from './PipelineOptions';
+import {setBlockOptions} from '../../larissa/redux/index';
+import {inspectorWidth} from '../../constants';
 
 function renderOptions(props) {
-    switch (props.node.kind) {
+
+    switch (props.node.node.kind) {
         case 'block':
-            return <BlockOptions node={props.node} onChange={(options) => props.setBlockOptions({id: props.node.id, options})} />;
+            return <BlockOptions node={props.node.node} onChange={(options) => props.setBlockOptions({id: props.node.node.id, options})} />;
+        case 'pipeline':
+            return <PipelineOptions node={props.node} />;
         default:
             return <div>Unable to render this kind of node</div>;
     }

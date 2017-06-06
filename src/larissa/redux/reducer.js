@@ -4,7 +4,10 @@ import {
 } from './actions';
 
 const initState = {
-    graph: {}, currentNode: null, nodeHistory: []
+    graph: {},
+    currentNode: null,
+    nodeHistory: [],
+    inspected: null
 };
 
 export const reducer = (state = initState, action) => {
@@ -13,7 +16,6 @@ export const reducer = (state = initState, action) => {
             return {...state, graph: action.payload};
         }
         case SET_CURRENT_PIPELINE: {
-            console.log('handle set current pipeline');
             const nodeIndex = state.nodeHistory.findIndex(node => node.id === action.payload.id);
             const currentIndex = state.nodeHistory.findIndex(node => node.id === state.currentNode);
             if (nodeIndex > -1) {

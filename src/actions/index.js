@@ -9,14 +9,8 @@ export const closeDrawer = createAction(CLOSE_DRAWER);
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 export const toggleDrawer = createAction(TOGGLE_DRAWER);
 
-export const SELECT_NODE = 'SELECT_NODE';
-export const selectNode = createAction(SELECT_NODE);
-
 export const TOGGLE_INSPECTOR = 'TOGGLE_INSPECTOR';
 export const toggleInspector = createAction(TOGGLE_INSPECTOR);
-
-export const SELECT_BLOCK = 'SELECT_BLOCK';
-export const selectBlock = createAction(SELECT_BLOCK);
 
 export const SELECT_PIPELINE = 'SELECT_PIPELINE';
 export const selectPipeline = createAction(SELECT_PIPELINE);

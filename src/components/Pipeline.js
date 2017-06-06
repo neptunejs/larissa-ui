@@ -54,7 +54,7 @@ export default class Pipeline extends Component {
                     node={id}
                     left={left}
                     top={top}
-                    selected={this.props.selectedNode.id === id}
+                    selected={this.props.selectedNode.node && this.props.selectedNode.node.id === id}
                 />);
 
                 const startNode = info.node;
@@ -99,7 +99,7 @@ export default class Pipeline extends Component {
     @keydown('delete')
     deleteKeyPressed() {
         if (this.props.selectedNode) {
-            this.props.deleteNode(this.props.selectedNode.id);
+            this.props.deleteNode(this.props.selectedNode.node.id);
         }
     }
 }

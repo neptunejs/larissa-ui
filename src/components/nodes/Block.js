@@ -2,8 +2,7 @@ import {createElement, Component} from 'react';
 import Paper from 'material-ui/Paper';
 import {connect} from 'react-redux';
 
-import {selectNode, selectBlock} from '../../actions/index';
-
+import {inspectNode} from '../../larissa/redux';
 import Ports from './Ports';
 import StatusBar from './StatusBar';
 
@@ -30,9 +29,8 @@ class Block extends Component {
 
     handleClick(event) {
         event.stopPropagation();
-        this.props.selectNode(this.props.node);
-        this.props.selectBlock(this.props.node);
+        this.props.inspectNode(this.props.node.id);
     }
 }
 
-export default connect(null, {selectNode, selectBlock})(Block);
+export default connect(null, {inspectNode})(Block);
