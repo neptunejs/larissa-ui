@@ -60,7 +60,7 @@ class CandidateEditor extends Component {
 
 function renderCandidate(candidate) {
     return (
-        <MenuItem value={candidate.info.id} key={candidate.info.id} primaryText={candidate.node.title}/>
+        <MenuItem value={candidate.info.id} key={candidate.info.id} primaryText={`${candidate.node.title} - ${candidate.info.name}`} />
     );
 }
 
