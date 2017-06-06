@@ -1,18 +1,17 @@
 import {createElement} from 'react';
 import {Drawer, AppBar} from 'material-ui';
 import {connect} from 'react-redux';
-import BlockOptions from './BlockOptions';
-import PipelineOptions from './PipelineOptions';
-import {setBlockOptions} from '../../larissa/redux/index';
+import BlockInspector from './BlockInspector';
+import PipelineInspector from './PipelineInspector';
 import {inspectorWidth} from '../../constants';
 
 function renderOptions(props) {
 
     switch (props.node.node.kind) {
         case 'block':
-            return <BlockOptions node={props.node.node} onChange={(options) => props.setBlockOptions({id: props.node.node.id, options})} />;
+            return <BlockInspector node={props.node} />;
         case 'pipeline':
-            return <PipelineOptions node={props.node} />;
+            return <PipelineInspector node={props.node} />;
         default:
             return <div>Unable to render this kind of node</div>;
     }
@@ -26,9 +25,7 @@ const SecondaryDrawer = props => {
                 iconElementLeft={<div></div>}
             >
             </AppBar>
-            <div style={{margin: 10}}>
-                {renderOptions(props)}
-            </div>
+            {renderOptions(props)}
         </Drawer>
     );
 };
@@ -40,4 +37,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, {setBlockOptions})(SecondaryDrawer);
+export default connect(mapStateToProps)(SecondaryDrawer);

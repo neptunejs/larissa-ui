@@ -5,10 +5,8 @@ import {linkInput, linkOutput} from '../../larissa/redux';
 
 class PipelineOptions extends Component {
     render() {
-        console.log(this.props);
         return (
-            <div>
-                <h2>Pipeline options</h2>
+            <div style={{margin: 10}}>
                 <CandidateEditor
                     candidates={this.props.node.inputCandidates}
                     label="Inputs"

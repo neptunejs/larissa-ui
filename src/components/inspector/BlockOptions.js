@@ -11,8 +11,7 @@ const BlockOptions = props => {
         return <div>No schema for this block</div>;
     } else {
         return (
-            <div>
-                <h2>Block options</h2>
+            <div style={{margin: 10}}>
                 <SchemaForm schema={blockType.schema} model={props.node.options} onModelChange={(keys, value) => {
                     let toChange = props.node.options;
                     for (let i = 0; i < keys.length - 1; i++) {
