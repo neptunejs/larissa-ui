@@ -36,3 +36,9 @@ export const deleteNode = createAction(DELETE_NODE);
 
 export const INSPECT_NODE = '@@larissa/INSPECT_NODE';
 export const inspectNode = createAction(INSPECT_NODE);
+
+export const LINK_INPUT = '@@larissa/LINK_INPUT';
+export const linkInput = createAction(LINK_INPUT);
+
+export const LINK_OUTPUT = '@@larissa/LINK_OUTPUT';
+export const linkOutput = createAction(LINK_OUTPUT);

@@ -43,7 +43,7 @@ class NodeHistory extends Component {
                     } else if (before) {
                         separator = '<';
                     } else {
-                        separator = '>'
+                        separator = '>';
                     }
                     return (
                         <PipelineHistoryElement
