@@ -25,7 +25,7 @@ export default function (state = defaultState, action) {
         case UNSELECT_NODE:
             return {...state, selectedNode: {node: {}}};
         case DELETE_NODE: {
-            if (state.selectedNode.id === action.payload) {
+            if (state.selectedNode.node.id === action.payload) {
                 return {...state, selectedNode: {node: {}}};
             } else {
                 return state;
