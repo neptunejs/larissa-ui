@@ -1,10 +1,7 @@
 import {createElement, Component} from 'react';
-import Paper from 'material-ui/Paper';
 import {connect} from 'react-redux';
-
 import {inspectNode} from '../../larissa/redux';
-import Ports from './Ports';
-import StatusBar from './StatusBar';
+import PaperBlock from './PaperBlock';
 
 class Block extends Component {
     render() {
@@ -14,20 +11,21 @@ class Block extends Component {
             selected,
             style: blockStyle
         } = this.props;
-        return (
-            <Paper style={{...blockStyle, border: selected ? 'solid 1px blue' : null}}
-                   onClick={this.handleClick.bind(this)}>
-                <Ports node={info.id} type="input" value={blockType.inputs} />
-                <Ports node={info.id} type="output" value={blockType.outputs} />
-                <StatusBar status={info.status} />
-                <div style={{padding: 5}}>
-                    <h4 style={{marginTop: 0}}>{blockType.label || blockType.name}</h4>
-                </div>
-            </Paper>
-        );
+        return <PaperBlock
+            inputs={blockType.inputs}
+            outputs={blockType.outputs}
+            selected={selected}
+            status={info.status}
+            style={blockStyle}
+            node={info.id}
+            title={info.title}
+            subtitle={blockType.label || blockType.name}
+            handleClick={this.handleClick.bind(this)}
+        />;
     }
 
     handleClick(event) {
+        console.log('handle click event');
         event.stopPropagation();
         this.props.inspectNode(this.props.node.id);
     }

@@ -2,17 +2,18 @@ import {
     CREATE_BLOCK,
     CREATE_BLOCK_WITH_CONNECTION,
     CREATE_PIPELINE, DELETE_NODE,
-    CONNECTION_ERROR,
-    RESET_PIPELINE,
-    RUN_ERROR,
-    RUN_PIPELINE,
-    SET_BLOCK_OPTIONS,
-    UPDATE_GRAPH,
-    SET_CURRENT_PIPELINE,
     INSPECT_NODE,
     LINK_INPUT,
     LINK_OUTPUT,
     NODE_CHANGED,
+    CONNECTION_ERROR,
+    RESET_PIPELINE,
+    RUN_ERROR,
+    RUN_PIPELINE,
+    SET_CURRENT_PIPELINE,
+    SET_BLOCK_OPTIONS,
+    SET_NODE_TITLE,
+    UPDATE_GRAPH,
     setCurrentPipeline,
     nodeChanged
 } from './actions';
@@ -37,7 +38,7 @@ export const memoryMiddleware = env => store => {
     rootPipeline.connect(ten, pIn.input('number'));
 
     // Listen to status changes in the pipeline to dispatch actions
-    rootPipeline.on('child-status', function () {
+    rootPipeline.on('child-change', function (node) {
         store.dispatch(createUpdateGraphAction(currentPipeline));
     });
 
@@ -170,6 +171,12 @@ export const memoryMiddleware = env => store => {
                 case NODE_CHANGED: {
                     action.payload = action.payload.inspect();
                     next(action);
+                    return null;
+                }
+                case SET_NODE_TITLE: {
+                    const node = rootPipeline.findNode(action.payload.id);
+                    if (!node) throw new Error(`Node with id ${action.payload.id} was not found for setting its title`);
+                    node.setTitle(action.payload.value);
                     return null;
                 }
                 default: {

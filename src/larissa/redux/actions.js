@@ -63,3 +63,6 @@ export const linkOutput = function (pipelineId, output, name) {
 
 export const NODE_CHANGED = '@@larissa/NODE_CHANGED';
 export const nodeChanged = createAction(NODE_CHANGED);
+
+export const SET_NODE_TITLE = '@@larissa/SET_NODE_TITLE';
+export const setNodeTitle = createAction(SET_NODE_TITLE);
