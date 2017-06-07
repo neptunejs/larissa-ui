@@ -3,9 +3,10 @@ import {createElement} from 'react';
 export default function SvgLines({lines = []}) {
     const inlines = [];
     for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
+        const [sP, eP] = lines[i];
+        const hD = (eP[0] - sP[0]) / 3;
         inlines.push(
-            <line key={i} x1={line[0][0]} y1={line[0][1]} x2={line[1][0]} y2={line[1][1]} stroke="black" strokeWidth={1} />
+            <path key={i} d={`M${sP[0]},${sP[1]} C${eP[0] - hD},${sP[1]} ${sP[0] + hD},${eP[1]} ${eP[0]},${eP[1]}`} stroke="black" fill="none" />
         );
     }
     return (
