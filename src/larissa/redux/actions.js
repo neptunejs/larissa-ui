@@ -58,3 +58,6 @@ export const linkOutput = function (pipelineId, output, name) {
         }
     };
 };
+
+export const NODE_CHANGED = '@@larissa/NODE_CHANGED';
+export const nodeChanged = createAction(NODE_CHANGED);

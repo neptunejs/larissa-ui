@@ -13,15 +13,16 @@ class PipelineOptions extends Component {
                     buttonText="Link Input"
                     onSubmit={(input, name) => {
                         this.props.linkInput(this.props.node.node.id, input, name);
-                    }} />
+                    }}
+                />
                 <CandidateEditor
                     candidates={this.props.node.outputCandidates}
                     label="Outputs"
                     buttonText="Link Output"
                     onSubmit={(output, name) => {
                         this.props.linkOutput(this.props.node.node.id, output, name);
-                    }
-                    } />
+                    }}
+                />
             </div>
         );
     }

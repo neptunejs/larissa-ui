@@ -11,7 +11,9 @@ import {
     INSPECT_NODE,
     LINK_INPUT,
     LINK_OUTPUT,
-    setCurrentPipeline
+    NODE_CHANGED,
+    setCurrentPipeline,
+    nodeChanged
 } from './actions';
 
 export const memoryMiddleware = env => store => {
@@ -36,6 +38,14 @@ export const memoryMiddleware = env => store => {
     // Listen to status changes in the pipeline to dispatch actions
     rootPipeline.on('child-status', function () {
         store.dispatch(createUpdateGraphAction(currentPipeline));
+    });
+
+    rootPipeline.on('deep-child-change', node => {
+        store.dispatch(nodeChanged(node));
+    });
+
+    rootPipeline.on('change', () => {
+        store.dispatch(nodeChanged(rootPipeline));
     });
 
     rootPipeline.on('runError', function (err) {
@@ -149,6 +159,11 @@ export const memoryMiddleware = env => store => {
                         throw new Error(`Node with id ${action.payload} was not found for inspection`);
                     }
                     action.payload = node.inspect();
+                    next(action);
+                    return null;
+                }
+                case NODE_CHANGED: {
+                    action.payload = action.payload.inspect();
                     next(action);
                     return null;
                 }
