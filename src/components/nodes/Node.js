@@ -20,7 +20,8 @@ const blockStyle = {
 
 class Node extends Component {
     render() {
-        const info = this.props.info;
+        const info = this.props.info.node;
+        const outputs = this.props.info.outputs;
         const style = {
             ...blockStyle,
             left: this.props.left,
@@ -31,6 +32,7 @@ class Node extends Component {
                 const blockType = env.getBlock(info.blockType.identifier);
                 return <Block
                     node={info}
+                    outputs={outputs}
                     selected={this.props.selected}
                     style={style}
                     blockType={blockType}

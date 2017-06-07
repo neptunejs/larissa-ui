@@ -203,7 +203,7 @@ function stateFromPipeline(pipeline) {
     };
 
     for (let [id, vertex] of pipeline.graph.vertices()) {
-        state.nodes[id] = vertex.toJSON();
+        state.nodes[id] = vertex.inspect();
     }
     return state;
 }

@@ -7,6 +7,7 @@ class Block extends Component {
     render() {
         const {
             node: info,
+            outputs: nodeOutputs,
             blockType,
             selected,
             style: blockStyle
@@ -14,6 +15,7 @@ class Block extends Component {
         return <PaperBlock
             inputs={blockType.inputs}
             outputs={blockType.outputs}
+            nodeOutputs={nodeOutputs}
             selected={selected}
             status={info.status}
             style={blockStyle}
