@@ -24,9 +24,9 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
             onClick={handleClick}
             onDoubleClick={handleDoubleClick}
         >
-            <Ports node={node} type="input" value={inputs}/>
-            <Ports node={node} type="output" value={outputs}/>
-            <StatusBar status={status}/>
+            <Ports node={node} type="input" value={inputs} />
+            <Ports node={node} type="output" value={outputs} />
+            <StatusBar status={status} />
             <div style={{padding: 5}}>
                 <h3 style={{margin: 0}}>{title}</h3>
                 <h5 style={{margin: 0}}>{subtitle}</h5>

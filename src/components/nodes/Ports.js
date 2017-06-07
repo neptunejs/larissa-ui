@@ -29,7 +29,7 @@ export default function Ports({type, value = [], node}) {
         };
         ports.push(
             <div key={i} style={pos}>
-                <PortConnection node={node} name={port.name} type={type}>
+                <PortConnection node={node} name={port.name} type={type} valType={port.type}>
                     <Component />
                 </PortConnection>
             </div>
@@ -85,17 +85,14 @@ function getRelevantProps(props) {
     return {
         node: props.node,
         type: props.type,
-        name: props.name
+        name: props.name,
+        valType: props.valType
     };
 }
 
 const portSource = {
     beginDrag(props) {
-        return {
-            type: props.type,
-            node: props.node,
-            name: props.name
-        };
+        return getRelevantProps(props);
     }
 };
 

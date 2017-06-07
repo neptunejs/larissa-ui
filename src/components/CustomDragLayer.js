@@ -36,6 +36,10 @@ class NodeDragPreview extends Component {
                 return (
                     <div>{item.label} (custom)</div>
                 );
+            case ItemTypes.NODE_PORT:
+                return (
+                    <div>{item.name}</div>
+                );
             default:
                 return <div style={{color: 'red'}}>Undefined drag preview</div>;
         }
