@@ -3,7 +3,6 @@ import {List, Subheader} from 'material-ui';
 import {NodeTree} from './ListNode';
 
 const NodeList = (props) => {
-    console.log(props);
     const tree = props.tree;
     return (
         <List>

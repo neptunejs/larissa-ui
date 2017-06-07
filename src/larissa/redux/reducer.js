@@ -3,10 +3,12 @@ import {
     SET_CURRENT_PIPELINE
 } from './actions';
 
+import {List} from 'immutable';
+
 const initState = {
     graph: {},
     currentNode: null,
-    nodeHistory: [],
+    nodeHistory: new List(),
     inspected: null
 };
 
@@ -22,14 +24,14 @@ export const reducer = (state = initState, action) => {
                 return {...state, currentNode: action.payload.id};
             } else {
                 if (action.meta.appendToHistory) {
-                    state.nodeHistory.splice(currentIndex + 1);
+                    const newHistory = state.nodeHistory.splice(currentIndex + 1);
                     return {
                         ...state,
-                        nodeHistory: [...state.nodeHistory, action.payload],
+                        nodeHistory: newHistory.push(action.payload),
                         currentNode: action.payload.id
                     };
                 } else {
-                    return {...state, nodeHistory: [action.payload], currentNode: action.payload.id};
+                    return {...state, nodeHistory: new List([action.payload]), currentNode: action.payload.id};
                 }
             }
         }
@@ -38,4 +40,3 @@ export const reducer = (state = initState, action) => {
         }
     }
 };
-

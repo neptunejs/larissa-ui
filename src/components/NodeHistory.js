@@ -34,11 +34,11 @@ class NodeHistory extends Component {
         let before = true;
         return (
             <div>
-                {this.props.nodes.map((node, idx) => {
+                {this.props.nodeHistory.map((node, idx) => {
                     const active = this.props.activeNode === node.id;
                     if (active) before = false;
                     let separator;
-                    if (idx === this.props.nodes.length - 1) {
+                    if (idx === this.props.nodeHistory.size - 1) {
                         separator = '';
                     } else if (before) {
                         separator = '<';
@@ -65,7 +65,7 @@ class NodeHistory extends Component {
 
 const mapStateToProps = state => {
     return {
-        nodes: state.pipeline.nodeHistory,
+        nodeHistory: state.pipeline.nodeHistory,
         activeNode: state.pipeline.currentNode
     };
 };

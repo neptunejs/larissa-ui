@@ -27,7 +27,6 @@ class Block extends Component {
     }
 
     handleClick(event) {
-        console.log('handle click event');
         event.stopPropagation();
         this.props.inspectNode(this.props.node.id);
     }
