@@ -69,3 +69,6 @@ export const nodeChanged = createAction(NODE_CHANGED);
 
 export const SET_NODE_TITLE = '@@larissa/SET_NODE_TITLE';
 export const setNodeTitle = createAction(SET_NODE_TITLE);
+
+export const CREATE_CONNECTION = '@@larissa/CREATE_CONNECTION';
+export const createConnection = createAction(CREATE_CONNECTION);

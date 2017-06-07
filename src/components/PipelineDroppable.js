@@ -22,8 +22,16 @@ class DropPipeline extends Component {
         const {canDrop, isOver} = this.props;
         return this.props.connectDropTarget(
             <div
-                style={{flex: 1, position: 'relative', backgroundColor: canDrop && isOver ? '#ddd' : '#fff'}}
-                onClick={() => this.props.unselectNode()} >
+                style={{
+                    userSelect: 'none',
+                    MozUserSelect: 'none',
+                    WebkitUserSelect: 'none',
+                    MsUserSelect: 'none',
+                    flex: 1,
+                    position: 'relative',
+                    backgroundColor: canDrop && isOver ? '#ddd' : '#fff',
+                }}
+                onClick={() => this.props.unselectNode()}>
                 <Pipeline />
             </div>
         );
@@ -34,10 +42,16 @@ const spec = {
     drop(props, monitor) {
         if (!monitor.didDrop()) {
             const item = monitor.getItem();
-            if (item.block.kind === 'pipeline') {
-                props.createPipelineFromJSON(item.block.value);
-            } else {
-                props.createBlock(item);
+            switch (monitor.getItemType()) {
+                case ItemTypes.BLOCK_NODE:
+                    if (item.block.kind === 'pipeline') {
+                        props.createPipelineFromJSON(item.block.value);
+                    } else {
+                        props.createBlock(item);
+                    }
+                    break;
+                default:
+                    throw new Error('Unexpected dropped type');
             }
         }
     }

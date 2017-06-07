@@ -1,6 +1,7 @@
 import {
     CREATE_BLOCK,
     CREATE_BLOCK_WITH_CONNECTION,
+    CREATE_CONNECTION,
     CREATE_PIPELINE,
     CREATE_PIPELINE_FROM_JSON,
     DELETE_NODE,
@@ -185,6 +186,20 @@ export const memoryMiddleware = env => store => {
                     if (!node) throw new Error(`Node with id ${action.payload.id} was not found for setting its title`);
                     node.setTitle(action.payload.value);
                     return null;
+                }
+                case CREATE_CONNECTION: {
+                    const source = action.payload.source;
+                    const dest = action.payload.dest;
+                    const sourceNode = currentPipeline.getNode(source.node);
+                    const destNode = currentPipeline.getNode(dest.node);
+                    if (!sourceNode) {
+                        throw new Error(`Source node with id ${source.node} was not found to create a connection`);
+                    }
+                    if (!destNode) {
+                        throw new Error(`Destination node with id ${source.node} was not found to create a connection`);
+                    }
+                    currentPipeline.connect(sourceNode.output(source.name), destNode.input(dest.name));
+                    return next(createUpdateGraphAction(currentPipeline));
                 }
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);

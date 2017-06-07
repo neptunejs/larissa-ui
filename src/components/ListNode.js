@@ -60,9 +60,9 @@ export const ParentListNode = props => {
 function renderTree(tree) {
     if (!tree) return null;
     if (tree.children && tree.children.length) {
-        return <ParentListNode key={tree.label} tree={tree} />;
+        return <ParentListNode key={tree.label} tree={tree}/>;
     } else {
-        return <LeafListNodeDraggable key={tree.label} label={tree.label} block={tree} />;
+        return <LeafListNodeDraggable key={tree.label} label={tree.label} block={tree}/>;
     }
 }
 

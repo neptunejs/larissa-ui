@@ -10,7 +10,8 @@ export const blockVerticalSeparation = 50;
 export const blockHorizontalSeparation = 100;
 
 export const ItemTypes = {
-    BLOCK_NODE: 'BLOCK_NODE'
+    BLOCK_NODE: 'BLOCK_NODE',
+    NODE_PORT: 'NODE_PORT'
 };
 
 // TODO: should this be imported from larissa ?
