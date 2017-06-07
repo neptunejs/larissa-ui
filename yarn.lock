@@ -843,9 +843,9 @@ babel-preset-babili@^0.1.1:
     babel-plugin-transform-undefined-to-void "^6.8.2"
     lodash.isplainobject "^4.0.6"
 
-babel-preset-env@^1.4.0:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.5.1.tgz#d2eca6af179edf27cdc305a84820f601b456dd0b"
+babel-preset-env@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.5.2.tgz#cd4ae90a6e94b709f97374b33e5f8b983556adef"
   dependencies:
     babel-plugin-check-es2015-constants "^6.22.0"
     babel-plugin-syntax-trailing-function-commas "^6.22.0"
@@ -2391,8 +2391,8 @@ global@^4.3.0:
     process "~0.5.1"
 
 globals@^9.0.0, globals@^9.14.0:
-  version "9.17.0"
-  resolved "https://registry.yarnpkg.com/globals/-/globals-9.17.0.tgz#0c0ca696d9b9bb694d2e5470bd37777caad50286"
+  version "9.18.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-9.18.0.tgz#aa3896b3e69b487f17e31ed2143d69a8e30c2d8a"
 
 globby@^5.0.0:
   version "5.0.0"
@@ -3052,19 +3052,19 @@ kind-of@^3.0.2:
   dependencies:
     is-buffer "^1.1.5"
 
-larissa-plugin-nodes-image-js@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-image-js/-/larissa-plugin-nodes-image-js-0.0.3.tgz#d0e66bd74841b80390f78e317ac36f174897dc32"
+larissa-plugin-nodes-image-js@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-image-js/-/larissa-plugin-nodes-image-js-0.0.6.tgz#d94a0b181c112995ff22d162d01e9359f02fd0a6"
   dependencies:
     image-js "^0.9.13"
 
-larissa-plugin-nodes-logic@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-logic/-/larissa-plugin-nodes-logic-0.0.5.tgz#85373d6b67d601420a4ca56509c98dbbb0be411d"
+larissa-plugin-nodes-logic@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-logic/-/larissa-plugin-nodes-logic-0.0.6.tgz#2a8c0e00f5fc53b9c04dc3c645f6515a522bbfd5"
 
-larissa@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.0.5.tgz#7df0d6264ca370c9ebe4c38f64607612bf3ee113"
+larissa@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.0.6.tgz#c231575b48b1d688ee27147a516aece4dcb31481"
   dependencies:
     graph.js "^1.21.1"
     is-my-json-valid "^2.16.0"
@@ -3178,9 +3178,9 @@ macaddress@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/macaddress/-/macaddress-0.2.8.tgz#5904dc537c39ec6dbefeae902327135fa8511f12"
 
-material-ui@^0.18.1:
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.1.tgz#1c8a47d7e930ff0b07064dd8633035984a5a3569"
+material-ui@^0.18.2:
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.2.tgz#d2d4fed1ea12da485c87a41003763e24dc19b241"
   dependencies:
     babel-runtime "^6.23.0"
     inline-style-prefixer "^3.0.2"
@@ -4311,14 +4311,14 @@ readable-stream@1.0:
     string_decoder "~0.10.x"
 
 readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.2.2, readable-stream@^2.2.6, readable-stream@^2.2.9:
-  version "2.2.10"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.10.tgz#effe72bb7c884c0dd335e2379d526196d9d011ee"
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.11.tgz#0796b31f8d7688007ff0b93a8088d34aa17c0f72"
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.1"
     isarray "~1.0.0"
     process-nextick-args "~1.0.6"
-    safe-buffer "^5.0.1"
+    safe-buffer "~5.0.1"
     string_decoder "~1.0.0"
     util-deprecate "~1.0.1"
 
@@ -4672,8 +4672,8 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
 
 shelljs@^0.7.5:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.7.tgz#b2f5c77ef97148f4b4f6e22682e10bba8667cff1"
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.7.8.tgz#decbcf874b0d1e5fb72e14b164a9683048e9acb3"
   dependencies:
     glob "^7.0.0"
     interpret "^1.0.0"
@@ -4860,10 +4860,10 @@ string_decoder@^0.10.25, string_decoder@~0.10.x:
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
 string_decoder@~1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.1.tgz#62e200f039955a6810d8df0a33ffc0f013662d98"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.2.tgz#b29e1f4e1125fa97a10382b8a533737b7491e179"
   dependencies:
-    safe-buffer "^5.0.1"
+    safe-buffer "~5.0.1"
 
 stringstream@~0.0.4:
   version "0.0.5"
