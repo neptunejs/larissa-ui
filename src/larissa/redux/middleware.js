@@ -2,6 +2,7 @@ import {
     CREATE_BLOCK,
     CREATE_BLOCK_WITH_CONNECTION,
     CREATE_PIPELINE, DELETE_NODE,
+    CONNECTION_ERROR,
     RESET_PIPELINE,
     RUN_ERROR,
     RUN_PIPELINE,
@@ -83,7 +84,11 @@ export const memoryMiddleware = env => store => {
                             }
                         }
                     } catch (e) {
-                        // TODO: dispatch action to notify user of failure
+                        currentPipeline.deleteNode(newNode);
+                        return next({
+                            type: CONNECTION_ERROR,
+                            payload: e.message
+                        });
                     }
                     return next(createUpdateGraphAction(currentPipeline));
                 }

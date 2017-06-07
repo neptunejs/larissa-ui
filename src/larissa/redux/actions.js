@@ -9,6 +9,8 @@ export const createPipeline = createAction(CREATE_PIPELINE);
 export const CREATE_BLOCK_WITH_CONNECTION = '@@larissa/CREATE_BLOCK_WITH_CONNECTION';
 export const createBlockWithConnection = createAction(CREATE_BLOCK_WITH_CONNECTION);
 
+export const CONNECTION_ERROR = '@@larissa/CONNECTION_ERROR';
+
 export const UPDATE_GRAPH = '@@larissa/UPDATE_GRAPH';
 
 export const RUN_PIPELINE = '@@larissa/RUN_PIPELINE';
