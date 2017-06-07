@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import {nodesToTree} from '../selectors';
 import {closeDrawer} from '../actions/index';
 
+import predefinedPipelines from '../larissa/predefinedPipelines';
+
 const MainDrawer = props => {
     return (
         <Drawer open={props.open}>
@@ -13,7 +15,7 @@ const MainDrawer = props => {
                 iconElementLeft={<IconButton onClick={props.closeDrawer} iconClassName="material-icons">arrow_back</IconButton>}
             >
             </AppBar>
-            <NodeList tree={props.tree} />
+            <NodeList tree={props.tree} pipelines={predefinedPipelines} />
         </Drawer>
     );
 };

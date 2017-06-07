@@ -8,7 +8,8 @@ const nodeSource = {
     beginDrag(props) {
         return {
             type: props.block.identifier,
-            label: props.block.label
+            label: props.block.label,
+            block: props.block
         };
     }
 };
@@ -73,4 +74,3 @@ export const NodeTree = props => {
         </div>
     );
 };
-

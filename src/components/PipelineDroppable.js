@@ -3,7 +3,7 @@ import {DropTarget} from 'react-dnd';
 import Pipeline from './Pipeline';
 import {ItemTypes} from '../constants';
 import {unselectNode} from '../actions/index';
-import {createBlock} from '../larissa/redux';
+import {createBlock, createPipelineFromJSON} from '../larissa/redux';
 import {connect} from 'react-redux';
 
 const types = [ItemTypes.BLOCK_NODE];
@@ -34,10 +34,14 @@ const spec = {
     drop(props, monitor) {
         if (!monitor.didDrop()) {
             const item = monitor.getItem();
-            props.createBlock(item);
+            if (item.block.kind === 'pipeline') {
+                props.createPipelineFromJSON(item.block.value);
+            } else {
+                props.createBlock(item);
+            }
         }
     }
 };
 
 
-export default connect(null, {createBlock, unselectNode})(DropTarget(types, spec, collect)(DropPipeline));
+export default connect(null, {createBlock, unselectNode, createPipelineFromJSON})(DropTarget(types, spec, collect)(DropPipeline));

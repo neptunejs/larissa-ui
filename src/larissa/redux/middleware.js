@@ -1,7 +1,9 @@
 import {
     CREATE_BLOCK,
     CREATE_BLOCK_WITH_CONNECTION,
-    CREATE_PIPELINE, DELETE_NODE,
+    CREATE_PIPELINE,
+    CREATE_PIPELINE_FROM_JSON,
+    DELETE_NODE,
     INSPECT_NODE,
     LINK_INPUT,
     LINK_OUTPUT,
@@ -118,6 +120,11 @@ export const memoryMiddleware = env => store => {
                 }
                 case CREATE_PIPELINE: {
                     const newPipeline = env.newPipeline();
+                    currentPipeline.addNode(newPipeline);
+                    return next(createUpdateGraphAction(currentPipeline));
+                }
+                case CREATE_PIPELINE_FROM_JSON: {
+                    const newPipeline = env.pipelineFromJSON(action.payload);
                     currentPipeline.addNode(newPipeline);
                     return next(createUpdateGraphAction(currentPipeline));
                 }
