@@ -17,6 +17,7 @@ import {
     SET_BLOCK_OPTIONS,
     SET_NODE_TITLE,
     UPDATE_GRAPH,
+    UPDATE_NODES,
     setCurrentPipeline,
     nodeChanged
 } from './actions';
@@ -41,8 +42,8 @@ export const memoryMiddleware = env => store => {
     rootPipeline.connect(ten, pIn.input('number'));
 
     // Listen to status changes in the pipeline to dispatch actions
-    rootPipeline.on('child-change', function (node) {
-        store.dispatch(createUpdateGraphAction(currentPipeline));
+    rootPipeline.on('child-change', () => {
+        store.dispatch(createUpdateNodesAction(currentPipeline));
     });
 
     rootPipeline.on('deep-child-change', node => {
@@ -65,6 +66,7 @@ export const memoryMiddleware = env => store => {
 
     // Update on initialization
     store.dispatch(createUpdateGraphAction(rootPipeline));
+    store.dispatch(createUpdateNodesAction(rootPipeline));
     store.dispatch(setCurrentPipeline(rootPipeline.toJSON()));
 
     return next => action => {
@@ -72,7 +74,8 @@ export const memoryMiddleware = env => store => {
             switch (action.type) {
                 case CREATE_BLOCK: {
                     currentPipeline.newNode(action.payload.type);
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 }
                 case CREATE_BLOCK_WITH_CONNECTION: {
                     const nodeId = action.payload.node;
@@ -94,7 +97,8 @@ export const memoryMiddleware = env => store => {
                             payload: e.message
                         });
                     }
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 }
                 case SET_BLOCK_OPTIONS: {
                     const node = currentPipeline.getNode(action.payload.id);
@@ -122,21 +126,25 @@ export const memoryMiddleware = env => store => {
                 case CREATE_PIPELINE: {
                     const newPipeline = env.newPipeline();
                     currentPipeline.addNode(newPipeline);
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 }
                 case CREATE_PIPELINE_FROM_JSON: {
                     const newPipeline = env.pipelineFromJSON(action.payload);
                     currentPipeline.addNode(newPipeline);
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 }
                 case UPDATE_GRAPH: // Just pass the action to the end user
+                case UPDATE_NODES:
                 case RUN_ERROR:
                     next(action);
                     return null;
                 case DELETE_NODE:
                     currentPipeline.deleteNode(currentPipeline.getNode(action.payload));
                     next(action);
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 case SET_CURRENT_PIPELINE: {
                     const newCurrentPipeline = rootPipeline.findNode(action.payload.id);
                     if (!newCurrentPipeline) {
@@ -156,7 +164,8 @@ export const memoryMiddleware = env => store => {
                     const linkName = action.payload.name;
                     const node = pipeline.getNode(nodeId);
                     pipeline.linkInput(node.input(inputName), linkName);
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 }
                 case LINK_OUTPUT: {
                     const pipeline = currentPipeline.getNode(action.payload.id);
@@ -165,7 +174,8 @@ export const memoryMiddleware = env => store => {
                     const linkName = action.payload.name;
                     const node = pipeline.getNode(nodeId);
                     pipeline.linkOutput(node.output(outputName), linkName);
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 }
                 case INSPECT_NODE: {
                     const node = currentPipeline.findNode(action.payload);
@@ -199,7 +209,8 @@ export const memoryMiddleware = env => store => {
                         throw new Error(`Destination node with id ${source.node} was not found to create a connection`);
                     }
                     currentPipeline.connect(sourceNode.output(source.name), destNode.input(dest.name));
-                    return next(createUpdateGraphAction(currentPipeline));
+                    next(createUpdateGraphAction(currentPipeline));
+                    return next(createUpdateNodesAction(currentPipeline));
                 }
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);
@@ -210,22 +221,20 @@ export const memoryMiddleware = env => store => {
     };
 };
 
-
 function createUpdateGraphAction(pipeline) {
     return {
         type: UPDATE_GRAPH,
-        payload: stateFromPipeline(pipeline)
+        payload: JSON.parse(pipeline.graph.toJSON())
     };
 }
 
-function stateFromPipeline(pipeline) {
-    const state = {
-        nodes: {},
-        graph: JSON.parse(pipeline.graph.toJSON())
-    };
-
-    for (let [id, vertex] of pipeline.graph.vertices()) {
-        state.nodes[id] = vertex.inspect();
+function createUpdateNodesAction(pipeline) {
+    const nodes = {};
+    for (const node of pipeline.nodes()) {
+        nodes[node.id] = node.inspect();
     }
-    return state;
+    return {
+        type: UPDATE_NODES,
+        payload: nodes
+    };
 }

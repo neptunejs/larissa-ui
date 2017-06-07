@@ -7,8 +7,8 @@ import getSubgraphs from './getSubgraphs';
 
 const limit = 5;
 export default function placeNodes(pipeline) {
-    if (!pipeline.graph) return null;
-    const graph = Graph.fromJSON(JSON.stringify(pipeline.graph));
+    if (!pipeline) return null;
+    const graph = Graph.fromJSON(JSON.stringify(pipeline));
     const subgraphs = getSubgraphs(graph);
     return subgraphs.map(getNodesPlacement);
 }

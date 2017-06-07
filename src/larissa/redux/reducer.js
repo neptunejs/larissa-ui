@@ -1,5 +1,6 @@
 import {
     UPDATE_GRAPH,
+    UPDATE_NODES,
     SET_CURRENT_PIPELINE
 } from './actions';
 
@@ -7,6 +8,7 @@ import {List} from 'immutable';
 
 const initState = {
     graph: {},
+    nodes: {},
     currentNode: null,
     nodeHistory: new List(),
     inspected: null
@@ -16,6 +18,9 @@ export const reducer = (state = initState, action) => {
     switch (action.type) {
         case UPDATE_GRAPH: {
             return {...state, graph: action.payload};
+        }
+        case UPDATE_NODES: {
+            return {...state, nodes: action.payload};
         }
         case SET_CURRENT_PIPELINE: {
             const nodeIndex = state.nodeHistory.findIndex(node => node.id === action.payload.id);
