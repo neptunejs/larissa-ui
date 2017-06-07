@@ -98,7 +98,7 @@ export default class Pipeline extends Component {
 
     @keydown('delete')
     deleteKeyPressed() {
-        if (this.props.selectedNode) {
+        if (this.props.selectedNode.node.id) {
             this.props.deleteNode(this.props.selectedNode.node.id);
         }
     }
