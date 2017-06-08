@@ -21,7 +21,6 @@ const SecondaryDrawer = props => {
     return (
         <Drawer width={inspectorWidth} open={props.inspectorOpen} openSecondary={true}>
             <AppBar
-                title="Options"
                 iconElementLeft={<div></div>}
             >
             </AppBar>
