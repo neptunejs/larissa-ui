@@ -55,6 +55,7 @@
     "larissa": "^0.0.6",
     "larissa-plugin-nodes-image-js": "^0.0.6",
     "larissa-plugin-nodes-logic": "^0.0.6",
+    "larissa-plugin-nodes-mljs": "^0.0.0",
     "lodash-es": "^4.17.4",
     "material-ui": "^0.18.2",
     "prop-types": "^15.5.10",
