@@ -5,6 +5,7 @@ import {
     CREATE_PIPELINE,
     CREATE_PIPELINE_FROM_JSON,
     DELETE_NODE,
+    DUMP_JSON,
     INSPECT_NODE,
     LINK_INPUT,
     LINK_OUTPUT,
@@ -73,6 +74,10 @@ export const memoryMiddleware = env => store => {
     return next => action => {
         if (action.type.startsWith('@@larissa/')) {
             switch (action.type) {
+                case DUMP_JSON: {
+                    console.log(JSON.stringify(currentPipeline));
+                    return null;
+                }
                 case CREATE_BLOCK: {
                     currentPipeline.newNode(action.payload.type);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
