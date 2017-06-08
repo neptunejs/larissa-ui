@@ -1,6 +1,6 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
-import {inspectNode} from '../../larissa/redux';
+import {selectNode} from '../../actions';
 import PaperBlock from './PaperBlock';
 
 class Block extends Component {
@@ -28,8 +28,8 @@ class Block extends Component {
 
     handleClick(event) {
         event.stopPropagation();
-        this.props.inspectNode(this.props.node.id);
+        this.props.selectNode(this.props.node.id);
     }
 }
 
-export default connect(null, {inspectNode})(Block);
+export default connect(null, {selectNode})(Block);

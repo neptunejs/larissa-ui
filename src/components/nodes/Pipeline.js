@@ -1,6 +1,8 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
-import {setCurrentPipeline, inspectNode} from '../../larissa/redux';
+
+import {setCurrentPipeline} from '../../larissa/redux';
+import {selectNode} from '../../actions';
 import PaperBlock from './PaperBlock';
 
 class Pipeline extends Component {
@@ -31,12 +33,12 @@ class Pipeline extends Component {
 
     handleClick(event) {
         event.stopPropagation();
-        this.props.inspectNode(this.props.node.id);
+        this.props.selectNode(this.props.node.id);
     }
 }
 
 const mapDispatchToProps = {
-    inspectNode,
+    selectNode,
     setCurrentPipeline
 };
 

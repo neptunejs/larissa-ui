@@ -6,8 +6,8 @@ import PipelineInspector from './PipelineInspector';
 import {inspectorWidth} from '../../constants';
 
 function renderOptions(props) {
-
-    switch (props.node.node.kind) {
+    const kind = props.node ? props.node.node.kind : '';
+    switch (kind) {
         case 'block':
             return <BlockInspector node={props.node} />;
         case 'pipeline':
@@ -32,7 +32,7 @@ const SecondaryDrawer = props => {
 
 const mapStateToProps = state => {
     return {
-        node: state.pipelineUI.selectedNode,
+        node: state.pipeline.nodes[state.pipelineUI.selectedNode],
         inspectorOpen: state.drawer.inspectorOpen
     };
 };

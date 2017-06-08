@@ -15,6 +15,9 @@ export const toggleInspector = createAction(TOGGLE_INSPECTOR);
 export const SELECT_PIPELINE = 'SELECT_PIPELINE';
 export const selectPipeline = createAction(SELECT_PIPELINE);
 
+export const SELECT_NODE = 'SELECT_NODE';
+export const selectNode = createAction(SELECT_NODE);
+
 export const UNSELECT_NODE = 'UNSELECT_NODE';
 export const unselectNode = createAction(UNSELECT_NODE);
 

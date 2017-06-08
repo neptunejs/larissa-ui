@@ -1,32 +1,24 @@
 import {
+    SELECT_NODE,
     UNSELECT_NODE
 } from '../actions';
 import {
-    DELETE_NODE,
-    INSPECT_NODE,
-    NODE_CHANGED
+    DELETE_NODE
 } from '../larissa/redux/actions';
 
 const defaultState = {
-    selectedNode: {
-        node: {}
-    },
+    selectedNode: null,
 };
 
 export default function (state = defaultState, action) {
     switch (action.type) {
-        case INSPECT_NODE:
+        case SELECT_NODE:
             return {...state, selectedNode: action.payload};
-        case NODE_CHANGED:
-            if (state.selectedNode.node.id === action.payload.node.id) {
-                return {...state, selectedNode: action.payload};
-            }
-            return state;
         case UNSELECT_NODE:
-            return {...state, selectedNode: {node: {}}};
+            return {...state, selectedNode: null};
         case DELETE_NODE: {
-            if (state.selectedNode.node.id === action.payload) {
-                return {...state, selectedNode: {node: {}}};
+            if (state.selectedNode === action.payload) {
+                return {...state, selectedNode: null};
             } else {
                 return state;
             }
