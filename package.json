@@ -64,6 +64,7 @@
     "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
+    "react-jsonschema-form": "^0.48.2",
     "react-keydown": "^1.7.3",
     "react-redux": "^5.0.4",
     "react-router-dom": "^4.1.1",

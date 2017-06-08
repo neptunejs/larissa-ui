@@ -54,6 +54,9 @@ class Node extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     const info = state.pipeline.nodes[ownProps.node];
+    if(!info) {
+        debugger;
+    }
     return {info};
 };
 

@@ -1,5 +1,5 @@
 import {createElement} from 'react';
-import BlockOptions from './BlockOptions';
+import BlockOptions from './BlockOptionsAlt';
 import NodeOptions from './NodeOptions';
 import {connect} from 'react-redux';
 import {Tabs, Tab} from 'material-ui';
