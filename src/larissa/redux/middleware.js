@@ -202,8 +202,19 @@ export const memoryMiddleware = env => store => {
                     if (!destNode) {
                         throw new Error(`Destination node with id ${source.node} was not found to create a connection`);
                     }
-                    currentPipeline.connect(sourceNode.output(source.name), destNode.input(dest.name));
-                    return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
+                    try {
+                        currentPipeline.connect(sourceNode.output(source.name), destNode.input(dest.name));
+                        return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
+                    } catch (e) {
+                        let message = e.message;
+                        if (message.includes('cycle')) {
+                            message = 'Cycles are not allowed';
+                        }
+                        return next({
+                            type: CONNECTION_ERROR,
+                            payload: message
+                        });
+                    }
                 }
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);
