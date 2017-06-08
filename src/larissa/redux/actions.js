@@ -77,3 +77,6 @@ export const createConnection = createAction(CREATE_CONNECTION);
 
 export const DUMP_JSON = '@@larissa/DUMP_JSON';
 export const dumpJson = createAction(DUMP_JSON);
+
+export const RUN_NODE = '@@larissa/RUN_NODE';
+export const runNode = createAction(RUN_NODE);

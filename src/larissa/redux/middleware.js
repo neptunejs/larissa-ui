@@ -13,6 +13,7 @@ import {
     CONNECTION_ERROR,
     RESET_PIPELINE,
     RUN_ERROR,
+    RUN_NODE,
     RUN_PIPELINE,
     SET_CURRENT_PIPELINE,
     SET_BLOCK_OPTIONS,
@@ -221,6 +222,9 @@ export const memoryMiddleware = env => store => {
                         });
                     }
                 }
+                case RUN_NODE:
+                    currentPipeline.runNode(action.payload);
+                    return next(createUpdateGraphAction(currentPipeline));
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);
                 }

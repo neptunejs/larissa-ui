@@ -21,6 +21,7 @@ const TextWidget = (props) => {
             value={props.value}
             floatingLabelText={props.label}
             onChange={(event) => props.onChange(event.target.value)}
+            multiLine={props.schema.multiLine}
         />
     );
 };
@@ -37,6 +38,7 @@ const CheckboxWidget = (props) => {
     );
 };
 
+
 const customWidgets = {TextWidget, CheckboxWidget};
 
 
@@ -48,8 +50,10 @@ class BlockOptionsAlt extends Component {
         }
 
 
+        console.log('schema ui', blockType.uiSchema);
         return (
             <Form schema={blockType.schema}
+                  uiSchema={blockType.uiSchema || {}}
                   formData={this.props.node.options}
                   onChange={(data) => {
                       this.props.onChange(data.formData);
