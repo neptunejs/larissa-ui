@@ -31,20 +31,21 @@ export const reducer = (state = initState, action) => {
             };
         }
         case SET_CURRENT_PIPELINE: {
-            const nodeIndex = state.nodeHistory.findIndex(node => node.id === action.payload.id);
-            const currentIndex = state.nodeHistory.findIndex(node => node.id === state.currentNode);
+            const pipelineId = action.payload.id;
+            const nodeIndex = state.nodeHistory.findIndex(node => node === pipelineId);
+            const currentIndex = state.nodeHistory.findIndex(node => node === state.currentNode);
             if (nodeIndex > -1) {
-                return {...state, currentNode: action.payload.id};
+                return {...state, currentNode: pipelineId};
             } else {
                 if (action.meta.appendToHistory) {
                     const newHistory = state.nodeHistory.splice(currentIndex + 1);
                     return {
                         ...state,
-                        nodeHistory: newHistory.push(action.payload),
-                        currentNode: action.payload.id
+                        nodeHistory: newHistory.push(pipelineId),
+                        currentNode: pipelineId
                     };
                 } else {
-                    return {...state, nodeHistory: new List([action.payload]), currentNode: action.payload.id};
+                    return {...state, nodeHistory: new List([pipelineId]), currentNode: pipelineId};
                 }
             }
         }

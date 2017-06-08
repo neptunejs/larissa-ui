@@ -34,8 +34,8 @@ class NodeHistory extends Component {
         let before = true;
         return (
             <div>
-                {this.props.nodeHistory.map((node, idx) => {
-                    const active = this.props.activeNode === node.id;
+                {this.props.nodeHistory.map((nodeId, idx) => {
+                    const active = this.props.activeNode === nodeId;
                     if (active) before = false;
                     let separator;
                     if (idx === this.props.nodeHistory.size - 1) {
@@ -47,8 +47,8 @@ class NodeHistory extends Component {
                     }
                     return (
                         <PipelineHistoryElement
-                            key={node.id}
-                            node={node}
+                            key={nodeId}
+                            node={this.props.nodes[nodeId].node}
                             active={active}
                             separator={separator}
                             handleClick={(node) => {
@@ -65,6 +65,7 @@ class NodeHistory extends Component {
 
 const mapStateToProps = state => {
     return {
+        nodes: state.pipeline.nodes,
         nodeHistory: state.pipeline.nodeHistory,
         activeNode: state.pipeline.currentNode
     };
