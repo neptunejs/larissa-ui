@@ -2,7 +2,7 @@ import {createElement} from 'react';
 import {Toolbar, ToolbarGroup, RaisedButton} from 'material-ui';
 import {connect} from 'react-redux';
 
-import {runPipeline, resetPipeline, createPipeline, dumpJson, runNode} from '../larissa/redux';
+import {runPipeline, resetPipeline, createPipeline, dumpJson, runNode, resetNode} from '../larissa/redux';
 import {toggleInspector} from '../actions';
 import NodeHistory from './NodeHistory';
 
@@ -22,7 +22,17 @@ const PipelineToolbar = props => {
                         }
                     }}
                 />
-                <RaisedButton label="RESET" primary={true} onClick={() => props.resetPipeline()}/>
+                <RaisedButton
+                    label={props.selectedNode ? 'RESET NODE' : 'RESET PIPELINE'}
+                    primary={true}
+                    onClick={() => {
+                        if (props.selectedNode) {
+                            props.resetNode(props.selectedNode);
+                        } else {
+                            props.resetPipeline()
+                        }
+                    }}
+                />
                 <RaisedButton label="DUMP JSON" primary={true} onClick={() => props.dumpJson()}/>
             </ToolbarGroup>
             <ToolbarGroup>
@@ -41,4 +51,12 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, {runPipeline, resetPipeline, createPipeline, toggleInspector, dumpJson, runNode})(PipelineToolbar);
+export default connect(mapStateToProps, {
+    runPipeline,
+    resetPipeline,
+    createPipeline,
+    toggleInspector,
+    dumpJson,
+    runNode,
+    resetNode
+})(PipelineToolbar);

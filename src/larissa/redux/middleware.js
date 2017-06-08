@@ -11,6 +11,7 @@ import {
     LINK_OUTPUT,
     NODE_CHANGED,
     CONNECTION_ERROR,
+    RESET_NODE,
     RESET_PIPELINE,
     RUN_ERROR,
     RUN_NODE,
@@ -228,6 +229,11 @@ export const memoryMiddleware = env => store => {
                 case RUN_NODE:
                     currentPipeline.runNode(action.payload);
                     return next(createUpdateGraphAction(currentPipeline));
+                case RESET_NODE: {
+                    const node = currentPipeline.getNode(action.payload);
+                    node.reset();
+                    return next(createUpdateGraphAction(currentPipeline));
+                }
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);
                 }

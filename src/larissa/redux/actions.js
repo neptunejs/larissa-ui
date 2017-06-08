@@ -80,3 +80,6 @@ export const dumpJson = createAction(DUMP_JSON);
 
 export const RUN_NODE = '@@larissa/RUN_NODE';
 export const runNode = createAction(RUN_NODE);
+
+export const RESET_NODE = '@@larissa/RESET_NODE';
+export const resetNode = createAction(RESET_NODE);
