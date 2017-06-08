@@ -11,7 +11,7 @@ const FieldTemplate = (props) => {
         <div>
             {props.children}
         </div>
-    )
+    );
 };
 
 const TextWidget = (props) => {
@@ -31,7 +31,7 @@ const CheckboxWidget = (props) => {
             labelPosition="right"
             id={props.id}
             label={props.label}
-            value={props.value}
+            toggled={props.value}
             onToggle={(event, toggled) => props.onChange(toggled)}
         />
     );

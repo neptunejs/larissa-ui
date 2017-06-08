@@ -3066,6 +3066,12 @@ larissa-plugin-nodes-logic@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-logic/-/larissa-plugin-nodes-logic-0.0.6.tgz#2a8c0e00f5fc53b9c04dc3c645f6515a522bbfd5"
 
+larissa-plugin-nodes-mljs@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-mljs/-/larissa-plugin-nodes-mljs-0.0.0.tgz#7a90472ef7255db89db26ecfdccd954a4c2e2fc1"
+  dependencies:
+    ml-pca "^1.1.2"
+
 larissa@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.0.6.tgz#c231575b48b1d688ee27147a516aece4dcb31481"
@@ -3361,6 +3367,19 @@ ml-matrix@3.0.0, ml-matrix@^3.0.0:
   dependencies:
     ml-array-utils "^0.3.0"
 
+ml-matrix@^2.0.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/ml-matrix/-/ml-matrix-2.3.0.tgz#df4601670a6735068ee9a6dbf23c094c1d3ece29"
+  dependencies:
+    ml-array-utils "^0.3.0"
+
+ml-pca@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ml-pca/-/ml-pca-1.1.2.tgz#1ce0af1763635d404819840b09d330b67a2b4a6a"
+  dependencies:
+    ml-matrix "^2.0.0"
+    ml-stat "^1.1.0"
+
 ml-regression@^4.0.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/ml-regression/-/ml-regression-4.2.1.tgz#061a70c18f2297ead74db2c1f99992f1329886f2"
@@ -3370,7 +3389,7 @@ ml-regression@^4.0.0:
     ml-matrix "^3.0.0"
     ml-stat "^1.3.3"
 
-ml-stat@^1.0.1, ml-stat@^1.2.0, ml-stat@^1.3.3:
+ml-stat@^1.0.1, ml-stat@^1.1.0, ml-stat@^1.2.0, ml-stat@^1.3.3:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/ml-stat/-/ml-stat-1.3.3.tgz#8a5493b0f67382fbf705c260e070436655a7dcfa"
 
