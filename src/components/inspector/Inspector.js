@@ -12,8 +12,10 @@ function renderOptions(props) {
             return <BlockInspector node={props.node} />;
         case 'pipeline':
             return <PipelineInspector node={props.node} />;
+        case '':
+            return null;
         default:
-            return <div>Unable to render this kind of node</div>;
+            return <div>Unable to render this kind of node ({kind})</div>;
     }
 }
 
