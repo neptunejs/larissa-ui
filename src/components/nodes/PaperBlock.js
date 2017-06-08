@@ -10,11 +10,16 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
     let result;
     if (status === FINISHED && nodeOutputs && nodeOutputs.size === 1) {
         const output = nodeOutputs.values().next().value;
-        const Component = renderers[output.getType()];
-        if (Component) {
-            result = (
-                <Component value={output.getValue()} />
-            );
+        const value = output.getValue();
+        if (value) {
+            const Component = renderers[output.getType()];
+            if (Component) {
+                result = (
+                    <Component value={value}/>
+                );
+            }
+        } else {
+            console.error('value is undefined. this should not happen...');
         }
     }
 
