@@ -1,10 +1,10 @@
 import {createElement, Component} from 'react';
 import Form from 'react-jsonschema-form';
-import {setBlockOptions} from '../../actions/index';
-import {connect} from 'react-redux';
-import env from '../../larissa/environment';
 import {TextField, Toggle} from 'material-ui';
+import {connect} from 'react-redux';
 
+import {setBlockOptions} from '../../actions/index';
+import env from '../../larissa/environment';
 
 const FieldTemplate = (props) => {
     return (
@@ -38,9 +38,7 @@ const CheckboxWidget = (props) => {
     );
 };
 
-
 const customWidgets = {TextWidget, CheckboxWidget};
-
 
 class BlockOptionsAlt extends Component {
     render() {
@@ -48,9 +46,6 @@ class BlockOptionsAlt extends Component {
         if (!blockType.schema) {
             return <div>No schema for this block</div>;
         }
-
-
-        console.log('schema ui', blockType.uiSchema);
         return (
             <Form schema={blockType.schema}
                   uiSchema={blockType.uiSchema || {}}
@@ -61,12 +56,10 @@ class BlockOptionsAlt extends Component {
                   widgets={customWidgets}
                   FieldTemplate={FieldTemplate}
             >
-                <div></div>
+                <div />
             </Form>
         );
-
     }
 }
-
 
 export default connect(null, {setBlockOptions})(BlockOptionsAlt);
