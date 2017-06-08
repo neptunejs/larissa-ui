@@ -3,7 +3,8 @@ import {
     UNSELECT_NODE
 } from '../actions';
 import {
-    DELETE_NODE
+    DELETE_NODE,
+    SET_CURRENT_PIPELINE
 } from '../larissa/redux/actions';
 
 const defaultState = {
@@ -15,6 +16,7 @@ export default function (state = defaultState, action) {
         case SELECT_NODE:
             return {...state, selectedNode: action.payload};
         case UNSELECT_NODE:
+        case SET_CURRENT_PIPELINE:
             return {...state, selectedNode: null};
         case DELETE_NODE: {
             if (state.selectedNode === action.payload) {
