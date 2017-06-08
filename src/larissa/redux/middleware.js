@@ -18,6 +18,7 @@ import {
     SET_NODE_TITLE,
     UPDATE_GRAPH,
     UPDATE_NODES,
+    UPDATE_NODES_AND_GRAPH,
     setCurrentPipeline,
     nodeChanged
 } from './actions';
@@ -43,7 +44,7 @@ export const memoryMiddleware = env => store => {
 
     // Listen to status changes in the pipeline to dispatch actions
     rootPipeline.on('child-change', () => {
-        store.dispatch(createUpdateNodesAction(currentPipeline));
+        store.dispatch(createUpdateNodesAction(rootPipeline));
     });
 
     rootPipeline.on('deep-child-change', node => {
@@ -211,12 +212,17 @@ export const memoryMiddleware = env => store => {
         }
         return next(action);
     };
-};
 
-function dispatchUpdateNodesAndGraphAction(pipeline, next) {
-    next(createUpdateNodesAction(pipeline));
-    next(createUpdateGraphAction(pipeline));
-}
+    function dispatchUpdateNodesAndGraphAction(pipeline, next) {
+        next({
+            type: UPDATE_NODES_AND_GRAPH,
+            payload: {
+                nodes: createUpdateNodesAction(rootPipeline).payload,
+                graph: createUpdateGraphAction(pipeline).payload
+            }
+        });
+    }
+};
 
 function createUpdateGraphAction(pipeline) {
     return {

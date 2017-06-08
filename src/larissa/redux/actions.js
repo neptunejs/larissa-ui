@@ -16,6 +16,7 @@ export const CONNECTION_ERROR = '@@larissa/CONNECTION_ERROR';
 
 export const UPDATE_GRAPH = '@@larissa/UPDATE_GRAPH';
 export const UPDATE_NODES = '@@larissa/UPDATE_NODES';
+export const UPDATE_NODES_AND_GRAPH = '@@larissa/UPDATE_NODES_AND_GRAPH';
 
 export const RUN_PIPELINE = '@@larissa/RUN_PIPELINE';
 export const runPipeline = createAction(RUN_PIPELINE);

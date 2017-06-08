@@ -1,6 +1,7 @@
 import {
     UPDATE_GRAPH,
     UPDATE_NODES,
+    UPDATE_NODES_AND_GRAPH,
     SET_CURRENT_PIPELINE
 } from './actions';
 
@@ -21,6 +22,13 @@ export const reducer = (state = initState, action) => {
         }
         case UPDATE_NODES: {
             return {...state, nodes: action.payload};
+        }
+        case UPDATE_NODES_AND_GRAPH: {
+            return {
+                ...state,
+                nodes: action.payload.nodes,
+                graph: action.payload.graph
+            };
         }
         case SET_CURRENT_PIPELINE: {
             const nodeIndex = state.nodeHistory.findIndex(node => node.id === action.payload.id);
