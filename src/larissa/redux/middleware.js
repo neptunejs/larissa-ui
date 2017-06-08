@@ -45,16 +45,19 @@ export const memoryMiddleware = env => store => {
     rootPipeline.connect(ten, pIn.input('number'));
 
     // Listen to status changes in the pipeline to dispatch actions
-    rootPipeline.on('child-change', () => {
+    rootPipeline.on('child-change', (node) => {
+        store.dispatch(nodeChanged(node));
         store.dispatch(createUpdateNodesAction(rootPipeline));
     });
 
     rootPipeline.on('deep-child-change', node => {
         store.dispatch(nodeChanged(node));
+        store.dispatch(createUpdateNodesAction(rootPipeline));
     });
 
     rootPipeline.on('change', () => {
         store.dispatch(nodeChanged(rootPipeline));
+        store.dispatch(createUpdateNodesAction(rootPipeline));
     });
 
     rootPipeline.on('runError', function (err) {
