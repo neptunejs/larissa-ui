@@ -3066,12 +3066,13 @@ larissa-plugin-nodes-mljs@^0.0.7:
   dependencies:
     ml-pca "^1.1.2"
 
-larissa@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.0.7.tgz#6a11ac6d2c31ed98c223efcfe2846ec9b79eff1c"
+larissa@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.1.0.tgz#afcad47d91131c428d856a2276e59cbf3cc3d616"
   dependencies:
     graph.js "^1.21.1"
     is-my-json-valid "^2.16.0"
+    papaparse "^4.3.3"
     uuid "^3.0.1"
 
 lazy-cache@^1.0.3:
@@ -3653,6 +3654,10 @@ pako@^1.0.0:
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
+
+papaparse@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-4.3.3.tgz#716ecd5b876d0e4f274b24d948fa0f8eda2f72be"
 
 param-case@2.1.x:
   version "2.1.1"
