@@ -11,7 +11,7 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
     if (status === FINISHED && nodeOutputs && nodeOutputs.size === 1) {
         const output = nodeOutputs.values().next().value;
         const value = output.getValue();
-        if (value) {
+        if (value !== undefined) {
             const Component = renderers[output.getType()];
             if (Component) {
                 result = (
