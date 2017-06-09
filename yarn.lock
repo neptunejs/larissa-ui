@@ -3064,15 +3064,15 @@ larissa-plugin-nodes-logic@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-logic/-/larissa-plugin-nodes-logic-0.0.6.tgz#2a8c0e00f5fc53b9c04dc3c645f6515a522bbfd5"
 
-larissa-plugin-nodes-mljs@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-mljs/-/larissa-plugin-nodes-mljs-0.0.7.tgz#73131e65c5e090f3f66206dd864a8fe61e045575"
+larissa-plugin-nodes-mljs@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-mljs/-/larissa-plugin-nodes-mljs-0.1.1.tgz#ad18bc743e5b5dd47887c2ea8dcdd17f29be4092"
   dependencies:
     ml-pca "^1.1.2"
 
-larissa@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.1.0.tgz#afcad47d91131c428d856a2276e59cbf3cc3d616"
+larissa@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.1.1.tgz#02fdabada91cfb8634621bdb95507c3462f6bcbf"
   dependencies:
     graph.js "^1.21.1"
     is-my-json-valid "^2.16.0"
