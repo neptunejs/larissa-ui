@@ -26,24 +26,34 @@ import {
     nodeChanged
 } from './actions';
 
+import predefinedPipelines from '../predefinedPipelines';
+
 export const memoryMiddleware = env => store => {
     // Create root pipeline
     const rootPipeline = env.newPipeline();
     rootPipeline.setTitle('ROOT');
     let currentPipeline = rootPipeline;
 
-    // Create dummy node on the pipeline
-    const ten = rootPipeline.newNode('number', {value: 10});
+    // Add demos
+    for (const pipeline of predefinedPipelines) {
+        const newPipeline = env.pipelineFromJSON(pipeline.value);
+        rootPipeline.addNode(newPipeline);
+    }
 
-    const pIn = env.newPipeline();
-    const five = pIn.newNode('number', {value: 5});
-    const prod = pIn.newNode('product');
-    pIn.connect(five, prod);
-    pIn.linkInput(prod.input(), 'number');
-    pIn.linkOutput(prod.output(), 'result');
+    {
+        // Create dummy node on the pipeline
+        const ten = rootPipeline.newNode('number', {value: 10});
 
-    rootPipeline.addNode(pIn);
-    rootPipeline.connect(ten, pIn.input('number'));
+        const pIn = env.newPipeline();
+        const five = pIn.newNode('number', {value: 5});
+        const prod = pIn.newNode('product');
+        pIn.connect(five, prod);
+        pIn.linkInput(prod.input(), 'number');
+        pIn.linkOutput(prod.output(), 'result');
+
+        rootPipeline.addNode(pIn);
+        rootPipeline.connect(ten, pIn.input('number'));
+    }
 
     let ignoreEvents = false;
     const setIgnoreEvents = () => ignoreEvents = true;
