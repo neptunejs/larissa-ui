@@ -12,6 +12,14 @@ export const toggleDrawer = createAction(TOGGLE_DRAWER);
 export const TOGGLE_INSPECTOR = 'TOGGLE_INSPECTOR';
 export const toggleInspector = createAction(TOGGLE_INSPECTOR);
 
+export const SELECT_INSPECTOR_TAB = 'SELECT_INSPECTOR_TAB';
+export const selectInspectorTab = function (kind, value) {
+    return {
+        type: SELECT_INSPECTOR_TAB,
+        payload: {kind, value}
+    };
+};
+
 export const SELECT_PIPELINE = 'SELECT_PIPELINE';
 export const selectPipeline = createAction(SELECT_PIPELINE);
 

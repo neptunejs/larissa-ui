@@ -8,19 +8,19 @@ import {setBlockOptions} from '../../larissa/redux';
 
 const BlockInspector = (props) => {
     return (
-        <Tabs>
-            <Tab label="General">
+        <Tabs value={props.tab} onChange={props.onTabChange}>
+            <Tab label="General" value="general">
                 <NodeOptions
                     node={props.node.node}
                 />
             </Tab>
-            <Tab label="Block">
+            <Tab label="Block" value="block">
                 <BlockOptions
                     node={props.node.node}
                     onChange={(options) => props.setBlockOptions({id: props.node.node.id, options})}
                 />
             </Tab>
-            <Tab label="View" >
+            <Tab label="View" value="view">
                 <Renderer />
             </Tab>
         </Tabs>

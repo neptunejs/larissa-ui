@@ -1,13 +1,17 @@
+import {Map} from 'immutable';
+
 import {
     OPEN_DRAWER,
     CLOSE_DRAWER,
+    SELECT_INSPECTOR_TAB,
     TOGGLE_DRAWER,
     TOGGLE_INSPECTOR
 } from '../actions/index';
 
 const defaultState = {
     open: true,
-    inspectorOpen: true
+    inspectorOpen: true,
+    selectedInspectorTabs: new Map()
 };
 
 export default function (state = defaultState, action) {
@@ -20,6 +24,11 @@ export default function (state = defaultState, action) {
             return {...state, open: !state.open};
         case TOGGLE_INSPECTOR:
             return {...state, inspectorOpen: !state.inspectorOpen};
+        case SELECT_INSPECTOR_TAB:
+            return {
+                ...state,
+                selectedInspectorTabs: state.selectedInspectorTabs.set(action.payload.kind, action.payload.value)
+            };
         default:
             return state;
     }

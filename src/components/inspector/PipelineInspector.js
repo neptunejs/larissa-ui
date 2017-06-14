@@ -5,13 +5,13 @@ import NodeOptions from './NodeOptions';
 
 const BlockInspector = (props) => {
     return (
-        <Tabs>
-            <Tab label="General">
+        <Tabs value={props.tab} onChange={props.onTabChange}>
+            <Tab label="General" value="general">
                 <NodeOptions
                     node={props.node.node}
                 />
             </Tab>
-            <Tab label="Pipeline">
+            <Tab label="Pipeline" value="pipeline">
                 <PipelineOptions
                     node={props.node}
                 />
