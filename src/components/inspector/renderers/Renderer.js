@@ -12,7 +12,7 @@ class Renderer extends Component {
                 TypeRenderer = TableRenderer;
                 break;
             default:
-                return <div>Cannot display this type ${type}</div>;
+                return <div>Cannot display this type {type}</div>;
         }
         return (
             <TypeRenderer data={data} />
