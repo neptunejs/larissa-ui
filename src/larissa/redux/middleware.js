@@ -20,6 +20,7 @@ import {
     SET_BLOCK_OPTIONS,
     SET_NODE_TITLE,
     UPDATE_GRAPH,
+    UPDATE_NODE,
     UPDATE_NODES,
     UPDATE_NODES_AND_GRAPH,
     setCurrentPipeline,
@@ -63,19 +64,19 @@ export const memoryMiddleware = env => store => {
     rootPipeline.on('child-change', (node) => {
         store.dispatch(nodeChanged(node));
         if (ignoreEvents) return;
-        store.dispatch(createUpdateNodesAction(rootPipeline));
+        store.dispatch(createUpdateNodeAction(node));
     });
 
     rootPipeline.on('deep-child-change', node => {
         store.dispatch(nodeChanged(node));
         if (ignoreEvents) return;
-        store.dispatch(createUpdateNodesAction(rootPipeline));
+        store.dispatch(createUpdateNodeAction(node));
     });
 
     rootPipeline.on('change', () => {
         store.dispatch(nodeChanged(rootPipeline));
         if (ignoreEvents) return;
-        store.dispatch(createUpdateNodesAction(rootPipeline));
+        store.dispatch(createUpdateNodeAction(rootPipeline));
     });
 
     rootPipeline.on('runError', function (err) {
@@ -167,11 +168,6 @@ export const memoryMiddleware = env => store => {
                     unsetIgnoreEvents();
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
-                case UPDATE_GRAPH: // Just pass the action to the end user
-                case UPDATE_NODES:
-                case RUN_ERROR:
-                    next(action);
-                    return null;
                 case DELETE_NODE: {
                     setIgnoreEvents();
                     currentPipeline.deleteNode(currentPipeline.getNode(action.payload));
@@ -269,6 +265,12 @@ export const memoryMiddleware = env => store => {
                     node.reset();
                     return next(createUpdateGraphAction(currentPipeline));
                 }
+                case UPDATE_GRAPH: // Just pass the action to the end user
+                case UPDATE_NODES:
+                case UPDATE_NODE:
+                case RUN_ERROR:
+                    next(action);
+                    return null;
                 default: {
                     throw new Error(`Unexpected action: ${action.type}`);
                 }
@@ -303,5 +305,15 @@ function createUpdateNodesAction(pipeline) {
     return {
         type: UPDATE_NODES,
         payload: nodes
+    };
+}
+
+function createUpdateNodeAction(node) {
+    return {
+        type: UPDATE_NODE,
+        payload: {
+            id: node.id,
+            value: node.inspect()
+        }
     };
 }

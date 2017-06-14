@@ -1,5 +1,6 @@
 import {
     UPDATE_GRAPH,
+    UPDATE_NODE,
     UPDATE_NODES,
     UPDATE_NODES_AND_GRAPH,
     SET_CURRENT_PIPELINE
@@ -19,6 +20,12 @@ export const reducer = (state = initState, action) => {
     switch (action.type) {
         case UPDATE_GRAPH: {
             return {...state, graph: action.payload};
+        }
+        case UPDATE_NODE: {
+            return {
+                ...state,
+                nodes: {...state.nodes, [action.payload.id]: action.payload.value}
+            };
         }
         case UPDATE_NODES: {
             return {...state, nodes: action.payload};
