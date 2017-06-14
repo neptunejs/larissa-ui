@@ -48,13 +48,13 @@ class BlockOptionsAlt extends Component {
         }
         return (
             <Form schema={blockType.schema}
-                  uiSchema={blockType.uiSchema || {}}
-                  formData={this.props.node.options}
-                  onChange={(data) => {
-                      this.props.onChange(data.formData);
-                  }}
-                  widgets={customWidgets}
-                  FieldTemplate={FieldTemplate}
+                uiSchema={blockType.uiSchema || {}}
+                formData={this.props.node.options}
+                onChange={(data) => {
+                    this.props.onChange(data.formData);
+                }}
+                widgets={customWidgets}
+                FieldTemplate={FieldTemplate}
             >
                 <div />
             </Form>

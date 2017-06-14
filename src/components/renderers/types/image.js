@@ -27,6 +27,6 @@ export class image extends Component {
                         }} />
                 }
             </div>
-        )
+        );
     }
 }

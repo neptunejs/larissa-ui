@@ -15,11 +15,11 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
             const Component = renderers[output.getType()];
             if (Component) {
                 result = (
-                    <Component value={value}/>
+                    <Component value={value} />
                 );
             }
         } else {
-            console.error('value is undefined. this should not happen...');
+            throw new Error('value is undefined. this should not happen...');
         }
     }
 

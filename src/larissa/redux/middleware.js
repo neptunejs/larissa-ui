@@ -97,7 +97,7 @@ export const memoryMiddleware = env => store => {
         if (action.type.startsWith('@@larissa/')) {
             switch (action.type) {
                 case DUMP_JSON: {
-                    console.log(JSON.stringify(currentPipeline));
+                    console.log(JSON.stringify(currentPipeline)); // eslint-disable-line no-console
                     return null;
                 }
                 case CREATE_BLOCK: {

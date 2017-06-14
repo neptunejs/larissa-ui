@@ -10,7 +10,7 @@ const PipelineToolbar = props => {
     return (
         <Toolbar>
             <ToolbarGroup firstChild={true}>
-                <RaisedButton label="INSERT PIPELINE" primary={true} onClick={() => props.createPipeline()}/>
+                <RaisedButton label="INSERT PIPELINE" primary={true} onClick={() => props.createPipeline()} />
                 <RaisedButton
                     label={props.selectedNode ? 'RUN NODE' : 'RUN PIPELINE'}
                     primary={true}
@@ -29,17 +29,17 @@ const PipelineToolbar = props => {
                         if (props.selectedNode) {
                             props.resetNode(props.selectedNode);
                         } else {
-                            props.resetPipeline()
+                            props.resetPipeline();
                         }
                     }}
                 />
-                <RaisedButton label="DUMP JSON" primary={true} onClick={() => props.dumpJson()}/>
+                <RaisedButton label="DUMP JSON" primary={true} onClick={() => props.dumpJson()} />
             </ToolbarGroup>
             <ToolbarGroup>
                 <NodeHistory />
             </ToolbarGroup>
             <ToolbarGroup lastChild={true}>
-                <RaisedButton label="INSPECTOR" primary={true} onClick={() => props.toggleInspector()}/>
+                <RaisedButton label="INSPECTOR" primary={true} onClick={() => props.toggleInspector()} />
             </ToolbarGroup>
         </Toolbar>
     );

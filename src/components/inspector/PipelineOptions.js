@@ -45,7 +45,7 @@ class CandidateEditor extends Component {
             <div>
                 <h4>{this.props.label}</h4>
                 <SelectField style={{width: '100%'}} floatingLabelText="Select" value={this.state.value}
-                             onChange={this.handleChange.bind(this)}>
+                    onChange={this.handleChange.bind(this)}>
                     {this.props.candidates.map(renderCandidate)}
                 </SelectField>
                 <TextField name="link_name" hintText="Link name" value={this.state.linkName} onChange={(event) => this.setState({linkName: event.target.value})} />
