@@ -1,12 +1,12 @@
 import {createElement} from 'react';
 import {connect} from 'react-redux';
 import {SchemaForm} from 'react-schema-form';
-import env from '../../larissa/environment';
-import {setBlockOptions} from '../../actions/index';
 
+import {setBlockOptions} from '../../actions/index';
+import findBlockType from '../../util/findBlockType';
 
 const BlockOptions = props => {
-    const blockType = env.getBlock(props.node.blockType.identifier);
+    const blockType = findBlockType(props.blockTypes, props.node.type);
     if (!blockType.schema) {
         return <div>No schema for this block</div>;
     } else {
@@ -28,6 +28,10 @@ const BlockOptions = props => {
     }
 };
 
+const mapStateToProps = (state) => {
+    return {
+        blockTypes: state.blockTypes
+    };
+};
 
-export default connect(null, {setBlockOptions})(BlockOptions);
-
+export default connect(mapStateToProps, {setBlockOptions})(BlockOptions);

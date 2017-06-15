@@ -9,6 +9,7 @@ class Pipeline extends Component {
     render() {
         const {
             node: info,
+            status,
             selected,
             style: blockStyle,
         } = this.props;
@@ -17,7 +18,7 @@ class Pipeline extends Component {
             inputs={info.inputs}
             outputs={info.outputs}
             selected={selected}
-            status={info.status}
+            status={status}
             style={blockStyle}
             node={info.id}
             title={info.title}

@@ -2,6 +2,8 @@ import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
 import keydown from 'react-keydown';
 
+import findBlockType from '../util/findBlockType';
+
 import Node from './nodes/Node';
 import SvgLines from './SvgLines';
 
@@ -19,6 +21,7 @@ import portSeparation from '../util/portSeparation';
 
 @connect((state) => {
     return {
+        blockTypes: state.blockTypes,
         subgraphs: placeNodes(state.pipeline.graph),
         selectedNode: state.pipelineUI.selectedNode
     };
@@ -28,6 +31,7 @@ import portSeparation from '../util/portSeparation';
 export default class Pipeline extends Component {
     render() {
         const subgraphs = this.props.subgraphs;
+        const blockTypes = this.props.blockTypes;
         if (!subgraphs) return null;
         let verticalOffset = 0;
         const nodes = [];
@@ -63,9 +67,9 @@ export default class Pipeline extends Component {
                 for (const connection of info.connected) {
                     const endInfo = placementInfo.get(connection.node);
                     const endNode = endInfo.node;
-                    const outPorts = getPorts(startNode, 'outputs');
+                    const outPorts = getPorts(startNode, 'outputs', blockTypes);
                     const outSeparation = portSeparation(outPorts.length);
-                    const inPorts = getPorts(endNode, 'inputs');
+                    const inPorts = getPorts(endNode, 'inputs', blockTypes);
                     const inSeparation = portSeparation(inPorts.length);
                     for (const [fromPort, toPort] of connection.connections) {
                         const fromIndex = getIndex(fromPort, outPorts);
@@ -108,9 +112,9 @@ function getHeight(nNodes) {
     return nNodes * blockHeight + (nNodes - 1) * blockVerticalSeparation;
 }
 
-function getPorts(node, type) {
+function getPorts(node, type, blockTypes) {
     if (node.kind === 'block') {
-        return node.blockType[type];
+        return findBlockType(blockTypes, node.type)[type];
     } else if (node.kind === 'pipeline') {
         return node[type];
     } else {

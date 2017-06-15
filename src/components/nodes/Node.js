@@ -1,7 +1,6 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
 
-import env from '../../larissa/environment';
 import {
     blockWidth,
     blockHeight,
@@ -21,6 +20,8 @@ const blockStyle = {
 class Node extends Component {
     render() {
         const info = this.props.info.node;
+        const status = this.props.info.status;
+        const blockTypes = this.props.blockTypes;
         const outputs = this.props.info.outputs;
         const style = {
             ...blockStyle,
@@ -29,9 +30,10 @@ class Node extends Component {
         };
         switch (info.kind) {
             case 'block': {
-                const blockType = env.getBlock(info.blockType.identifier);
+                const blockType = blockTypes.find((blockType) => blockType.identifier === info.type);
                 return <Block
                     node={info}
+                    status={status}
                     outputs={outputs}
                     selected={this.props.selected}
                     style={style}
@@ -41,6 +43,7 @@ class Node extends Component {
             case 'pipeline': {
                 return <Pipeline
                     node={info}
+                    status={status}
                     style={style}
                     selected={this.props.selected}
                 />;
@@ -54,7 +57,10 @@ class Node extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     const info = state.pipeline.nodes[ownProps.node];
-    return {info};
+    return {
+        blockTypes: state.blockTypes,
+        info
+    };
 };
 
 export default connect(mapStateToProps)(Node);

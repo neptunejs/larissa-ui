@@ -2,6 +2,8 @@ import {createElement, Component} from 'react';
 import TableRenderer from './type/table';
 import {connect} from 'react-redux';
 
+import findBlockType from '../../../util/findBlockType';
+
 class Renderer extends Component {
     render() {
         const {type, data} = this.props;
@@ -26,7 +28,7 @@ const mapStateToProps = (state) => {
     if (outputs.length) {
         const val = outputs[0][1].value;
         return {
-            type: node.node.blockType.outputs[0].type,
+            type: findBlockType(state.blockTypes, node.node.type).outputs[0].type,
             data: val
         };
     }

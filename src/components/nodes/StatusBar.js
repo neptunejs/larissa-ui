@@ -14,24 +14,29 @@ export default function StatusBar({status}) {
     let value = 100;
     let color;
 
-    switch (status) {
-        case INSTANTIATED:
-            color = yellow500;
-            break;
-        case ERRORED:
-            color = red500;
-            break;
-        case FINISHED:
-            color = doneGreen;
-            break;
-        case RUNNING:
-            color = doneGreen;
-            mode = 'indeterminate';
-            break;
-        default:
-            color = doneGreen;
-            value = parseInt(status);
-            break;
+    if (typeof status === 'number') {
+        color = doneGreen;
+        value = parseInt(status);
+    } else {
+        switch (status) {
+            case INSTANTIATED:
+                color = yellow500;
+                break;
+            case ERRORED:
+                color = red500;
+                break;
+            case FINISHED:
+                color = doneGreen;
+                break;
+            case RUNNING:
+                color = doneGreen;
+                mode = 'indeterminate';
+                break;
+            default:
+                color = 'black';
+                break;
+        }
     }
+
     return <LinearProgress mode={mode} value={value} color={color} />;
 }

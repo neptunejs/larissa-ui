@@ -4,7 +4,7 @@ import {TextField, Toggle} from 'material-ui';
 import {connect} from 'react-redux';
 
 import {setBlockOptions} from '../../actions/index';
-import env from '../../larissa/environment';
+import findBlockType from '../../util/findBlockType';
 
 const FieldTemplate = (props) => {
     return (
@@ -42,7 +42,7 @@ const customWidgets = {TextWidget, CheckboxWidget};
 
 class BlockOptionsAlt extends Component {
     render() {
-        const blockType = env.getBlock(this.props.node.blockType.identifier);
+        const blockType = findBlockType(this.props.blockTypes, this.props.node.type);
         if (!blockType.schema) {
             return <div>No schema for this block</div>;
         }
@@ -62,4 +62,10 @@ class BlockOptionsAlt extends Component {
     }
 }
 
-export default connect(null, {setBlockOptions})(BlockOptionsAlt);
+const mapStateToProps = (state) => {
+    return {
+        blockTypes: state.blockTypes
+    };
+};
+
+export default connect(mapStateToProps, {setBlockOptions})(BlockOptionsAlt);
