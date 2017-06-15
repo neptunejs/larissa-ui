@@ -16,6 +16,7 @@ export const ItemTypes = {
 
 // TODO: should this be imported from larissa ?
 export const INSTANTIATED = 'INSTANTIATED';
+export const READY = 'READY';
 export const ERRORED = 'ERRORED';
 export const RUNNING = 'RUNNING';
 export const FINISHED = 'FINISHED';

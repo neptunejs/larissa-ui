@@ -1,12 +1,13 @@
 import {createElement} from 'react';
 
-import {INSTANTIATED, ERRORED, FINISHED, RUNNING} from '../../constants';
+import {INSTANTIATED, ERRORED, FINISHED, RUNNING, READY} from '../../constants';
 
 import LinearProgress from 'material-ui/LinearProgress';
 import {
     yellow500,
     red500,
-    lightGreenA400 as doneGreen
+    lightGreenA400 as doneGreen,
+    orange500
 } from 'material-ui/styles/colors';
 
 export default function StatusBar({status}) {
@@ -20,6 +21,9 @@ export default function StatusBar({status}) {
     } else {
         switch (status) {
             case INSTANTIATED:
+                color = orange500;
+                break;
+            case READY:
                 color = yellow500;
                 break;
             case ERRORED:
