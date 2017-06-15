@@ -45,7 +45,7 @@ export const reducer = (state = initState, action) => {
                 return {
                     ...state,
                     nodeHistory: state.nodeHistory.remove(nodeIndex)
-                }
+                };
             } else {
                 return state;
             }
