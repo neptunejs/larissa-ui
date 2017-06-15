@@ -3,7 +3,8 @@ import {
     UPDATE_NODE,
     UPDATE_NODES,
     UPDATE_NODES_AND_GRAPH,
-    SET_CURRENT_PIPELINE
+    SET_CURRENT_PIPELINE,
+    DELETE_NODE
 } from './actions';
 
 import {List} from 'immutable';
@@ -36,6 +37,18 @@ export const reducer = (state = initState, action) => {
                 nodes: action.payload.nodes,
                 graph: action.payload.graph
             };
+        }
+        case DELETE_NODE: {
+            const nodeId = action.payload;
+            const nodeIndex = state.nodeHistory.indexOf(nodeId);
+            if (nodeIndex !== -1) {
+                return {
+                    ...state,
+                    nodeHistory: state.nodeHistory.remove(nodeIndex)
+                }
+            } else {
+                return state;
+            }
         }
         case SET_CURRENT_PIPELINE: {
             const pipelineId = action.payload.id;
