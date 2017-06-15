@@ -2951,6 +2951,10 @@ json-loader@^0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/json-loader/-/json-loader-0.5.4.tgz#8baa1365a632f58a3c46d20175fc6002c96e37de"
 
+json-schema-defaults@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/json-schema-defaults/-/json-schema-defaults-0.3.0.tgz#8dafda34c6b1a6627d856b7eafad764c0f39db6b"
+
 json-schema@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.2.3.tgz#b480c892e59a2f05954ce727bd3f2a4e882f9e13"
@@ -3020,9 +3024,9 @@ larissa-plugin-nodes-image-js@^0.0.7:
   dependencies:
     image-js "^0.9.13"
 
-larissa-plugin-nodes-logic@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-logic/-/larissa-plugin-nodes-logic-0.0.6.tgz#2a8c0e00f5fc53b9c04dc3c645f6515a522bbfd5"
+larissa-plugin-nodes-logic@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/larissa-plugin-nodes-logic/-/larissa-plugin-nodes-logic-0.2.0.tgz#ea92dd1e95b8881d39cb1094a03cde6fd0585bc8"
 
 larissa-plugin-nodes-mljs@^0.1.1:
   version "0.1.1"
@@ -3030,12 +3034,13 @@ larissa-plugin-nodes-mljs@^0.1.1:
   dependencies:
     ml-pca "^1.1.2"
 
-larissa@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.1.1.tgz#02fdabada91cfb8634621bdb95507c3462f6bcbf"
+larissa@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/larissa/-/larissa-0.2.0.tgz#1770fa89138bf287647a77138c53add2a6c5a334"
   dependencies:
     graph.js "^1.21.1"
     is-my-json-valid "^2.16.0"
+    json-schema-defaults "^0.3.0"
     papaparse "^4.3.3"
     uuid "^3.0.1"
 
