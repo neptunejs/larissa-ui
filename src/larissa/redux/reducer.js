@@ -52,8 +52,8 @@ export const reducer = (state = initState, action) => {
         }
         case SET_CURRENT_PIPELINE: {
             const pipelineId = action.payload.id;
-            const nodeIndex = state.nodeHistory.findIndex(node => node === pipelineId);
-            const currentIndex = state.nodeHistory.findIndex(node => node === state.currentNode);
+            const nodeIndex = state.nodeHistory.indexOf(pipelineId);
+            const currentIndex = state.nodeHistory.indexOf(state.currentNode);
             if (nodeIndex > -1) {
                 return {...state, currentNode: pipelineId};
             } else {
