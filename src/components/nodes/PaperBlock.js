@@ -12,7 +12,8 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
         const output = nodeOutputs.values().next().value;
         const value = output.getValue();
         if (value !== undefined) {
-            const Component = renderers[output.getType()];
+            let Component = renderers[output.getType()];
+            if (!Component) Component = renderers[typeof value];
             if (Component) {
                 result = (
                     <Component value={value} />
