@@ -15,6 +15,7 @@ const FieldTemplate = (props) => {
 };
 
 const TextWidget = (props) => {
+    const type = props.schema.type === 'number' ? 'number' : 'text';
     return (
         <TextField
             id={props.id}
@@ -22,6 +23,7 @@ const TextWidget = (props) => {
             floatingLabelText={props.label}
             onChange={(event) => props.onChange(event.target.value)}
             multiLine={props.schema.multiLine}
+            type={type}
         />
     );
 };
