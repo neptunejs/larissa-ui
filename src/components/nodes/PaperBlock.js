@@ -1,10 +1,12 @@
 import {createElement} from 'react';
-import {Paper} from 'material-ui';
+import Paper from 'material-ui/Paper';
 
 import StatusBar from './StatusBar';
 import Ports from './Ports';
-import {FINISHED} from '../../constants';
+import {FINISHED, selectedColor} from '../../constants';
 import * as renderers from '../renderers';
+
+const selectedBorder = `solid 1px ${selectedColor}`;
 
 export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, outputs, title, subtitle, handleClick, handleDoubleClick}) => {
     let result;
@@ -26,7 +28,7 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
 
     return (
         <Paper
-            style={{...style, border: selected ? 'solid 1px blue' : null}}
+            style={{...style, border: selected ? selectedBorder : null}}
             onClick={handleClick}
             onDoubleClick={handleDoubleClick}
         >

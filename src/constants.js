@@ -1,3 +1,4 @@
+import {blue700} from 'material-ui/styles/colors';
 
 export const drawerWidth = 256;
 export const inspectorWidth = 450;
@@ -8,6 +9,8 @@ export const blockHeight = 100;
 export const blockMargin = 20;
 export const blockVerticalSeparation = 50;
 export const blockHorizontalSeparation = 100;
+
+export const selectedColor = blue700;
 
 export const ItemTypes = {
     BLOCK_NODE: 'BLOCK_NODE',
