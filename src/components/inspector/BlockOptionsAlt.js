@@ -3,7 +3,6 @@ import Form from 'react-jsonschema-form';
 import {TextField, Toggle} from 'material-ui';
 import {connect} from 'react-redux';
 
-import {setBlockOptions} from '../../actions/index';
 import findBlockType from '../../util/findBlockType';
 
 const FieldTemplate = (props) => {
@@ -19,7 +18,7 @@ const TextWidget = (props) => {
     return (
         <TextField
             id={props.id}
-            value={props.value}
+            value={props.value || ''}
             floatingLabelText={props.label}
             onChange={(event) => props.onChange(event.target.value)}
             multiLine={props.schema.multiLine}
@@ -70,4 +69,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, {setBlockOptions})(BlockOptionsAlt);
+export default connect(mapStateToProps)(BlockOptionsAlt);
