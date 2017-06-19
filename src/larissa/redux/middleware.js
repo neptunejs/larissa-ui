@@ -58,12 +58,6 @@ export const memoryMiddleware = env => store => {
     const unsetIgnoreEvents = () => ignoreEvents = false;
 
     // Listen to status changes in the pipeline to dispatch actions
-    rootPipeline.on('child-change', (node) => {
-        store.dispatch(nodeChanged(node));
-        if (ignoreEvents) return;
-        store.dispatch(createUpdateNodeAction(node));
-    });
-
     rootPipeline.on('deep-child-change', node => {
         store.dispatch(nodeChanged(node));
         if (ignoreEvents) return;
