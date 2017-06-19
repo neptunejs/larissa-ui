@@ -10,6 +10,7 @@ import {
 } from '../larissa/redux/actions';
 
 const defaultState = {
+    currentPipeline: null,
     selectedNode: null,
     selectedLink: null
 };
@@ -21,8 +22,9 @@ export default function (state = defaultState, action) {
         case SELECT_LINK:
             return {...state, selectedLink: action.payload, selectedNode: null};
         case UNSELECT_NODE:
-        case SET_CURRENT_PIPELINE:
             return {...state, selectedNode: null, selectedLink: null};
+        case SET_CURRENT_PIPELINE:
+            return {...state, currentPipeline: action.payload.id};
         case DELETE_NODE: {
             if (state.selectedNode === action.payload) {
                 return {...state, selectedNode: null};

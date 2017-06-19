@@ -42,7 +42,7 @@ const SecondaryDrawer = props => {
 
 const mapStateToProps = state => {
     return {
-        node: state.pipeline.nodes[state.pipelineUI.selectedNode],
+        node: state.pipeline.nodes[state.pipelineUI.selectedNode || state.pipelineUI.currentPipeline],
         inspectorOpen: state.drawer.inspectorOpen,
         selectedTabs: state.drawer.selectedInspectorTabs
     };
