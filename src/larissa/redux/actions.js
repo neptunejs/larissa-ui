@@ -42,6 +42,9 @@ export const RUN_ERROR = '@@larissa/RUN_ERROR';
 export const DELETE_NODE = '@@larissa/DELETE_NODE';
 export const deleteNode = createAction(DELETE_NODE);
 
+export const DELETE_LINK = '@@larissa/DELETE_LINK';
+export const deleteLink = createAction(DELETE_LINK);
+
 export const INSPECT_NODE = '@@larissa/INSPECT_NODE';
 export const inspectNode = createAction(INSPECT_NODE);
 

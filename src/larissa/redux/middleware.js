@@ -5,6 +5,7 @@ import {
     CREATE_PIPELINE,
     CREATE_PIPELINE_FROM_JSON,
     DELETE_NODE,
+    DELETE_LINK,
     DUMP_JSON,
     INSPECT_NODE,
     LINK_INPUT,
@@ -167,6 +168,17 @@ export const memoryMiddleware = env => store => {
                 case DELETE_NODE: {
                     setIgnoreEvents();
                     currentPipeline.deleteNode(currentPipeline.getNode(action.payload));
+                    unsetIgnoreEvents();
+                    next(action);
+                    return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
+                }
+                case DELETE_LINK: {
+                    setIgnoreEvents();
+                    const split = action.payload.split('_');
+                    currentPipeline.disconnect(
+                        currentPipeline.findNode(split[0]).output(split[2]),
+                        currentPipeline.findNode(split[1]).input(split[3])
+                    );
                     unsetIgnoreEvents();
                     next(action);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);

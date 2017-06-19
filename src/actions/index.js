@@ -29,6 +29,9 @@ export const selectNode = createAction(SELECT_NODE);
 export const UNSELECT_NODE = 'UNSELECT_NODE';
 export const unselectNode = createAction(UNSELECT_NODE);
 
+export const SELECT_LINK = 'SELECT_LINK';
+export const selectLink = createAction(SELECT_LINK);
+
 export const BLOCK_OPTIONS = 'BLOCK_OPTIONS';
 export const setBlockOptions = createAction(BLOCK_OPTIONS);
 

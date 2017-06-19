@@ -5,7 +5,7 @@ import keydown from 'react-keydown';
 import findBlockType from '../util/findBlockType';
 
 import Node from './nodes/Node';
-import SvgLines from './SvgLines';
+import SvgLinks from './SvgLinks';
 
 import {
     blockHeight,
@@ -16,17 +16,21 @@ import {
     portSize
 } from '../constants';
 import placeNodes from '../util/placeNodes';
-import {deleteNode} from '../larissa/redux';
+import {selectLink} from '../actions';
+import {deleteNode, deleteLink} from '../larissa/redux';
 import portSeparation from '../util/portSeparation';
 
 @connect((state) => {
     return {
         blockTypes: state.blockTypes,
         subgraphs: placeNodes(state.pipeline.graph),
-        selectedNode: state.pipelineUI.selectedNode
+        selectedNode: state.pipelineUI.selectedNode,
+        selectedLink: state.pipelineUI.selectedLink,
     };
 }, {
-    deleteNode
+    deleteNode,
+    deleteLink,
+    selectLink
 })
 export default class Pipeline extends Component {
     render() {
@@ -84,7 +88,10 @@ export default class Pipeline extends Component {
                                 endInfo.top + inSeparation[toIndex] + blockMargin + portSize / 2 + 0.5
                             ]
                         ];
-                        lines.push(line);
+                        lines.push({
+                            key: `${startNode.id}_${endNode.id}_${fromPort}_${toPort}`,
+                            line
+                        });
                     }
                 }
 
@@ -94,7 +101,7 @@ export default class Pipeline extends Component {
         }
         return (
             <div style={{position: 'relative', height: '100%'}}>
-                <SvgLines lines={lines} />
+                <SvgLinks lines={lines} onClick={this.props.selectLink} selected={this.props.selectedLink} />
                 {nodes}
             </div>
         );
@@ -104,6 +111,8 @@ export default class Pipeline extends Component {
     deleteKeyPressed() {
         if (this.props.selectedNode) {
             this.props.deleteNode(this.props.selectedNode);
+        } else if (this.props.selectedLink) {
+            this.props.deleteLink(this.props.selectedLink);
         }
     }
 }
