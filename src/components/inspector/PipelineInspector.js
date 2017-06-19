@@ -3,7 +3,7 @@ import PipelineOptions from './PipelineOptions';
 import {Tabs, Tab} from 'material-ui';
 import NodeOptions from './NodeOptions';
 
-const BlockInspector = (props) => {
+const PipelineInspector = (props) => {
     return (
         <Tabs value={props.tab} onChange={props.onTabChange}>
             <Tab label="General" value="general">
@@ -20,4 +20,4 @@ const BlockInspector = (props) => {
     );
 };
 
-export default BlockInspector;
+export default PipelineInspector;
