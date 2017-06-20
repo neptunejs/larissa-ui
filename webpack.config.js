@@ -4,6 +4,8 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const HOT_RELOADING = !!process.env.HOT_RELOADING;
+
 const VENDOR_LIBS = [
     'immutable', 'material-ui',
     'react', 'react-dom', 'react-keydown', 'react-redux', 'react-router-dom',
@@ -34,10 +36,15 @@ if (process.env.NODE_ENV === 'production') {
 } else {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     plugins.push(
-        new BundleAnalyzerPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
+        new BundleAnalyzerPlugin()
     );
+
+    if (HOT_RELOADING) {
+        plugins.push(
+            new webpack.HotModuleReplacementPlugin(),
+            new webpack.NamedModulesPlugin()
+        );
+    }
     outputFilename = '[name].[hash].js';
 }
 
@@ -75,7 +82,7 @@ module.exports = {
     plugins,
     devtool: 'source-map',
     devServer: {
-        hot: true,
+        hot: HOT_RELOADING,
         compress: true,
         historyApiFallback: true,
         contentBase: './'
