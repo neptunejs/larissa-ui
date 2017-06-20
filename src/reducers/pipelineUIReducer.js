@@ -24,7 +24,7 @@ export default function (state = defaultState, action) {
         case UNSELECT_NODE:
             return {...state, selectedNode: null, selectedLink: null};
         case SET_CURRENT_PIPELINE:
-            return {...state, currentPipeline: action.payload.id};
+            return {...state, currentPipeline: action.payload.id, selectedNode: null, selectedLink: null};
         case DELETE_NODE: {
             if (state.selectedNode === action.payload) {
                 return {...state, selectedNode: null};
