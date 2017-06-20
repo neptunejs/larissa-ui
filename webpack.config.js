@@ -8,7 +8,7 @@ const VENDOR_LIBS = [
     'immutable', 'material-ui',
     'react', 'react-dom', 'react-keydown', 'react-redux', 'react-router-dom',
     'redux', 'redux-actions', 'redux-promise-middleware', 'redux-thunk',
-    'reselect', 'react-schema-form'
+    'reselect', 'react-jsonschema-form'
 ];
 
 const plugins = [
@@ -30,7 +30,7 @@ let outputFilename;
 if (process.env.NODE_ENV === 'production') {
     // const BabiliPlugin = require('babili-webpack-plugin');
     // plugins.push(new BabiliPlugin());
-    outputFilename = '[name].[chunkhash].js'
+    outputFilename = '[name].[chunkhash].js';
 } else {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     plugins.push(

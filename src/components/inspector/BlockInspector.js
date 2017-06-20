@@ -1,5 +1,5 @@
 import {createElement} from 'react';
-import BlockOptions from './BlockOptionsAlt';
+import BlockOptions from './BlockOptions';
 import NodeOptions from './NodeOptions';
 import Renderer from './renderers/Renderer';
 import {connect} from 'react-redux';

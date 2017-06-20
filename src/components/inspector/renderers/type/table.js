@@ -62,7 +62,6 @@ class TableRenderer extends Component {
         return (
             <div>
                 <SelectField
-                    // style={{width: '100%'}}
                     floatingLabelText="Select X"
                     value={this.state.xIdx}
                     onChange={this.onXChange.bind(this)}
@@ -70,7 +69,6 @@ class TableRenderer extends Component {
                     {data.headers.map(renderLabel)}
                 </SelectField>
                 <SelectField
-                    // style={{width: '100%'}}
                     floatingLabelText="Select Y"
                     value={this.state.yIdx}
                     onChange={this.onYChange.bind(this)}
@@ -78,7 +76,6 @@ class TableRenderer extends Component {
                     {data.headers.map(renderLabel)}
                 </SelectField>
                 <SelectField
-                    style={{width: '100%'}}
                     floatingLabelText="Select color"
                     value={this.state.colorIdx}
                     onChange={this.onColorChange.bind(this)}

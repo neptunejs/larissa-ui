@@ -1,32 +1,67 @@
-import {createElement} from 'react';
+import {createElement, Component} from 'react';
+import Form from 'react-jsonschema-form';
+import {TextField, Toggle} from 'material-ui';
 import {connect} from 'react-redux';
-import {SchemaForm} from 'react-schema-form';
 
-import {setBlockOptions} from '../../actions/index';
 import findBlockType from '../../util/findBlockType';
 
-const BlockOptions = props => {
-    const blockType = findBlockType(props.blockTypes, props.node.type);
-    if (!blockType.schema) {
-        return <div>No schema for this block</div>;
-    } else {
+const FieldTemplate = (props) => {
+    return (
+        <div>
+            {props.children}
+        </div>
+    );
+};
+
+const TextWidget = (props) => {
+    const type = props.schema.type === 'number' ? 'number' : 'text';
+    return (
+        <TextField
+            id={props.id}
+            value={props.value || ''}
+            floatingLabelText={props.label}
+            onChange={(event) => props.onChange(event.target.value)}
+            multiLine={props.schema.multiLine}
+            type={type}
+        />
+    );
+};
+
+const CheckboxWidget = (props) => {
+    return (
+        <Toggle
+            labelPosition="right"
+            id={props.id}
+            label={props.label}
+            toggled={props.value}
+            onToggle={(event, toggled) => props.onChange(toggled)}
+        />
+    );
+};
+
+const customWidgets = {TextWidget, CheckboxWidget};
+
+class BlockOptionsAlt extends Component {
+    render() {
+        const blockType = findBlockType(this.props.blockTypes, this.props.node.type);
+        if (!blockType.schema) {
+            return <div>No schema for this block</div>;
+        }
         return (
-            <div style={{margin: 10}}>
-                <SchemaForm schema={blockType.schema} model={props.node.options} onModelChange={(keys, value) => {
-                    let toChange = props.node.options;
-                    for (let i = 0; i < keys.length - 1; i++) {
-                        toChange = toChange[keys[i]];
-                    }
-                    const key = keys[keys.length - 1];
-                    toChange[key] = value;
-                    if (props.onChange) {
-                        props.onChange(props.node.options);
-                    }
-                }} />
-            </div>
+            <Form schema={blockType.schema}
+                uiSchema={blockType.uiSchema || {}}
+                formData={this.props.node.options}
+                onChange={(data) => {
+                    this.props.onChange(data.formData);
+                }}
+                widgets={customWidgets}
+                FieldTemplate={FieldTemplate}
+            >
+                <div />
+            </Form>
         );
     }
-};
+}
 
 const mapStateToProps = (state) => {
     return {
@@ -34,4 +69,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, {setBlockOptions})(BlockOptions);
+export default connect(mapStateToProps)(BlockOptionsAlt);
