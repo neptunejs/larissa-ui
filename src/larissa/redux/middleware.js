@@ -193,10 +193,10 @@ export const memoryMiddleware = env => store => {
                     setIgnoreEvents();
                     const pipeline = currentPipeline.getNode(action.payload.id);
                     const nodeId = action.payload.input.node.id;
-                    const inputName = action.payload.input.info.name;
+                    const inputPort = action.payload.input.port;
                     const linkName = action.payload.name;
                     const node = pipeline.getNode(nodeId);
-                    pipeline.linkInput(node.input(inputName), linkName);
+                    pipeline.linkInput(node.input(inputPort), linkName);
                     unsetIgnoreEvents();
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
@@ -204,10 +204,10 @@ export const memoryMiddleware = env => store => {
                     setIgnoreEvents();
                     const pipeline = currentPipeline.getNode(action.payload.id);
                     const nodeId = action.payload.output.node.id;
-                    const outputName = action.payload.output.info.name;
+                    const outputPort = action.payload.output.port;
                     const linkName = action.payload.name;
                     const node = pipeline.getNode(nodeId);
-                    pipeline.linkOutput(node.output(outputName), linkName);
+                    pipeline.linkOutput(node.output(outputPort), linkName);
                     unsetIgnoreEvents();
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }

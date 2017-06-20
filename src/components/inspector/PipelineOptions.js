@@ -8,7 +8,7 @@ class PipelineOptions extends Component {
         return (
             <div style={{margin: 10}}>
                 <CandidateEditor
-                    candidates={this.props.node.inputCandidates}
+                    candidates={this.props.inputCandidates}
                     label="Inputs"
                     buttonText="Link Input"
                     onSubmit={(input, name) => {
@@ -16,7 +16,7 @@ class PipelineOptions extends Component {
                     }}
                 />
                 <CandidateEditor
-                    candidates={this.props.node.outputCandidates}
+                    candidates={this.props.outputCandidates}
                     label="Outputs"
                     buttonText="Link Output"
                     onSubmit={(output, name) => {
@@ -50,7 +50,7 @@ class CandidateEditor extends Component {
                 </SelectField>
                 <TextField name="link_name" hintText="Link name" value={this.state.linkName} onChange={(event) => this.setState({linkName: event.target.value})} />
                 <RaisedButton onClick={() => {
-                    this.props.onSubmit(this.props.candidates.find(candidate => candidate.info.id === this.state.value), this.state.linkName);
+                    this.props.onSubmit(this.props.candidates.find(candidate => candidate.id === this.state.value), this.state.linkName);
                 }} label={this.props.buttonText} />
             </div>
         );
@@ -59,8 +59,35 @@ class CandidateEditor extends Component {
 
 function renderCandidate(candidate) {
     return (
-        <MenuItem value={candidate.info.id} key={candidate.info.id} primaryText={`${candidate.node.title} - ${candidate.info.name}`} />
+        <MenuItem value={candidate.id} key={candidate.id} primaryText={`${candidate.node.title} - ${candidate.port}`} />
     );
 }
 
-export default connect(null, {linkInput, linkOutput})(PipelineOptions);
+function mapStateToProps(state, currentProps) {
+    const nodes = state.pipeline.nodes;
+    const node = currentProps.node;
+    const inputCandidates = [];
+    const outputCandidates = [];
+    for (const inputCandidate of node.inputCandidates) {
+        inputCandidates.push({
+            id: `${nodes[inputCandidate.node].node.id}_input_${inputCandidate.port}`,
+            node: nodes[inputCandidate.node].node,
+            direction: 'input',
+            port: inputCandidate.port
+        });
+    }
+    for (const outputCandidate of node.outputCandidates) {
+        outputCandidates.push({
+            id: `${nodes[outputCandidate.node].node.id}_output_${outputCandidate.port}`,
+            node: nodes[outputCandidate.node].node,
+            direction: 'output',
+            port: outputCandidate.port
+        });
+    }
+    return {
+        inputCandidates,
+        outputCandidates
+    };
+}
+
+export default connect(mapStateToProps, {linkInput, linkOutput})(PipelineOptions);
