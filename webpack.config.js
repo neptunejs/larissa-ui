@@ -20,7 +20,9 @@ const plugins = [
     }),
     new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
+    }),
+    // todo enable when we upgrade to webpack 3
+    // new webpack.optimize.ModuleConcatenationPlugin()
 ];
 
 let outputFilename;
