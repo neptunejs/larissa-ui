@@ -9,6 +9,7 @@ import {
     DUMP_JSON,
     INSPECT_NODE,
     LINK_INPUT,
+    LINK_OPTIONS,
     LINK_OUTPUT,
     NODE_CHANGED,
     CONNECTION_ERROR,
@@ -211,6 +212,13 @@ export const memoryMiddleware = env => store => {
                     unsetIgnoreEvents();
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
+                case LINK_OPTIONS: {
+                    const pipeline = currentPipeline.findNode(action.payload.sourceNodeId);
+                    const targetNode = pipeline.findNode(action.payload.targetNodeId);
+                    pipeline.linkOptions(action.payload.name, targetNode);
+                    return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
+                }
+
                 case INSPECT_NODE: {
                     const node = currentPipeline.findNode(action.payload);
                     if (!node) {

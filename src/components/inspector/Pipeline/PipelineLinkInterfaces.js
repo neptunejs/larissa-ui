@@ -1,9 +1,9 @@
 import {createElement, Component} from 'react';
 import {TextField, RaisedButton, SelectField, MenuItem} from 'material-ui';
 import {connect} from 'react-redux';
-import {linkInput, linkOutput} from '../../larissa/redux';
+import {linkInput, linkOutput} from '../../../larissa/redux/index';
 
-class PipelineOptions extends Component {
+class PipelineLinkInterfaces extends Component {
     render() {
         return (
             <div style={{margin: 10}}>
@@ -32,7 +32,7 @@ class CandidateEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            linkName: ''
+            name: ''
         };
     }
 
@@ -48,7 +48,7 @@ class CandidateEditor extends Component {
                     onChange={this.handleChange.bind(this)}>
                     {this.props.candidates.map(renderCandidate)}
                 </SelectField>
-                <TextField name="link_name" hintText="Link name" value={this.state.linkName} onChange={(event) => this.setState({linkName: event.target.value})} />
+                <TextField name="link_name" hintText="Link name" value={this.state.name} onChange={(event) => this.setState({name: event.target.value})} />
                 <RaisedButton onClick={() => {
                     this.props.onSubmit(this.props.candidates.find(candidate => candidate.id === this.state.value), this.state.linkName);
                 }} label={this.props.buttonText} />
@@ -90,4 +90,4 @@ function mapStateToProps(state, currentProps) {
     };
 }
 
-export default connect(mapStateToProps, {linkInput, linkOutput})(PipelineOptions);
+export default connect(mapStateToProps, {linkInput, linkOutput})(PipelineLinkInterfaces);

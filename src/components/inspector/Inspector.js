@@ -6,7 +6,7 @@ import {inspectorWidth} from '../../constants';
 import {selectInspectorTab} from '../../actions';
 
 import BlockInspector from './BlockInspector';
-import PipelineInspector from './PipelineInspector';
+import PipelineInspector from './Pipeline/PipelineInspector';
 
 function renderOptions(props) {
     const kind = props.node ? props.node.node.kind : '';
@@ -20,6 +20,7 @@ function renderOptions(props) {
             />;
         case 'pipeline':
             return <PipelineInspector
+                pipeline={props.pipeline}
                 node={props.node}
                 tab={tab}
                 onTabChange={(value) => props.selectInspectorTab('pipeline', value)}
@@ -44,7 +45,8 @@ const mapStateToProps = state => {
     return {
         node: state.pipeline.nodes[state.pipelineUI.selectedNode || state.pipelineUI.currentPipeline],
         inspectorOpen: state.drawer.inspectorOpen,
-        selectedTabs: state.drawer.selectedInspectorTabs
+        selectedTabs: state.drawer.selectedInspectorTabs,
+        pipeline: state.pipeline
     };
 };
 
