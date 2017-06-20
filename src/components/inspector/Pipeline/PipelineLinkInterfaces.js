@@ -2,6 +2,7 @@ import {createElement, Component} from 'react';
 import {TextField, RaisedButton, SelectField, MenuItem} from 'material-ui';
 import {connect} from 'react-redux';
 import {linkInput, linkOutput} from '../../../larissa/redux/index';
+import pipelineOptionsSelector from '../../../selectors/pipelineOptionsSelector';
 
 class PipelineLinkInterfaces extends Component {
     render() {
@@ -63,31 +64,4 @@ function renderCandidate(candidate) {
     );
 }
 
-function mapStateToProps(state, currentProps) {
-    const nodes = state.pipeline.nodes;
-    const node = currentProps.node;
-    const inputCandidates = [];
-    const outputCandidates = [];
-    for (const inputCandidate of node.inputCandidates) {
-        inputCandidates.push({
-            id: `${nodes[inputCandidate.node].node.id}_input_${inputCandidate.port}`,
-            node: nodes[inputCandidate.node].node,
-            direction: 'input',
-            port: inputCandidate.port
-        });
-    }
-    for (const outputCandidate of node.outputCandidates) {
-        outputCandidates.push({
-            id: `${nodes[outputCandidate.node].node.id}_output_${outputCandidate.port}`,
-            node: nodes[outputCandidate.node].node,
-            direction: 'output',
-            port: outputCandidate.port
-        });
-    }
-    return {
-        inputCandidates,
-        outputCandidates
-    };
-}
-
-export default connect(mapStateToProps, {linkInput, linkOutput})(PipelineLinkInterfaces);
+export default connect(pipelineOptionsSelector, {linkInput, linkOutput})(PipelineLinkInterfaces);
