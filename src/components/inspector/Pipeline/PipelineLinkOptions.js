@@ -2,6 +2,7 @@ import {createElement, Component} from 'react';
 import CandidateEditor from './CandidateEditor';
 import {connect} from 'react-redux';
 import {linkOptions} from '../../../larissa/redux/index';
+import pipelineLinkOptionsSelector from '../../../selectors/pipelineLinkOptionsSelector';
 
 class PipelineLinkOptions extends Component {
     render() {
@@ -23,4 +24,4 @@ class PipelineLinkOptions extends Component {
     }
 }
 
-export default connect(null, {linkOptions})(PipelineLinkOptions);
+export default connect(pipelineLinkOptionsSelector, {linkOptions})(PipelineLinkOptions);

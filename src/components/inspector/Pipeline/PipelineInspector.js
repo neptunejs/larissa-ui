@@ -18,7 +18,6 @@ const PipelineInspector = (props) => {
                 />
                 <PipelineLinkOptions
                     node={props.node}
-                    graph={props.pipeline.graph}
                 />
             </Tab>
         </Tabs>
