@@ -19,7 +19,7 @@ class CandidateEditor extends Component {
             <div>
                 <h4>{this.props.label}</h4>
                 <SelectField style={{width: '100%'}} floatingLabelText="Select" value={this.state.value}
-                             onChange={this.handleChange.bind(this)}>
+                    onChange={this.handleChange.bind(this)}>
                     {candidates.map(renderCandidate(getKey, getValue, getText))}
                 </SelectField>
                 <TextField
@@ -35,7 +35,7 @@ class CandidateEditor extends Component {
                     });
                 }} label={this.props.buttonText}
                 />
-                <hr/>
+                <hr />
             </div>
         );
     }

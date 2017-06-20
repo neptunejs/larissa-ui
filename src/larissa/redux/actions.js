@@ -71,7 +71,7 @@ export const linkOutput = function (pipelineId, output, name) {
 };
 
 export const LINK_OPTIONS = '@@larissa/LINK_OPTIONS';
-export const linkOptions = function(name, sourceNodeId, targetNodeId) {
+export const linkOptions = function (name, sourceNodeId, targetNodeId) {
     return {
         type: LINK_OPTIONS,
         payload: {
