@@ -18,24 +18,26 @@ class CandidateEditor extends Component {
         return (
             <div>
                 <h4>{this.props.label}</h4>
-                <SelectField style={{width: '100%'}} floatingLabelText="Select" value={this.state.value}
-                    onChange={this.handleChange.bind(this)}>
-                    {candidates.map(renderCandidate(getKey, getValue, getText))}
-                </SelectField>
-                <TextField
-                    name="name"
-                    hintText={this.props.hintText}
-                    value={this.state.name}
-                    onChange={(event) => this.setState({name: event.target.value})}
-                />
-                <RaisedButton onClick={() => {
+                <form onSubmit={(event) => {
+                    event.preventDefault();
                     this.props.onSubmit(candidates.find(candidate => getValue(candidate) === this.state.value), this.state.name);
                     this.setState({
                         name: '',
                         value: ''
                     });
-                }} label={this.props.buttonText}
-                />
+                }}>
+                    <SelectField style={{width: '100%'}} floatingLabelText="Select" value={this.state.value}
+                                 onChange={this.handleChange.bind(this)}>
+                        {candidates.map(renderCandidate(getKey, getValue, getText))}
+                    </SelectField>
+                    <TextField
+                        name="name"
+                        hintText={this.props.hintText}
+                        value={this.state.name}
+                        onChange={(event) => this.setState({name: event.target.value})}
+                    />
+                    <RaisedButton type="submit" label={this.props.buttonText} />
+                </form>
             </div>
         );
     }
