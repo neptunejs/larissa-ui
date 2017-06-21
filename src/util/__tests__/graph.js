@@ -1,4 +1,4 @@
-import Graph from 'graph.js/dist/graph.full';
+import Graph from 'graph.js/dist/graph';
 
 import getSubgraphs from '../getSubgraphs';
 

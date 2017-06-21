@@ -11,6 +11,7 @@
     "eslint": "eslint src --cache",
     "eslint-fix": "npm run eslint -- --fix",
     "start": "HOT_RELOADING=1 webpack-dev-server --inline",
+    "start-no-hot": "webpack-dev-server --inline",
     "test": "npm run eslint"
   },
   "repository": {

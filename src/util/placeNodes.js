@@ -1,7 +1,7 @@
 /*
 Implement the Coffman–Graham algorithm (https://en.wikipedia.org/wiki/Coffman%E2%80%93Graham_algorithm)
  */
-import Graph from 'graph.js/dist/graph.es6';
+import Graph from 'graph.js/dist/graph';
 
 import getSubgraphs from './getSubgraphs';
 

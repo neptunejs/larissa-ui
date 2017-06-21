@@ -10,7 +10,8 @@ const VENDOR_LIBS = [
     'immutable', 'material-ui',
     'react', 'react-dom', 'react-keydown', 'react-redux', 'react-router-dom',
     'redux', 'redux-actions', 'redux-promise-middleware', 'redux-thunk',
-    'reselect', 'react-jsonschema-form'
+    'reselect'
+    //, 'react-jsonschema-form' // do not put this module as it has a circular dependency that breaks webpack 3
 ];
 
 const plugins = [
@@ -79,7 +80,9 @@ module.exports = {
                 use: 'url-loader',
                 test: /\.(jpe?g|png|gif|svg)$/i
             }
-        ]
+        ],
+        // todo work around a bug in redux-persist: https://github.com/rt2zz/redux-persist/issues/366
+        strictThisContextOnImports: true
     },
     plugins,
     devtool: 'source-map',
