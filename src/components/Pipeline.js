@@ -124,7 +124,7 @@ function getHeight(nNodes) {
 function getPorts(node, type, blockTypes) {
     if (node.kind === 'block') {
         return findBlockType(blockTypes, node.type)[type];
-    } else if (node.kind === 'pipeline') {
+    } else if (node.kind === 'pipeline' || node.kind === 'map-loop') {
         return node[type];
     } else {
         throw new Error('unexpected node kind: ' + node.kind);

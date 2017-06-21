@@ -28,7 +28,7 @@ import {
     UPDATE_NODES,
     UPDATE_NODES_AND_GRAPH,
     setCurrentPipeline,
-    nodeChanged
+    nodeChanged, CREATE_LOOP
 } from './actions';
 
 import predefinedPipelines from '../predefinedPipelines';
@@ -71,6 +71,12 @@ export const memoryMiddleware = env => store => {
         rootPipeline.connect(ten, pIn.input('number'));
         const id = rootPipeline.newNode('identity');
         rootPipeline.connect(pIn.output('result'), id);
+    }
+
+    {
+        const string = rootPipeline.newNode('string', {value: '[1, 2]'});
+        const json = rootPipeline.newNode('json-parse');
+        rootPipeline.connect(string, json);
     }
 
     let ignoreEvents = false;
@@ -181,6 +187,21 @@ export const memoryMiddleware = env => store => {
                     setIgnoreEvents();
                     const newPipeline = env.newPipeline();
                     currentPipeline.addNode(newPipeline);
+                    unsetIgnoreEvents();
+                    return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
+                }
+                case CREATE_LOOP: {
+                    setIgnoreEvents();
+                    const newPipeline = env.newPipeline();
+                    const input = newPipeline.newNode('identity');
+                    input.title = 'Loop input';
+                    const output = newPipeline.newNode('identity');
+                    output.title = 'Loop output';
+                    newPipeline.linkInput(input.input(), {name: 'loopInput', default: true});
+                    newPipeline.linkOutput(output.output(), {name: 'loopOutput', default: true});
+                    currentPipeline.newLoop(newPipeline, {
+                        type: 'map'
+                    });
                     unsetIgnoreEvents();
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }

@@ -2,7 +2,7 @@ import {createElement} from 'react';
 import {Toolbar, ToolbarGroup, RaisedButton} from 'material-ui';
 import {connect} from 'react-redux';
 
-import {runPipeline, resetPipeline, createPipeline, dumpJson, runNode, resetNode} from '../larissa/redux';
+import {runPipeline, resetPipeline, createPipeline, createLoop, dumpJson, runNode, resetNode} from '../larissa/redux';
 import {toggleInspector} from '../actions';
 import NodeHistory from './NodeHistory';
 
@@ -11,6 +11,7 @@ const PipelineToolbar = props => {
         <Toolbar>
             <ToolbarGroup firstChild={true}>
                 <RaisedButton label="INSERT PIPELINE" primary={true} onClick={() => props.createPipeline()} />
+                <RaisedButton label="INSERT LOOP" primary={true} onClick={() => props.createLoop()} />
                 <RaisedButton
                     label={props.selectedNode ? 'RUN NODE' : 'RUN PIPELINE'}
                     primary={true}
@@ -55,6 +56,7 @@ export default connect(mapStateToProps, {
     runPipeline,
     resetPipeline,
     createPipeline,
+    createLoop,
     toggleInspector,
     dumpJson,
     runNode,

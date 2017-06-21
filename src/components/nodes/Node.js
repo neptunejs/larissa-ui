@@ -9,6 +9,7 @@ import {
 
 import Block from './Block';
 import Pipeline from './Pipeline';
+import MapLoop from './MapLoop';
 
 const blockStyle = {
     width: blockWidth,
@@ -42,6 +43,14 @@ class Node extends Component {
             }
             case 'pipeline': {
                 return <Pipeline
+                    node={info}
+                    status={status}
+                    style={style}
+                    selected={this.props.selected}
+                />;
+            }
+            case 'map-loop': {
+                return <MapLoop
                     node={info}
                     status={status}
                     style={style}

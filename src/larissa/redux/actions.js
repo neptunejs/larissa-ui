@@ -6,6 +6,9 @@ export const createBlock = createAction(CREATE_BLOCK);
 export const CREATE_PIPELINE = '@@larissa/CREATE_PIPELINE';
 export const createPipeline = createAction(CREATE_PIPELINE);
 
+export const CREATE_LOOP = '@@larissa/CREATE_LOOP';
+export const createLoop = createAction(CREATE_LOOP);
+
 export const CREATE_PIPELINE_FROM_JSON = '@@larissa/CREATE_PIPELINE_FROM_JSON';
 export const createPipelineFromJSON = createAction(CREATE_PIPELINE_FROM_JSON);
 
