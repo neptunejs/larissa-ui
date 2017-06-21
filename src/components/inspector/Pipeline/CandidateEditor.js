@@ -31,11 +31,11 @@ class CandidateEditor extends Component {
                 <RaisedButton onClick={() => {
                     this.props.onSubmit(candidates.find(candidate => getValue(candidate) === this.state.value), this.state.name);
                     this.setState({
-                        name: ''
+                        name: '',
+                        value: ''
                     });
                 }} label={this.props.buttonText}
                 />
-                <hr />
             </div>
         );
     }
