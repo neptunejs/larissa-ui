@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {inspectorWidth} from '../../constants';
 import {selectInspectorTab} from '../../actions';
 
-import BlockInspector from './BlockInspector';
+import BlockInspector from './Block/BlockInspector';
 import PipelineInspector from './Pipeline/PipelineInspector';
 
 function renderOptions(props) {

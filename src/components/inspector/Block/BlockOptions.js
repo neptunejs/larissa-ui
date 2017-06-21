@@ -1,9 +1,9 @@
 import {createElement, Component} from 'react';
 import Form from 'react-jsonschema-form';
 import {connect} from 'react-redux';
-import * as customWidgets from '../jsonschemaForm/Widgets';
-import {FieldTemplate, ArrayFieldTemplate} from '../jsonschemaForm/Templates';
-import findBlockType from '../../util/findBlockType';
+import * as customWidgets from '../../jsonschemaForm/Widgets';
+import {FieldTemplate, ArrayFieldTemplate} from '../../jsonschemaForm/Templates';
+import findBlockType from '../../../util/findBlockType';
 
 class BlockOptionsAlt extends Component {
     render() {

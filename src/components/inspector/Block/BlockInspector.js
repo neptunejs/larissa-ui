@@ -1,10 +1,10 @@
 import {createElement} from 'react';
 import BlockOptions from './BlockOptions';
-import NodeOptions from './NodeOptions';
-import Renderer from './renderers/Renderer';
+import NodeOptions from '../NodeOptions';
+import Renderer from '../renderers/Renderer';
 import {connect} from 'react-redux';
 import {Tabs, Tab} from 'material-ui';
-import {setBlockOptions} from '../../larissa/redux';
+import {setBlockOptions} from '../../../larissa/redux/index';
 
 const BlockInspector = (props) => {
     return (
