@@ -16,6 +16,7 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
         if (value !== undefined) {
             let Component = renderers[output.getType()];
             if (!Component) Component = renderers[typeof value];
+            if (!Component && Array.isArray(value)) Component = renderers.array;
             if (Component) {
                 result = (
                     <Component value={value} />
