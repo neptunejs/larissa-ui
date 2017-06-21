@@ -1,5 +1,6 @@
 import {createElement, Component} from 'react';
 import CandidateEditor from './CandidateEditor';
+import PortsDisplayer from './PortsDisplayer';
 import {connect} from 'react-redux';
 import {linkInput, linkOutput} from '../../../larissa/redux/index';
 import pipelineOptionsSelector from '../../../selectors/pipelineOptionsSelector';
@@ -8,9 +9,17 @@ class PipelineLinkInterfaces extends Component {
     render() {
         return (
             <div style={{margin: 10}}>
+                <PortsDisplayer
+                    ports={this.props.inputs}
+                    title="Input ports"
+                />
+                <PortsDisplayer
+                    ports={this.props.outputs}
+                    title="Output ports"
+                />
                 <CandidateEditor
                     candidates={this.props.inputCandidates}
-                    label="Inputs"
+                    label="Add inputs"
                     buttonText="Link Input"
                     getValue={(candidate) => candidate.id}
                     getKey={(candidate) => candidate.id}
@@ -21,7 +30,7 @@ class PipelineLinkInterfaces extends Component {
                 />
                 <CandidateEditor
                     candidates={this.props.outputCandidates}
-                    label="Outputs"
+                    label="Add outputs"
                     buttonText="Link Output"
                     getValue={(candidate) => candidate.id}
                     getKey={(candidate) => candidate.id}

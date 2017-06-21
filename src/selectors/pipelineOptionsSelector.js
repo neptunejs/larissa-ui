@@ -9,6 +9,8 @@ export default createSelector(
     (nodes, node) => {
         const inputCandidates = [];
         const outputCandidates = [];
+        const inputs = [];
+        const outputs = [];
         for (const inputCandidate of node.inputCandidates) {
             inputCandidates.push({
                 id: `${nodes[inputCandidate.node].node.id}_input_${inputCandidate.port}`,
@@ -25,9 +27,32 @@ export default createSelector(
                 port: outputCandidate.port
             });
         }
+
+        for (const input of node.node.inputs) {
+            inputs.push(getPort(input, nodes));
+        }
+
+        for (const output of node.node.outputs) {
+            outputs.push(getPort(output, nodes));
+        }
+
         return {
+            inputs,
+            outputs,
             inputCandidates,
             outputCandidates
         };
     }
 );
+
+function getPort(port, nodes) {
+    return {
+        name: port.name,
+        id: port.id,
+        link: {
+            id: port.link.id,
+            node: nodes[port.link.id].node,
+            name: port.link.name
+        }
+    };
+}
