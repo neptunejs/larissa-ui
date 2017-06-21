@@ -1,6 +1,7 @@
 import {createElement} from 'react';
 import PipelineLinkInterfaces from './PipelineLinkInterfaces';
 import PipelineLinkOptions from './PipelineLinkOptions';
+import PipelineOptions from './PipelineOptions';
 import {Tabs, Tab} from 'material-ui';
 import NodeOptions from '../NodeOptions';
 
@@ -19,6 +20,9 @@ const PipelineInspector = (props) => {
                 <PipelineLinkOptions
                     node={props.node}
                 />
+            </Tab>
+            <Tab label="Options" value="options">
+                <PipelineOptions />
             </Tab>
         </Tabs>
     );

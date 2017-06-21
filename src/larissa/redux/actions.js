@@ -37,6 +37,12 @@ export const resetPipeline = createAction(RESET_PIPELINE);
 export const SET_BLOCK_OPTIONS = '@@larissa/SET_BLOCK_OPTIONS';
 export const setBlockOptions = createAction(SET_BLOCK_OPTIONS);
 
+export const SET_PIPELINE_OPTIONS = '@@larissa/SET_PIPELINE_OPTIONS';
+export const setPipelineOptions = createAction(SET_PIPELINE_OPTIONS);
+
+export const SET_NODE_OPTIONS = '@@larissa/SET_NODE_OPTIONS';
+export const setNodeOptions = createAction(SET_NODE_OPTIONS);
+
 export const RUN_ERROR = '@@larissa/RUN_ERROR';
 
 export const DELETE_NODE = '@@larissa/DELETE_NODE';

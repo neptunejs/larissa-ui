@@ -6,7 +6,7 @@ export default createSelector(
     currentNodeSelector,
     (node) => {
         return {
-            graph: JSON.parse(node.node.graph)
+            graph: JSON.parse(node.node.graph).filter(el => typeof el[0] === 'string')
         };
     }
 );

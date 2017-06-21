@@ -20,7 +20,9 @@ import {
     RUN_PIPELINE,
     SET_CURRENT_PIPELINE,
     SET_BLOCK_OPTIONS,
+    SET_NODE_OPTIONS,
     SET_NODE_TITLE,
+    SET_PIPELINE_OPTIONS,
     UPDATE_GRAPH,
     UPDATE_NODE,
     UPDATE_NODES,
@@ -47,7 +49,24 @@ export const memoryMiddleware = env => store => {
 
     {
         const ten = rootPipeline.newNode('number', {value: 10});
-        const pIn = env.pipelineFromJSON({kind: 'pipeline', id: '7f741154-df9f-4f2d-a802-f0f651e28e4f', inputs: [{id: '7f741154-df9f-4f2d-a802-f0f651e28e4f_input_number', name: 'number', multiple: false, required: false, link: {id: '457f37f6-bd43-4582-b556-aa086d4d82e1', name: 'value'}}], outputs: [{id: '7f741154-df9f-4f2d-a802-f0f651e28e4f_output_result', name: 'result', link: {id: '457f37f6-bd43-4582-b556-aa086d4d82e1', name: 'product'}}], graph: '[["845f215a-89dd-48a5-ba94-edf96945db24",{"kind":"block","id":"845f215a-89dd-48a5-ba94-edf96945db24","type":"number","options":{"value":5},"title":"number"}],["457f37f6-bd43-4582-b556-aa086d4d82e1",{"kind":"block","id":"457f37f6-bd43-4582-b556-aa086d4d82e1","type":"product","options":{},"title":"product"}],[["845f215a-89dd-48a5-ba94-edf96945db24","457f37f6-bd43-4582-b556-aa086d4d82e1"],["845f215a-89dd-48a5-ba94-edf96945db24_output_number:457f37f6-bd43-4582-b556-aa086d4d82e1_input_value"]]]', title: 'Pipeline'});
+        const pIn = env.pipelineFromJSON({
+            kind: 'pipeline',
+            id: '7f741154-df9f-4f2d-a802-f0f651e28e4f',
+            inputs: [{
+                id: '7f741154-df9f-4f2d-a802-f0f651e28e4f_input_number',
+                name: 'number',
+                multiple: false,
+                required: false,
+                link: {id: '457f37f6-bd43-4582-b556-aa086d4d82e1', name: 'value'}
+            }],
+            outputs: [{
+                id: '7f741154-df9f-4f2d-a802-f0f651e28e4f_output_result',
+                name: 'result',
+                link: {id: '457f37f6-bd43-4582-b556-aa086d4d82e1', name: 'product'}
+            }],
+            graph: '[["845f215a-89dd-48a5-ba94-edf96945db24",{"kind":"block","id":"845f215a-89dd-48a5-ba94-edf96945db24","type":"number","options":{"value":5},"title":"number"}],["457f37f6-bd43-4582-b556-aa086d4d82e1",{"kind":"block","id":"457f37f6-bd43-4582-b556-aa086d4d82e1","type":"product","options":{},"title":"product"}],[["845f215a-89dd-48a5-ba94-edf96945db24","457f37f6-bd43-4582-b556-aa086d4d82e1"],["845f215a-89dd-48a5-ba94-edf96945db24_output_number:457f37f6-bd43-4582-b556-aa086d4d82e1_input_value"]]]',
+            title: 'Pipeline'
+        });
         rootPipeline.addNode(pIn);
         rootPipeline.connect(ten, pIn.input('number'));
         const id = rootPipeline.newNode('identity');
@@ -124,10 +143,22 @@ export const memoryMiddleware = env => store => {
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
                 case SET_BLOCK_OPTIONS: {
-                    const node = currentPipeline.getNode(action.payload.id);
-                    if (node.kind !== 'block') throw new Error('Setting options on not-a-block');
+                    const node = currentPipeline.getExistingNode(action.payload.id);
+                    if (node.kind !== 'block') throw new Error(`expected node to be a block, got ${node.kind} instead`);
                     node.setOptions(action.payload.options);
                     // No need for dispatching. Listener will detect the reset of the Block
+                    return null;
+                }
+                case SET_PIPELINE_OPTIONS: {
+                    // Set pipeline options
+                    const pipeline = currentPipeline.findExistingNode(action.payload.id);
+                    if (pipeline.kind !== 'pipeline') throw new Error(`Expected node to be a pipeline, got ${pipeline.kind} instead`);
+                    pipeline.setOptions(action.payload.options);
+                    return next(action);
+                }
+                case SET_NODE_OPTIONS: {
+                    const node = currentPipeline.findExistingNode(action.payload.id);
+                    node.setOptions(action.payload.options);
                     return null;
                 }
                 case RUN_PIPELINE: {
