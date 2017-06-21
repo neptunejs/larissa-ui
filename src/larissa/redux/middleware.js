@@ -107,10 +107,10 @@ export const memoryMiddleware = env => store => {
                         const node = currentPipeline.getNode(nodeId);
                         if (node) {
                             if (action.payload.portType === 'input') {
-                                currentPipeline.connect(newNode, node.input(action.payload.portName));
+                                currentPipeline.connect(newNode, node.input(action.payload.portName), {replace: true});
                             }
                             if (action.payload.portType === 'output') {
-                                currentPipeline.connect(node.output(action.payload.portName), newNode);
+                                currentPipeline.connect(node.output(action.payload.portName), newNode, {replace: true});
                             }
                         }
                     } catch (e) {
@@ -252,7 +252,7 @@ export const memoryMiddleware = env => store => {
                     }
                     try {
                         setIgnoreEvents();
-                        currentPipeline.connect(sourceNode.output(source.name), destNode.input(dest.name));
+                        currentPipeline.connect(sourceNode.output(source.name), destNode.input(dest.name), {replace: true});
                         return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                     } catch (e) {
                         let message = e.message;
