@@ -11,7 +11,10 @@ export default createSelector(
         const options = node.node.linkedOptions.map(option => ({
             title: option[0],
             schema: option[1].schema,
-            node: nodes[option[1].node].node
+            node: {
+                id: nodes[option[1].node].node.id,
+                options: getOptions(nodes[option[1].node].node, nodes)
+            }
         }));
 
         return {
@@ -19,3 +22,17 @@ export default createSelector(
         };
     }
 );
+
+function getOptions(node, nodes) {
+    if (node.kind === 'block') {
+        return node.options;
+    } else {
+        const linkedOptions = node.linkedOptions;
+        if (!linkedOptions) return {};
+        const options = {};
+        linkedOptions.forEach(linkedOption => {
+            options[linkedOption[0]] = getOptions(nodes[linkedOption[1].node].node);
+        });
+        return options;
+    }
+}
