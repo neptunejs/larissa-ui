@@ -214,7 +214,7 @@ export const memoryMiddleware = env => store => {
                 }
                 case DELETE_NODE: {
                     setIgnoreEvents();
-                    currentPipeline.deleteNode(currentPipeline.getNode(action.payload));
+                    currentPipeline.deleteNode(currentPipeline.getExistingNode(action.payload));
                     unsetIgnoreEvents();
                     next(action);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
@@ -223,18 +223,15 @@ export const memoryMiddleware = env => store => {
                     setIgnoreEvents();
                     const split = action.payload.split('_');
                     currentPipeline.disconnect(
-                        currentPipeline.findNode(split[0]).output(split[2]),
-                        currentPipeline.findNode(split[1]).input(split[3])
+                        currentPipeline.findExistingNode(split[0]).output(split[2]),
+                        currentPipeline.findExistingNode(split[1]).input(split[3])
                     );
                     unsetIgnoreEvents();
                     next(action);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
                 case SET_CURRENT_PIPELINE: {
-                    const newCurrentPipeline = rootPipeline.findNode(action.payload.id);
-                    if (!newCurrentPipeline) {
-                        throw new Error(`Pipeline with id ${action.payload.id} was not found`);
-                    }
+                    const newCurrentPipeline = rootPipeline.findExistingNode(action.payload.id);
                     if (newCurrentPipeline.kind !== 'pipeline') {
                         throw new Error('Setting pipeline to be not-a-pipeline');
                     }
@@ -244,38 +241,35 @@ export const memoryMiddleware = env => store => {
                 }
                 case LINK_INPUT: {
                     setIgnoreEvents();
-                    const pipeline = currentPipeline.getNode(action.payload.id);
+                    const pipeline = currentPipeline.getExistingNode(action.payload.id);
                     const nodeId = action.payload.input.node.id;
                     const inputPort = action.payload.input.port;
                     const linkName = action.payload.name;
-                    const node = pipeline.getNode(nodeId);
+                    const node = pipeline.getExistingNode(nodeId);
                     pipeline.linkInput(node.input(inputPort), linkName);
                     unsetIgnoreEvents();
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
                 case LINK_OUTPUT: {
                     setIgnoreEvents();
-                    const pipeline = currentPipeline.getNode(action.payload.id);
+                    const pipeline = currentPipeline.getExistingNode(action.payload.id);
                     const nodeId = action.payload.output.node.id;
                     const outputPort = action.payload.output.port;
                     const linkName = action.payload.name;
-                    const node = pipeline.getNode(nodeId);
+                    const node = pipeline.getExistingNode(nodeId);
                     pipeline.linkOutput(node.output(outputPort), linkName);
                     unsetIgnoreEvents();
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
                 case LINK_OPTIONS: {
-                    const pipeline = currentPipeline.findNode(action.payload.sourceNodeId);
-                    const targetNode = pipeline.findNode(action.payload.targetNodeId);
+                    const pipeline = currentPipeline.findExistingNode(action.payload.sourceNodeId);
+                    const targetNode = pipeline.findExistingNode(action.payload.targetNodeId);
                     pipeline.linkOptions(action.payload.name, targetNode);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
                 }
 
                 case INSPECT_NODE: {
-                    const node = currentPipeline.findNode(action.payload);
-                    if (!node) {
-                        throw new Error(`Node with id ${action.payload} was not found for inspection`);
-                    }
+                    const node = currentPipeline.findExistingNode(action.payload);
                     action.payload = node.inspect();
                     next(action);
                     return null;
@@ -286,22 +280,15 @@ export const memoryMiddleware = env => store => {
                     return null;
                 }
                 case SET_NODE_TITLE: {
-                    const node = rootPipeline.findNode(action.payload.id);
-                    if (!node) throw new Error(`Node with id ${action.payload.id} was not found for setting its title`);
+                    const node = rootPipeline.findExistingNode(action.payload.id);
                     node.setTitle(action.payload.value);
                     return null;
                 }
                 case CREATE_CONNECTION: {
                     const source = action.payload.source;
                     const dest = action.payload.dest;
-                    const sourceNode = currentPipeline.getNode(source.node);
-                    const destNode = currentPipeline.getNode(dest.node);
-                    if (!sourceNode) {
-                        throw new Error(`Source node with id ${source.node} was not found to create a connection`);
-                    }
-                    if (!destNode) {
-                        throw new Error(`Destination node with id ${source.node} was not found to create a connection`);
-                    }
+                    const sourceNode = currentPipeline.getExistingNode(source.node);
+                    const destNode = currentPipeline.getExistingNode(dest.node);
                     try {
                         setIgnoreEvents();
                         currentPipeline.connect(sourceNode.output(source.name), destNode.input(dest.name), {replace: true});
@@ -323,7 +310,7 @@ export const memoryMiddleware = env => store => {
                     currentPipeline.runNode(action.payload);
                     return next(createUpdateGraphAction(currentPipeline));
                 case RESET_NODE: {
-                    const node = currentPipeline.getNode(action.payload);
+                    const node = currentPipeline.getExistingNode(action.payload);
                     node.reset();
                     return next(createUpdateGraphAction(currentPipeline));
                 }
