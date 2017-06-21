@@ -241,7 +241,7 @@ export const memoryMiddleware = env => store => {
                 }
                 case LINK_INPUT: {
                     setIgnoreEvents();
-                    const pipeline = currentPipeline.getExistingNode(action.payload.id);
+                    const pipeline = getExistingOrCurrentNode(action.payload.id);
                     const nodeId = action.payload.input.node.id;
                     const inputPort = action.payload.input.port;
                     const linkName = action.payload.name;
@@ -252,7 +252,7 @@ export const memoryMiddleware = env => store => {
                 }
                 case LINK_OUTPUT: {
                     setIgnoreEvents();
-                    const pipeline = currentPipeline.getExistingNode(action.payload.id);
+                    const pipeline = getExistingOrCurrentNode(action.payload.id);
                     const nodeId = action.payload.output.node.id;
                     const outputPort = action.payload.output.port;
                     const linkName = action.payload.name;
@@ -337,6 +337,16 @@ export const memoryMiddleware = env => store => {
             }
         });
     }
+
+    function getExistingOrCurrentNode(id) {
+        let pipeline;
+        if (currentPipeline.id === id) {
+            pipeline = currentPipeline;
+        } else {
+            pipeline = currentPipeline.getExistingNode(id);
+        }
+        return pipeline;
+    }
 };
 
 function createUpdateGraphAction(pipeline) {
@@ -366,3 +376,4 @@ function createUpdateNodeAction(node) {
         }
     };
 }
+
