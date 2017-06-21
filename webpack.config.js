@@ -35,8 +35,10 @@ if (process.env.NODE_ENV === 'production') {
     outputFilename = '[name].[chunkhash].js';
 } else {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+    const CircularDependencyPlugin = require('circular-dependency-plugin');
     plugins.push(
-        new BundleAnalyzerPlugin()
+        new BundleAnalyzerPlugin(),
+        new CircularDependencyPlugin()
     );
 
     if (HOT_RELOADING) {
