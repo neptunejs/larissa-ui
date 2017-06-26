@@ -3,8 +3,6 @@ import {createElement} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import NodeListDrawer from './Drawer';
 import SecondaryDrawer from './inspector/Inspector';
-import HTML5Backend from 'react-dnd-html5-backend';
-import {DragDropContext} from 'react-dnd';
 import CustomDragLayer from './CustomDragLayer';
 import MainAppBar from './MainAppBar';
 import MainContent from './MainContent';
@@ -25,4 +23,4 @@ function App() {
     );
 }
 
-export default DragDropContext(HTML5Backend)(App);
+export default App;
