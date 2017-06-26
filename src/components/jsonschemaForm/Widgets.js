@@ -1,5 +1,5 @@
 import {createElement} from 'react';
-import {TextField, Toggle} from 'material-ui';
+import {TextField, Toggle, SelectField, MenuItem} from 'material-ui';
 
 
 export const TextWidget = (props) => {
@@ -25,5 +25,27 @@ export const CheckboxWidget = (props) => {
             toggled={props.value}
             onToggle={(event, toggled) => props.onChange(toggled)}
         />
+    );
+};
+
+export const SelectWidget = (props) => {
+    const {value, onChange, options} = props;
+    return (
+        <SelectField
+            value={value}
+            onChange={(event, index, value) => {
+                onChange(value);
+            }}
+        >
+            {options.enumOptions.map(({value, label}, i) => {
+                return (
+                    <MenuItem
+                        value={value}
+                        key={i}
+                        primaryText={label}
+                    />
+                );
+            })}
+        </SelectField>
     );
 };

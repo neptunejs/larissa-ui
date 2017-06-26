@@ -26,8 +26,12 @@ class CandidateEditor extends Component {
                         value: ''
                     });
                 }}>
-                    <SelectField style={{width: '100%'}} floatingLabelText="Select" value={this.state.value}
-                                 onChange={this.handleChange.bind(this)}>
+                    <SelectField
+                        style={{width: '100%'}}
+                        floatingLabelText="Select"
+                        value={this.state.value}
+                        onChange={this.handleChange.bind(this)}
+                    >
                         {candidates.map(renderCandidate(getKey, getValue, getText))}
                     </SelectField>
                     <TextField
@@ -36,7 +40,7 @@ class CandidateEditor extends Component {
                         value={this.state.name}
                         onChange={(event) => this.setState({name: event.target.value})}
                     />
-                    <RaisedButton type="submit" label={this.props.buttonText} />
+                    <RaisedButton type="submit" label={this.props.buttonText}/>
                 </form>
             </div>
         );
