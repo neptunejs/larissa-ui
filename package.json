@@ -10,7 +10,7 @@
     "deploy": "NODE_ENV=production npm run build && bash deploy.sh",
     "eslint": "eslint src --cache",
     "eslint-fix": "npm run eslint -- --fix",
-    "start": "HOT_RELOADING=1 webpack-dev-server --inline",
+    "start": "cross-env HOT_RELOADING=1 webpack-dev-server --inline",
     "start-no-hot": "webpack-dev-server --inline",
     "test": "npm run eslint"
   },
@@ -37,6 +37,7 @@
     "babel-preset-react": "^6.24.1",
     "babili-webpack-plugin": "^0.1.1",
     "circular-dependency-plugin": "^3.0.0",
+    "cross-env": "^5.0.1",
     "css-loader": "^0.28.1",
     "eslint": "^4.0.0",
     "eslint-config-cheminfo": "^1.8.0",
