@@ -89,6 +89,10 @@ ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-2.1.1.tgz#c3b33ab5ee360d86e0e628f0468ae7ef27d654df"
 
+ansi-regex@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-3.0.0.tgz#ed0317c322064f79466c02966bddb605ab37d998"
+
 ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
@@ -831,7 +835,7 @@ babel-plugin-transform-undefined-to-void@^6.8.2:
   version "6.8.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-undefined-to-void/-/babel-plugin-transform-undefined-to-void-6.8.2.tgz#fe2b1d294eb05e87524eb93724dea6e2c3d66fa1"
 
-babel-preset-babili@^0.1.1:
+babel-preset-babili@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/babel-preset-babili/-/babel-preset-babili-0.1.4.tgz#ad9d6651002f5bc3f07cab300781167f54724bf2"
   dependencies:
@@ -964,12 +968,12 @@ babel-types@^6.19.0, babel-types@^6.23.0, babel-types@^6.24.1, babel-types@^6.25
     to-fast-properties "^1.0.1"
 
 babili-webpack-plugin@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/babili-webpack-plugin/-/babili-webpack-plugin-0.1.1.tgz#25eae9c79c03b92f2bc12c82cef7e0b866d83bfb"
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/babili-webpack-plugin/-/babili-webpack-plugin-0.1.2.tgz#164ac03d5932f6a52143e7ffc06f2711c651b6f2"
   dependencies:
     babel-core "^6.24.1"
-    babel-preset-babili "^0.1.1"
-    webpack-sources "^0.2.3"
+    babel-preset-babili "^0.1.4"
+    webpack-sources "^1.0.1"
 
 babylon@^6.17.0, babylon@^6.17.2:
   version "6.17.4"
@@ -1213,12 +1217,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000694"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000694.tgz#02009f4f82d2f0126e4c691b7cd5adb351935c01"
+  version "1.0.30000696"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000696.tgz#e71f5c61e1f96c7a3af4e791ac5db55e11737604"
 
 caniuse-lite@^1.0.30000684:
-  version "1.0.30000694"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000694.tgz#1492dab7c10c608c9d37a723e6e3e7873e0ce94f"
+  version "1.0.30000696"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000696.tgz#30f2695d2a01a0dfd779a26ab83f4d134b3da5cc"
 
 canvas@^1.6.0:
   version "1.6.5"
@@ -2610,8 +2614,8 @@ hash-base@^2.0.0:
     inherits "^2.0.1"
 
 hash.js@^1.0.0, hash.js@^1.0.3:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.1.tgz#5cb2e796499224e69fd0b00ed01d2d4a16e7a323"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.2.tgz#bf5c887825cfe40b9efde7bf11bd2db26e6bf01b"
   dependencies:
     inherits "^2.0.3"
     minimalistic-assert "^1.0.0"
@@ -2663,8 +2667,8 @@ home-or-tmp@^2.0.0:
     os-tmpdir "^1.0.1"
 
 hosted-git-info@^2.1.4:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.4.2.tgz#0076b9f46a270506ddbaaea56496897460612a67"
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"
 
 hpack.js@^2.1.6:
   version "2.1.6"
@@ -3812,8 +3816,8 @@ nopt@^4.0.1:
     osenv "^0.1.4"
 
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
-  version "2.3.8"
-  resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.3.8.tgz#d819eda2a9dedbd1ffa563ea4071d936782295bb"
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/normalize-package-data/-/normalize-package-data-2.4.0.tgz#12f95a307d58352075a04907b84ac8be98ac012f"
   dependencies:
     hosted-git-info "^2.1.4"
     is-builtin-module "^1.0.0"
@@ -3840,8 +3844,8 @@ normalize-url@^1.4.0:
     sort-keys "^1.0.0"
 
 npmlog@^4.0.2:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.0.tgz#dc59bee85f64f00ed424efb2af0783df25d1c0b5"
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.2.tgz#08a7f2a8bf734604779a9efa4ad5cc717abb954b"
   dependencies:
     are-we-there-yet "~1.1.2"
     console-control-strings "~1.1.0"
@@ -5113,10 +5117,6 @@ source-list-map@^0.1.7:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
 
-source-list-map@^1.1.1:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-1.1.2.tgz#9889019d1024cce55cdc069498337ef6186a11a1"
-
 source-list-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.0.tgz#aaa47403f7b245a92fbc97ea08f250d6087ed085"
@@ -5236,11 +5236,11 @@ string-width@^1.0.1, string-width@^1.0.2:
     strip-ansi "^3.0.0"
 
 string-width@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-2.0.0.tgz#635c5436cc72a6e0c387ceca278d4e2eec52687e"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-2.1.0.tgz#030664561fc146c9423ec7d978fe2457437fe6d0"
   dependencies:
     is-fullwidth-code-point "^2.0.0"
-    strip-ansi "^3.0.0"
+    strip-ansi "^4.0.0"
 
 string_decoder@^0.10.25, string_decoder@~0.10.x:
   version "0.10.31"
@@ -5261,6 +5261,12 @@ strip-ansi@^3.0.0, strip-ansi@^3.0.1:
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-3.0.1.tgz#6a385fb8853d952d5ff05d0e8aaf94278dc63dcf"
   dependencies:
     ansi-regex "^2.0.0"
+
+strip-ansi@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-4.0.0.tgz#a8479022eb1ac368a871389b635262c505ee368f"
+  dependencies:
+    ansi-regex "^3.0.0"
 
 strip-bom@^2.0.0:
   version "2.0.0"
@@ -5685,13 +5691,6 @@ webpack-dev-server@^2.4.5:
     supports-color "^3.1.1"
     webpack-dev-middleware "^1.10.2"
     yargs "^6.0.0"
-
-webpack-sources@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-0.2.3.tgz#17c62bfaf13c707f9d02c479e0dcdde8380697fb"
-  dependencies:
-    source-list-map "^1.1.1"
-    source-map "~0.5.3"
 
 webpack-sources@^1.0.1:
   version "1.0.1"
