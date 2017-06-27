@@ -54,9 +54,6 @@ export const deleteNode = createAction(DELETE_NODE);
 export const DELETE_LINK = '@@larissa/DELETE_LINK';
 export const deleteLink = createAction(DELETE_LINK);
 
-export const INSPECT_NODE = '@@larissa/INSPECT_NODE';
-export const inspectNode = createAction(INSPECT_NODE);
-
 export const LINK_INPUT = '@@larissa/LINK_INPUT';
 export const linkInput = function (pipelineId, input, name) {
     return {

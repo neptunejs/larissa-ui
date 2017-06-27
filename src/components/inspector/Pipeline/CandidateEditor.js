@@ -40,7 +40,7 @@ class CandidateEditor extends Component {
                         value={this.state.name}
                         onChange={(event) => this.setState({name: event.target.value})}
                     />
-                    <RaisedButton type="submit" label={this.props.buttonText}/>
+                    <RaisedButton type="submit" label={this.props.buttonText} />
                 </form>
             </div>
         );

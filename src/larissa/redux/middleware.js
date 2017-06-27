@@ -7,7 +7,6 @@ import {
     DELETE_NODE,
     DELETE_LINK,
     DUMP_JSON,
-    INSPECT_NODE,
     LINK_INPUT,
     LINK_OPTIONS,
     LINK_OUTPUT,
@@ -266,13 +265,6 @@ export const memoryMiddleware = env => store => {
                     const targetNode = pipeline.findExistingNode(action.payload.targetNodeId);
                     pipeline.linkOptions(action.payload.name, targetNode);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
-                }
-
-                case INSPECT_NODE: {
-                    const node = currentPipeline.findExistingNode(action.payload);
-                    action.payload = node.inspect();
-                    next(action);
-                    return null;
                 }
                 case NODE_CHANGED: {
                     action.payload = action.payload.inspect();
