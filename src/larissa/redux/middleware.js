@@ -24,6 +24,9 @@ import {
     SET_NODE_TITLE,
     SET_PIPELINE_OPTIONS,
     SET_ROOT_PIPELINE_FROM_JSON,
+    UNLINK_INPUT,
+    UNLINK_OPTIONS,
+    UNLINK_OUTPUT,
     UPDATE_GRAPH,
     UPDATE_NODE,
     UPDATE_NODES,
@@ -286,6 +289,21 @@ export const memoryMiddleware = env => store => {
                     const targetNode = pipeline.findExistingNode(action.payload.targetNodeId);
                     pipeline.linkOptions(action.payload.name, targetNode);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
+                }
+                case UNLINK_INPUT: {
+                    const pipeline = currentPipeline.findExistingNode(action.payload.id);
+                    pipeline.unlinkInput(action.payload.name);
+                    return next(action);
+                }
+                case UNLINK_OUTPUT: {
+                    const pipeline = currentPipeline.findExistingNode(action.payload.id);
+                    pipeline.unlinkOutput(action.payload.name);
+                    return next(action);
+                }
+                case UNLINK_OPTIONS: {
+                    const pipeline = currentPipeline.findExistingNode(action.payload.id);
+                    pipeline.unlinkOptions(action.payload.name);
+                    return next(action);
                 }
                 case SET_NODE_TITLE: {
                     const node = rootPipeline.findExistingNode(action.payload.id);

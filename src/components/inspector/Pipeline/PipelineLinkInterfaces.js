@@ -2,7 +2,7 @@ import {createElement, Component} from 'react';
 import CandidateEditor from './CandidateEditor';
 import PortsDisplayer from './PortsDisplayer';
 import {connect} from 'react-redux';
-import {linkInput, linkOutput} from '../../../larissa/redux/index';
+import {linkInput, linkOutput, unlinkInput, unlinkOutput} from '../../../larissa/redux/index';
 import pipelineOptionsSelector from '../../../selectors/pipelineOptionsSelector';
 
 class PipelineLinkInterfaces extends Component {
@@ -12,10 +12,22 @@ class PipelineLinkInterfaces extends Component {
                 <PortsDisplayer
                     ports={this.props.inputs}
                     title="Input ports"
+                    onDelete={(row) => {
+                        this.props.unlinkInput({
+                            id: this.props.node.node.id,
+                            name: row.name
+                        });
+                    }}
                 />
                 <PortsDisplayer
                     ports={this.props.outputs}
                     title="Output ports"
+                    onDelete={(row) => {
+                        this.props.unlinkOutput({
+                            id: this.props.node.node.id,
+                            name: row.name
+                        });
+                    }}
                 />
                 <CandidateEditor
                     candidates={this.props.inputCandidates}
@@ -44,4 +56,5 @@ class PipelineLinkInterfaces extends Component {
     }
 }
 
-export default connect(pipelineOptionsSelector, {linkInput, linkOutput})(PipelineLinkInterfaces);
+console.log(unlinkInput);
+export default connect(pipelineOptionsSelector, {linkInput, linkOutput, unlinkInput, unlinkOutput})(PipelineLinkInterfaces);

@@ -105,3 +105,12 @@ export const runNode = createAction(RUN_NODE);
 
 export const RESET_NODE = '@@larissa/RESET_NODE';
 export const resetNode = createAction(RESET_NODE);
+
+export const UNLINK_OPTIONS = '@@larissa/UNLINK_OPTIONS';
+export const unlinkOptions = createAction(UNLINK_OPTIONS);
+
+export const UNLINK_INPUT = '@@larissa/UNLINK_INPUT';
+export const unlinkInput = createAction(UNLINK_INPUT);
+
+export const UNLINK_OUTPUT = '@@larissa/UNLINK_OUTPUT';
+export const unlinkOutput = createAction(UNLINK_OUTPUT);
