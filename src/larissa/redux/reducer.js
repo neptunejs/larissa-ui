@@ -25,10 +25,10 @@ export const reducer = (state = initState, action) => {
             const status = action.payload.status;
             const previous = state.nodeState.get(nodeId);
             if (!previous) {
-                return {...state, nodeState: state.nodeState.set(nodeId, {status})}
+                return {...state, nodeState: state.nodeState.set(nodeId, {status})};
             }
             if (previous.status !== status) {
-                return {...state, nodeState: state.nodeState.set(nodeId, {...previous, status})}
+                return {...state, nodeState: state.nodeState.set(nodeId, {...previous, status})};
             }
             break;
         }
@@ -84,6 +84,9 @@ export const reducer = (state = initState, action) => {
                     return {...state, nodeHistory: new List([pipelineId]), currentNode: pipelineId};
                 }
             }
+        }
+        default: {
+            return state;
         }
     }
     return state;

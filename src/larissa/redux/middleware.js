@@ -94,7 +94,7 @@ export const memoryMiddleware = env => store => {
 
     rootPipeline.on('change', (type, value) => {
         if (type === 'status') {
-            store.dispatch(createStatusChangeAction(rootPipeline, value))
+            store.dispatch(createStatusChangeAction(rootPipeline, value));
         } else {
             if (ignoreEvents) return;
             store.dispatch(createUpdateNodeAction(rootPipeline));
