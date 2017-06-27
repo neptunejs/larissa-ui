@@ -10,7 +10,6 @@ import {
     LINK_INPUT,
     LINK_OPTIONS,
     LINK_OUTPUT,
-    NODE_CHANGED,
     CONNECTION_ERROR,
     RESET_NODE,
     RESET_PIPELINE,
@@ -27,7 +26,7 @@ import {
     UPDATE_NODES,
     UPDATE_NODES_AND_GRAPH,
     setCurrentPipeline,
-    nodeChanged, CREATE_LOOP
+    CREATE_LOOP
 } from './actions';
 
 import predefinedPipelines from '../predefinedPipelines';
@@ -84,13 +83,11 @@ export const memoryMiddleware = env => store => {
 
     // Listen to status changes in the pipeline to dispatch actions
     rootPipeline.on('deep-child-change', node => {
-        store.dispatch(nodeChanged(node));
         if (ignoreEvents) return;
         store.dispatch(createUpdateNodeAction(node));
     });
 
     rootPipeline.on('change', () => {
-        store.dispatch(nodeChanged(rootPipeline));
         if (ignoreEvents) return;
         store.dispatch(createUpdateNodeAction(rootPipeline));
     });
@@ -265,11 +262,6 @@ export const memoryMiddleware = env => store => {
                     const targetNode = pipeline.findExistingNode(action.payload.targetNodeId);
                     pipeline.linkOptions(action.payload.name, targetNode);
                     return dispatchUpdateNodesAndGraphAction(currentPipeline, next);
-                }
-                case NODE_CHANGED: {
-                    action.payload = action.payload.inspect();
-                    next(action);
-                    return null;
                 }
                 case SET_NODE_TITLE: {
                     const node = rootPipeline.findExistingNode(action.payload.id);
