@@ -34,6 +34,9 @@ export const setCurrentPipeline = function (pipeline, meta) {
     };
 };
 
+export const SET_ROOT_PIPELINE_FROM_JSON = '@@larissa/SET_ROOT_PIPELINE';
+export const setRootPipelineFromJson = createAction(SET_ROOT_PIPELINE_FROM_JSON);
+
 export const RESET_PIPELINE = '@@larissa/RESET_PIPELINE';
 export const resetPipeline = createAction(RESET_PIPELINE);
 

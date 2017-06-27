@@ -23,6 +23,7 @@ import {
     SET_NODE_OPTIONS,
     SET_NODE_TITLE,
     SET_PIPELINE_OPTIONS,
+    SET_ROOT_PIPELINE_FROM_JSON,
     UPDATE_GRAPH,
     UPDATE_NODE,
     UPDATE_NODES,
@@ -34,7 +35,7 @@ import predefinedPipelines from '../predefinedPipelines';
 
 export const memoryMiddleware = env => store => {
     // Create root pipeline
-    const rootPipeline = env.newPipeline();
+    let rootPipeline = env.newPipeline();
     rootPipeline.setTitle('ROOT');
     let currentPipeline = rootPipeline;
 
@@ -82,39 +83,47 @@ export const memoryMiddleware = env => store => {
     const setIgnoreEvents = () => ignoreEvents = true;
     const unsetIgnoreEvents = () => ignoreEvents = false;
 
-    // Listen to status changes in the pipeline to dispatch actions
-    rootPipeline.on('deep-child-change', (node, type, value) => {
-        if (type === 'status') {
-            store.dispatch(createStatusChangeAction(node, value));
-        } else {
-            if (ignoreEvents) return;
-            store.dispatch(createUpdateNodeAction(node));
-        }
-    });
+    setRootPipeline(rootPipeline);
 
-    rootPipeline.on('change', (type, value) => {
-        if (type === 'status') {
-            store.dispatch(createStatusChangeAction(rootPipeline, value));
-        } else {
-            if (ignoreEvents) return;
-            store.dispatch(createUpdateNodeAction(rootPipeline));
-        }
-    });
+    function setRootPipeline(newRootPipeline) {
+        rootPipeline.removeAllListeners();
+        rootPipeline = newRootPipeline;
+        // Listen to status changes in the pipeline to dispatch actions
 
-    rootPipeline.on('runError', function (err) {
-        console.log(err); // eslint-disable-line no-console
-        store.dispatch({
-            type: RUN_ERROR,
-            payload: {
-                message: err.message
+        rootPipeline.on('deep-child-change', (node, type, value) => {
+            if (type === 'status') {
+                store.dispatch(createStatusChangeAction(node, value));
+            } else {
+                if (ignoreEvents) return;
+                store.dispatch(createUpdateNodeAction(node));
             }
         });
-    });
 
-    // Update on initialization
-    store.dispatch(createUpdateNodesAction(rootPipeline));
-    store.dispatch(createUpdateGraphAction(rootPipeline));
-    store.dispatch(setCurrentPipeline(rootPipeline.toJSON()));
+        rootPipeline.on('change', (type, value) => {
+            if (type === 'status') {
+                store.dispatch(createStatusChangeAction(rootPipeline, value));
+            } else {
+                if (ignoreEvents) return;
+                store.dispatch(createUpdateNodeAction(rootPipeline));
+            }
+        });
+
+        rootPipeline.on('runError', function (err) {
+            console.log(err); // eslint-disable-line no-console
+            store.dispatch({
+                type: RUN_ERROR,
+                payload: {
+                    message: err.message
+                }
+            });
+        });
+
+        // Update on initialization
+        store.dispatch(createUpdateNodesAction(rootPipeline));
+        store.dispatch(createUpdateGraphAction(rootPipeline));
+        store.dispatch(setCurrentPipeline(rootPipeline.toJSON()));
+    }
+
 
     return next => action => {
         if (action.type.startsWith('@@larissa/')) {
@@ -243,6 +252,12 @@ export const memoryMiddleware = env => store => {
                     currentPipeline = newCurrentPipeline;
                     next(action);
                     return next(createUpdateGraphAction(currentPipeline));
+                }
+                case SET_ROOT_PIPELINE_FROM_JSON: {
+                    const newRootPipeline = env.pipelineFromJSON(action.payload);
+                    setRootPipeline(newRootPipeline);
+                    next(action);
+                    break;
                 }
                 case LINK_INPUT: {
                     setIgnoreEvents();

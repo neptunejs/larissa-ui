@@ -3,6 +3,8 @@ import {DragSource} from 'react-dnd';
 import {getEmptyImage} from 'react-dnd-html5-backend';
 import {ItemTypes} from '../constants';
 import {ListItem} from 'material-ui';
+import {setRootPipelineFromJson} from '../larissa/redux';
+import {connect} from 'react-redux';
 
 const nodeSource = {
     beginDrag(props) {
@@ -22,6 +24,7 @@ function collect(connect, monitor) {
     };
 }
 
+@connect(null, {setRootPipelineFromJson})
 class LeafNode extends Component {
     render() {
         const {isDragging, connectDragSource, block} = this.props;
@@ -30,6 +33,11 @@ class LeafNode extends Component {
                 <ListItem
                     style={{opacity: isDragging ? 0.5 : 1}}
                     primaryText={block.label}
+                    onDoubleClick={() => {
+                        if (this.props.block.kind === 'pipeline') {
+                            this.props.setRootPipelineFromJson(this.props.block.value);
+                        }
+                    }}
                 />
             </div>
         );
