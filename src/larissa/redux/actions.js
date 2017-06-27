@@ -16,7 +16,7 @@ export const CREATE_BLOCK_WITH_CONNECTION = '@@larissa/CREATE_BLOCK_WITH_CONNECT
 export const createBlockWithConnection = createAction(CREATE_BLOCK_WITH_CONNECTION);
 
 export const CONNECTION_ERROR = '@@larissa/CONNECTION_ERROR';
-
+export const NODE_STATUS_CHANGE = '@@larissa/NODE_STATUS_CHANGE';
 export const UPDATE_GRAPH = '@@larissa/UPDATE_GRAPH';
 export const UPDATE_NODE = '@@larissa/UPDATE_NODE';
 export const UPDATE_NODES = '@@larissa/UPDATE_NODES';

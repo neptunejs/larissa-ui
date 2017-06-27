@@ -21,7 +21,6 @@ const blockStyle = {
 class Node extends Component {
     render() {
         const info = this.props.info.node;
-        const status = this.props.info.status;
         const blockTypes = this.props.blockTypes;
         const outputs = this.props.info.outputs;
         const style = {
@@ -34,7 +33,6 @@ class Node extends Component {
                 const blockType = blockTypes.find((blockType) => blockType.identifier === info.type);
                 return <Block
                     node={info}
-                    status={status}
                     outputs={outputs}
                     selected={this.props.selected}
                     style={style}
@@ -44,7 +42,6 @@ class Node extends Component {
             case 'pipeline': {
                 return <Pipeline
                     node={info}
-                    status={status}
                     style={style}
                     selected={this.props.selected}
                 />;
@@ -52,7 +49,6 @@ class Node extends Component {
             case 'map-loop': {
                 return <MapLoop
                     node={info}
-                    status={status}
                     style={style}
                     selected={this.props.selected}
                 />;

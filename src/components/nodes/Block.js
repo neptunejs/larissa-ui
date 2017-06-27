@@ -7,7 +7,6 @@ class Block extends Component {
     render() {
         const {
             node: info,
-            status,
             outputs: nodeOutputs,
             blockType,
             selected,
@@ -18,7 +17,6 @@ class Block extends Component {
             outputs={blockType.outputs}
             nodeOutputs={nodeOutputs}
             selected={selected}
-            status={status}
             style={blockStyle}
             node={info.id}
             title={info.title}

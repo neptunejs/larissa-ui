@@ -9,7 +9,6 @@ class MapLoop extends Component {
     render() {
         const {
             node: info,
-            status,
             selected,
             style: blockStyle,
         } = this.props;
@@ -18,7 +17,6 @@ class MapLoop extends Component {
             inputs={info.inputs}
             outputs={info.outputs}
             selected={selected}
-            status={status}
             style={blockStyle}
             node={info.id}
             title={info.title}

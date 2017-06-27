@@ -1,5 +1,6 @@
 import {createElement} from 'react';
 import Paper from 'material-ui/Paper';
+import {connect} from 'react-redux';
 
 import StatusBar from './StatusBar';
 import Ports from './Ports';
@@ -45,4 +46,12 @@ export const PaperBlock = ({style, status, selected, node, inputs, nodeOutputs, 
     );
 };
 
-export default PaperBlock;
+function mapState(state, ownProps) {
+    const nodeId = ownProps.node;
+    const nodeState = state.pipeline.nodeState.get(nodeId);
+    return {
+        status: nodeState ? nodeState.status : null
+    };
+}
+
+export default connect(mapState)(PaperBlock);

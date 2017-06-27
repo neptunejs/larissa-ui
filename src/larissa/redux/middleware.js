@@ -12,6 +12,7 @@ import {
     LINK_INPUT,
     LINK_OPTIONS,
     LINK_OUTPUT,
+    NODE_STATUS_CHANGE,
     RESET_NODE,
     RESET_PIPELINE,
     RUN_ERROR,
@@ -82,14 +83,22 @@ export const memoryMiddleware = env => store => {
     const unsetIgnoreEvents = () => ignoreEvents = false;
 
     // Listen to status changes in the pipeline to dispatch actions
-    rootPipeline.on('deep-child-change', node => {
-        if (ignoreEvents) return;
-        store.dispatch(createUpdateNodeAction(node));
+    rootPipeline.on('deep-child-change', (node, type, value) => {
+        if (type === 'status') {
+            store.dispatch(createStatusChangeAction(node, value));
+        } else {
+            if (ignoreEvents) return;
+            store.dispatch(createUpdateNodeAction(node));
+        }
     });
 
-    rootPipeline.on('change', () => {
-        if (ignoreEvents) return;
-        store.dispatch(createUpdateNodeAction(rootPipeline));
+    rootPipeline.on('change', (type, value) => {
+        if (type === 'status') {
+            store.dispatch(createStatusChangeAction(rootPipeline, value))
+        } else {
+            if (ignoreEvents) return;
+            store.dispatch(createUpdateNodeAction(rootPipeline));
+        }
     });
 
     rootPipeline.on('runError', function (err) {
@@ -302,6 +311,7 @@ export const memoryMiddleware = env => store => {
                 case UPDATE_NODES:
                 case UPDATE_NODE:
                 case RUN_ERROR:
+                case NODE_STATUS_CHANGE:
                     next(action);
                     return null;
                 default: {
@@ -357,6 +367,16 @@ function createUpdateNodeAction(node) {
         payload: {
             id: node.id,
             value: node.inspect()
+        }
+    };
+}
+
+function createStatusChangeAction(node, status) {
+    return {
+        type: NODE_STATUS_CHANGE,
+        payload: {
+            id: node.id,
+            status
         }
     };
 }

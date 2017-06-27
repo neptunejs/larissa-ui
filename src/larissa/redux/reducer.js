@@ -1,24 +1,37 @@
 import {
+    DELETE_NODE,
+    NODE_STATUS_CHANGE,
     UPDATE_GRAPH,
     UPDATE_NODE,
     UPDATE_NODES,
     UPDATE_NODES_AND_GRAPH,
     SET_CURRENT_PIPELINE,
-    DELETE_NODE
 } from './actions';
 
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 
 const initState = {
     graph: {},
     nodes: {},
+    nodeState: new Map(),
     currentNode: null,
-    nodeHistory: new List(),
-    inspected: null
+    nodeHistory: new List()
 };
 
 export const reducer = (state = initState, action) => {
     switch (action.type) {
+        case NODE_STATUS_CHANGE: {
+            const nodeId = action.payload.id;
+            const status = action.payload.status;
+            const previous = state.nodeState.get(nodeId);
+            if (!previous) {
+                return {...state, nodeState: state.nodeState.set(nodeId, {status})}
+            }
+            if (previous.status !== status) {
+                return {...state, nodeState: state.nodeState.set(nodeId, {...previous, status})}
+            }
+            break;
+        }
         case UPDATE_GRAPH: {
             return {...state, graph: action.payload};
         }
@@ -29,13 +42,16 @@ export const reducer = (state = initState, action) => {
             };
         }
         case UPDATE_NODES: {
-            return {...state, nodes: action.payload};
+            const nodeState = nodeStateFromNodes(action.payload);
+            return {...state, nodes: action.payload, nodeState};
         }
         case UPDATE_NODES_AND_GRAPH: {
+            const nodeState = nodeStateFromNodes(action.payload.nodes);
             return {
                 ...state,
                 nodes: action.payload.nodes,
-                graph: action.payload.graph
+                graph: action.payload.graph,
+                nodeState
             };
         }
         case DELETE_NODE: {
@@ -69,8 +85,14 @@ export const reducer = (state = initState, action) => {
                 }
             }
         }
-        default: {
-            return state;
-        }
     }
+    return state;
 };
+
+function nodeStateFromNodes(nodes) {
+    const map = {};
+    for (const nodeId of Object.keys(nodes)) {
+        map[nodeId] = {status: nodes[nodeId].status};
+    }
+    return new Map(map);
+}
