@@ -1,6 +1,8 @@
 import {
+    CONNECTION_ERROR,
     CREATE_BLOCK,
     CREATE_BLOCK_WITH_CONNECTION,
+    CREATE_LOOP,
     CREATE_CONNECTION,
     CREATE_PIPELINE,
     CREATE_PIPELINE_FROM_JSON,
@@ -10,7 +12,6 @@ import {
     LINK_INPUT,
     LINK_OPTIONS,
     LINK_OUTPUT,
-    CONNECTION_ERROR,
     RESET_NODE,
     RESET_PIPELINE,
     RUN_ERROR,
@@ -26,7 +27,6 @@ import {
     UPDATE_NODES,
     UPDATE_NODES_AND_GRAPH,
     setCurrentPipeline,
-    CREATE_LOOP
 } from './actions';
 
 import predefinedPipelines from '../predefinedPipelines';
@@ -360,4 +360,3 @@ function createUpdateNodeAction(node) {
         }
     };
 }
-
