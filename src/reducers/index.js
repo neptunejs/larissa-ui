@@ -5,6 +5,7 @@ import drawerReducer from './drawerReducer';
 import nodesReducer from './nodesReducer';
 import notificationsReducer from './notificationsReducer';
 import pipelineUIReducer from './pipelineUIReducer';
+import pipelineGridReducer from './pipelineGridReducer';
 import {reducer as larissaReducer} from '../larissa/redux';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     drawer: drawerReducer,
     notifications: notificationsReducer,
     pipeline: larissaReducer,
+    pipelineGrid: pipelineGridReducer,
     pipelineUI: pipelineUIReducer,
     router: routerReducer
 });

@@ -37,3 +37,6 @@ export const setBlockOptions = createAction(BLOCK_OPTIONS);
 
 export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 export const clearNotification = createAction(CLEAR_NOTIFICATION);
+
+export const MOVE_NODE = 'MOVE_NODE';
+export const moveNode = createAction(MOVE_NODE);
