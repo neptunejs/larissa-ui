@@ -43,12 +43,12 @@ export const memoryMiddleware = env => store => {
     let currentPipeline = rootPipeline;
 
     // Add demos
-    for (const pipeline of predefinedPipelines) {
+    /*for (const pipeline of predefinedPipelines) {
         if (pipeline.preload) {
             const newPipeline = env.pipelineFromJSON(pipeline.value);
             rootPipeline.addNode(newPipeline);
         }
-    }
+    }*/
 
     {
         const ten = rootPipeline.newNode('number', {value: 10});
@@ -72,15 +72,17 @@ export const memoryMiddleware = env => store => {
         });
         rootPipeline.addNode(pIn);
         rootPipeline.connect(ten, pIn.input('number'));
-        const id = rootPipeline.newNode('identity');
-        rootPipeline.connect(pIn.output('result'), id);
+        const sum = rootPipeline.newNode('sum');
+        rootPipeline.connect(pIn.output('result'), sum);
+        const number = rootPipeline.newNode('number', {value: 1});
+        rootPipeline.connect(number, sum);
     }
 
-    {
+    /*{
         const string = rootPipeline.newNode('string', {value: '[1, 2]'});
         const json = rootPipeline.newNode('json-parse');
         rootPipeline.connect(string, json);
-    }
+    }*/
 
     let ignoreEvents = false;
     const setIgnoreEvents = () => ignoreEvents = true;
