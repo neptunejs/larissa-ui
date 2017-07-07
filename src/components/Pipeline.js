@@ -27,7 +27,7 @@ import portSeparation from '../util/portSeparation';
         selectedNode: state.pipelineUI.selectedNode,
         selectedLink: state.pipelineUI.selectedLink,
         grid: state.pipelineGrid,
-        graph: Graph.fromJSON(JSON.stringify(state.pipelineUI.graph))
+        graph: Graph.fromJSON(JSON.stringify(state.pipeline.graph))
     };
 }, {
     deleteNode,
