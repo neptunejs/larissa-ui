@@ -1,6 +1,7 @@
 import {createElement, Component} from 'react';
 import {connect} from 'react-redux';
 import keydown from 'react-keydown';
+import Graph from 'graph.js/dist/graph';
 
 import findBlockType from '../util/findBlockType';
 
@@ -23,9 +24,10 @@ import portSeparation from '../util/portSeparation';
 @connect((state) => {
     return {
         blockTypes: state.blockTypes,
-        subgraphs: placeNodes(state.pipeline.graph),
         selectedNode: state.pipelineUI.selectedNode,
         selectedLink: state.pipelineUI.selectedLink,
+        grid: state.pipelineGrid,
+        graph: Graph.fromJSON(JSON.stringify(state.pipelineUI.graph))
     };
 }, {
     deleteNode,
@@ -34,71 +36,12 @@ import portSeparation from '../util/portSeparation';
 })
 export default class Pipeline extends Component {
     render() {
-        const subgraphs = this.props.subgraphs;
         const blockTypes = this.props.blockTypes;
-        if (!subgraphs) return null;
-        let verticalOffset = 0;
+        const grid = this.props.grid;
+        const graph = this.props.graph;
         const nodes = [];
         const lines = [];
-        const placementInfo = new Map();
-        for (const graph of subgraphs) {
-            const widths = {};
-            for (const level of graph.levels) {
-                widths[level[0]] = {total: level[1], current: level[1]};
-            }
-            for (const [id, info] of graph.nodes) {
-                const widthObj = widths[info.level];
-                const width = widthObj.current--;
-                let padding = 0;
-                if (graph.maxWidth > widthObj.total) {
-                    padding = Math.round((getHeight(graph.maxWidth) - getHeight(widthObj.total)) / 2);
-                }
-
-                const left = (graph.totalLevels - info.level) * (blockWidth + blockHorizontalSeparation);
-                const top = (width - 1) * (blockHeight + blockVerticalSeparation) + padding + verticalOffset;
-
-                nodes.push(<Node
-                    key={id}
-                    node={id}
-                    left={left}
-                    top={top}
-                    selected={this.props.selectedNode === id}
-                />);
-
-                const startNode = info.node;
-                const startInfo = {left, top, node: info.node};
-
-                for (const connection of info.connected) {
-                    const endInfo = placementInfo.get(connection.node);
-                    const endNode = endInfo.node;
-                    const outPorts = getPorts(startNode, 'outputs', blockTypes);
-                    const outSeparation = portSeparation(outPorts.length);
-                    const inPorts = getPorts(endNode, 'inputs', blockTypes);
-                    const inSeparation = portSeparation(inPorts.length);
-                    for (const [fromPort, toPort] of connection.connections) {
-                        const fromIndex = getIndex(fromPort, outPorts);
-                        const toIndex = getIndex(toPort, inPorts);
-                        const line = [
-                            [
-                                left + blockWidth + blockMargin + portSize - 1,
-                                top + outSeparation[fromIndex] + blockMargin + portSize / 2 + 0.5
-                            ],
-                            [
-                                endInfo.left + blockMargin - portSize + 1,
-                                endInfo.top + inSeparation[toIndex] + blockMargin + portSize / 2 + 0.5
-                            ]
-                        ];
-                        lines.push({
-                            key: `${startNode.id}_${endNode.id}_${fromPort}_${toPort}`,
-                            line
-                        });
-                    }
-                }
-
-                placementInfo.set(id, startInfo);
-            }
-            verticalOffset += (graph.maxWidth * blockHeight) + blockVerticalSeparation;
-        }
+        // todo create nodes and lines
         return (
             <div style={{position: 'relative', height: '100%'}}>
                 <SvgLinks lines={lines} onClick={this.props.selectLink} selected={this.props.selectedLink} />
